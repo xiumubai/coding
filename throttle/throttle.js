@@ -1,3 +1,12 @@
+/*
+ * @Author: 朽木白
+ * @Date: 2023-09-28 11:37:34
+ * @LastEditors: 1547702880@@qq.com
+ * @LastEditTime: 2023-10-10 12:33:54
+ * @Description: 节流
+ * @docs: https://github.com/mqyqingfeng/Blog/issues/26
+ */
+
 var count = 1;
 var container = document.getElementById('container');
 
