@@ -2,8 +2,17 @@
  * @Author: 朽木白
  * @Date: 2023-10-12 15:32:49
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-10-12 18:00:14
+ * @LastEditTime: 2023-10-12 18:05:11
  * @Description: 链表结构
+ */
+
+/**
+ * 链表的时间复杂度如下：
+  访问：O(n)
+  搜索：O(n)
+  插入：O(1)
+  删除：O(1)
+  链表的空间复杂度为O(n)，其中n是链表中的节点数。
  */
 
 class Node {
@@ -12,7 +21,6 @@ class Node {
     this.next = null;
   }
 }
-
 
 module.exports = class LinkedList {
   constructor() {
