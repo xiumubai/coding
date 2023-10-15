@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-10-12 13:45:41
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-10-15 20:03:38
+ * @LastEditTime: 2023-10-15 20:06:58
  * @Description: 最长递增子序列
  * @docs: https://leetcode.cn/problems/longest-increasing-subsequence/description/
  */
@@ -46,11 +46,23 @@ function lengthOfLIS(nums) {
   return tails.length
 
   function getFirstGreaterIndex(target) {
-    for (let i = 0; i < tails.length; i++) {
-      if (tails[i] >= target) {
-        return i
+    // for (let i = 0; i < tails.length; i++) {
+    //   if (tails[i] >= target) {
+    //     return i
+    //   }
+    // }
+
+    // 查找可以用二分查找法
+    let i = 0, j = tails.length - 1;
+    while(i < j) {
+      const mid = Math.floor((i +j) / 2) 
+      if (tails[mid] >= target) {
+        j = mid
+      } else {
+        i = mid +1
       }
     }
+    return i
   }
 }
 
