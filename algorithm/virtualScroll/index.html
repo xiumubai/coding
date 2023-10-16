@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style> 
+  .viewport {
+    height: 300px;
+    overflow: auto;
+  }
+
+  .content {
+    height: 1000px;
+    /* 实际内容高度 */
+    padding: 20px;
+  }
+  .item {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    line-height: 50px;
+    padding: 10px;
+  }
+
+</style>
+</head>
+<body>
+  
+  <div class="viewport">
+    <div class="content">
+    </div>
+  </div>
+  <script>
+    const viewport = document.querySelector('.viewport')
+    const content = document.querySelector('.content')
+
+    // 每个item的高度
+    const ITEM_HEIGHT = 50
+    // 总的item数量
+    const ITEM_COUNT = 10000
+
+    const Total_Height = ITEM_HEIGHT * ITEM_COUNT
+
+    content.style.height = Total_Height
+
+    // 构造内容项
+    function createItem(index) {
+      const item = document.createElement('div')
+      item.classList.add('item')
+      item.textContent = `Item ${index}`
+      item.style.height = `${ITEM_HEIGHT}px`;
+      return item
+    }
+
+    // 渲染函数
+    function render(viewport, content) {
+      const scrollTop = viewport.scrollTop
+      const viewportHeight = viewport.clientHeight
+
+      // 计算当前应该展示的元素索引
+      const startIndex = Math.floor(scrollTop / ITEM_HEIGHT)
+      const endIndex = Math.min(Math.ceil((scrollTop + viewportHeight) / ITEM_HEIGHT), ITEM_COUNT)
+
+      // 生成当前窗口应该展示的item
+      const items = []
+      for (let i = startIndex; i < endIndex; i++) {
+        const item = createItem(i);
+        items.push(item);
+      }
+
+      content.innerHTML = ''
+
+      // 每一次滚动事件都会重新设置一次padding，使得当前容器中的元素能够整好显示在窗口中
+      content.style.paddingTop = `${startIndex * ITEM_HEIGHT}px`;
+
+      content.append(...items)
+
+    }
+
+    // 首次渲染
+    render(viewport, content)
+
+    // 滚动事件的时候触发渲染
+    viewport.addEventListener('scroll', () => {
+        render(viewport, content)
+    });
+
+  </script>
+</body>
+</html>
