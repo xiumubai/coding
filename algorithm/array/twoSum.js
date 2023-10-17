@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-10-13 17:05:39
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-10-17 15:58:46
+ * @LastEditTime: 2023-10-17 20:04:27
  * @Description: 两数之和
  */
 
@@ -12,9 +12,24 @@
  * 示例: 给定 nums = [2, 7, 11, 15], target = 9，因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]
  */
 
-function twoSum(array, target) {
-
-
-  return arr
-
+// 时间复杂度O(n)、 空间复杂度O(n)
+function twoNumAdd(arr, target) {
+  if (Array.isArray(arr)) {
+    // 使用map将遍历过的数字存起来，空间换时间
+    let map = {};
+    for (let i = 0; i < arr.length; i++) {
+      // 从map中查找是否有key 等于 target-nums[i]，如果有，则条件成立，返回结果
+      if (map[target - arr[i]] !== undefined) {
+        return [target - arr[i], arr[i]];
+      } else {
+        // 条件不成立，将该值存起来
+        map[arr[i]] = i;
+      }
+    }
+  }
+  return [];
 }
+
+var arr = [2, 7, 11, 15]
+const result = twoNumAdd(arr, 9)
+console.log(result);
