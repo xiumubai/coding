@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-11-02 18:46:37
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-11-02 18:50:25
+ * @LastEditTime: 2023-11-02 20:02:08
  * @Description: 校验html是否合法
  */
 
@@ -15,7 +15,7 @@ function validateHTML(htmlString) {
 
   // 检查HTML是否有效
   if (tempDiv.innerHTML === htmlString) {
-      return true;
+    return true;
   } else {
       return false;
   }

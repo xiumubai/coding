@@ -2,15 +2,14 @@
  * @Author: 朽木白
  * @Date: 2023-11-02 10:49:35
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-11-02 18:56:46
+ * @LastEditTime: 2023-11-02 20:01:35
  * @Description: 实现数组的旋转
  */
 // 示例用法
-// const array = [1, 2, 3, 4, 5];
+// const array = [1, 2, 3, 4, 5];  4 5 1 2 3
 // const k = 2;
 // const rotatedArray = rotateArray(inputArray, k);
 // console.log(rotatedArray); // 输出: [4, 5, 1, 2, 3]
-
 
 function rotateArray(inputArray, k) {
   const n = inputArray.length;
