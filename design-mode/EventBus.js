@@ -2,10 +2,9 @@
  * @Author: 朽木白
  * @Date: 2023-10-10 20:36:04
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-10-10 23:34:15
+ * @LastEditTime: 2023-11-02 20:10:25
  * @Description: 发布订阅模式
  */
-
 
 class EventBus {
   constructor() {

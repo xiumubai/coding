@@ -144,55 +144,10 @@ function getUserAction() {
 // container.onmousemove = debounce(getUserAction.bind(null, 1), 300, true);
 
 // 5、返回值
-// function debounce(func, wait, immediate) {
-//   var timer, result;
-
-//   return function() {
-//     // DOM对象
-//     var context = this
-//     // 自定义参数和Event对象
-//     var args = arguments;
-//     if(timer) {
-//       clearTimeout(timer)
-//     }
-
-//     // 是否需要立即执行
-//     if (immediate) {
-      
-//       // timer在触发后的wait（ms）是true，所以callNow在这期间为false
-//       var callNow = !timer
-//       // 停止触发wait（ms）后，才可以重新触发执行
-//       timer = setTimeout(function() {
-//         // 这里timer需要手动设置为null，callNow才能重新执行
-//         timer = null
-//       }, wait)
-//       // 触发的第一时间立即执行
-//       if (callNow) {
-//         result = func.apply(context, args)
-//       }
-//     } else {
-
-//       // 如果不是立即执行，延时wait（ms）以后执行
-//       timer = setTimeout(function() {
-//         // 在setTimeout中，this指向window，所以这里需要把外面正确的this指向传递进来
-//         result = func.apply(context, args)
-//       }, wait)
-//     }
-    
-//     return result;
-//   }
-// }
-
-// container.onmousemove = debounce(getUserAction, 300);
-
-
-// 6.取消
-// 能取消 debounce 函数，比如说我 debounce 的时间间隔是 10 秒钟，immediate 为 true，
-// 这样的话，我只有等 10 秒后才能重新触发事件，现在我希望有一个按钮，点击后，取消防抖，这样我再去触发，就可以又立刻执行。
 function debounce(func, wait, immediate) {
   var timer, result;
 
-  var debounced =  function() {
+  return function() {
     // DOM对象
     var context = this
     // 自定义参数和Event对象
@@ -226,19 +181,64 @@ function debounce(func, wait, immediate) {
     
     return result;
   }
-
-  debounced.cancel = function() {
-    clearTimeout(timer)
-    timer = null
-  }
-
-  return debounced
 }
+//TODO： 如果鼠标一直停留在滑动区域内一直滑动的话，事件就不生效了
 
-var setUseAction = debounce(getUserAction, 10000, true);
+container.onclick = debounce(getUserAction, 1000, true);
 
-container.onmousemove = setUseAction;
 
-document.getElementById("button").addEventListener('click', function(){
-    setUseAction.cancel();
-})
+// 6.取消
+// 能取消 debounce 函数，比如说我 debounce 的时间间隔是 10 秒钟，immediate 为 true，
+// 这样的话，我只有等 10 秒后才能重新触发事件，现在我希望有一个按钮，点击后，取消防抖，这样我再去触发，就可以又立刻执行。
+// function debounce(func, wait, immediate) {
+//   var timer, result;
+
+//   var debounced =  function() {
+//     // DOM对象
+//     var context = this
+//     // 自定义参数和Event对象
+//     var args = arguments;
+//     if(timer) {
+//       clearTimeout(timer)
+//     }
+
+//     // 是否需要立即执行
+//     if (immediate) {
+      
+//       // timer在触发后的wait（ms）是true，所以callNow在这期间为false
+//       var callNow = !timer
+//       // 停止触发wait（ms）后，才可以重新触发执行
+//       timer = setTimeout(function() {
+//         // 这里timer需要手动设置为null，callNow才能重新执行
+//         timer = null
+//       }, wait)
+//       // 触发的第一时间立即执行
+//       if (callNow) {
+//         result = func.apply(context, args)
+//       }
+//     } else {
+//       // 如果不是立即执行，延时wait（ms）以后执行
+//       timer = setTimeout(function() {
+//         // 在setTimeout中，this指向window，所以这里需要把外面正确的this指向传递进来
+//         result = func.apply(context, args)
+//       }, wait)
+//     }
+    
+//     return result;
+//   }
+
+//   debounced.cancel = function() {
+//     clearTimeout(timer)
+//     timer = null
+//   }
+
+//   return debounced
+// }
+
+// var setUseAction = debounce(getUserAction, 10000, true);
+
+// container.onmousemove = setUseAction;
+
+// document.getElementById("button").addEventListener('click', function(){
+//     setUseAction.cancel();
+// })
