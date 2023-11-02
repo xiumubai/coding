@@ -13,6 +13,7 @@ function sameArray(nums1, nums2) {
 
   for (let i = 0; i < nums1.length; i++) {
     if (nums2.includes(nums1[i])) {
+      // 去重
       // if(!nums.includes(nums1[i])) {
       //   nums.push(nums1[i])
       // }
