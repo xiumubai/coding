@@ -29,7 +29,16 @@ Promise.resolve().then(function() {
 });
 console.log("start");
 
-// 打印结果： start promise0 promise1 promise5 timer1 promise2 promise4 timer2 promise3
+// 打印结果： 
+// start 
+// promise0 
+// promise1 
+// promise5 
+// timer1 
+// promise2 
+// promise4 
+// timer2 
+// promise3
 
 
 // 2. async 面试题
@@ -60,4 +69,12 @@ new Promise(resolve => {
   });
 console.log("script end");
 
-// 打印结果:  script start => async2 end => Promise => script end => async1 end => promise1 => promise2 => setTimeout
+// 打印结果:  
+// script start
+// async2 end 
+// Promise 
+// script end 
+// async1 end 
+// promise1 
+// promise2 
+// setTimeout
