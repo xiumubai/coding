@@ -1,3 +1,10 @@
+/*
+ * @Author: 朽木白
+ * @Date: 2023-11-01 15:17:54
+ * @LastEditors: 1547702880@@qq.com
+ * @LastEditTime: 2023-11-04 13:54:53
+ * @Description: 沿原型链往上查找
+ */
 const myInstanceof = (left, right) => {
   let proto = Object.getPrototypeOf(left)
   while(true) {
