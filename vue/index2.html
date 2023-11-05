@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多个响应式</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    let data = {
+      msg: 'hahha',
+      num: 12
+    }
+    let vm = {}
+    function proxyData() {
+      Object.keys(data).forEach(key => {
+        Object.defineProperty(vm, key, {
+          // 可枚举
+          enumerable: true,
+          // 可配置
+          configurable: true,
+          get() {
+            return data[key]
+          },
+          set(newValue) {
+            if (newValue === data[key]) return
+            data[key] = newValue
+            document.querySelector('#app').textContent = data[key]
+          }
+        })
+      })
+    }
+
+    proxyData()
+  </script>
+</body>
+</html>
