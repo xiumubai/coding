@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>proxy响应式</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    let data = {
+      msg: 'hahha',
+      num: 12
+    }
+    let vm = new Proxy(data, {
+      get(target, key) {
+        return target[key]
+      },
+      set(target, key, newValue) {
+        if (target[key] === newValue) return
+        // 进行设置值
+        target[key] = newValue
+        document.querySelector('#app').textContent = target[key]
+      }
+    })
+
+    // 触发get
+    console.log(vm.num)
+    // 触发set
+    vm.msg = 'hehe'
+    
+  </script>
+</body>
+</html>
