@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单个响应式</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    let data = {
+      msg: ''
+    }
+
+    let vm = {}
+
+    Object.defineProperty(vm, 'msg', {
+      get() {
+        return data.msg
+      },
+      set(newValue) {
+        if (newValue === data.msg) return
+        data.msg = newValue
+        document.querySelector('#app').textContent = newValue
+      }
+    })
+
+    vm.msg = '124'
+  </script>
+</body>
+</html>
