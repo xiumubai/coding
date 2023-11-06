@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue3响应式</title>
+  <!-- https://juejin.cn/post/7134281691295645732 -->
+</head>
+<body>
+  <script type="module">
+    import { ref, effect, toRef, reactive } from './js/reactive.js'
+
+    const obj = reactive({
+        name: '白哥',
+        age: 22, 
+    })
+
+    console.log(obj.age, obj.name);
+    const name = toRef(obj, 'name')
+    console.log(name)
+
+    effect(() => {
+      name.value = '朽木白'
+    })
+    console.log(name.value)
+  </script>
+</body>
+</html>
