@@ -2,16 +2,10 @@
  * @Author: 朽木白
  * @Date: 2023-11-01 15:47:42
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-11-15 19:35:45
+ * @LastEditTime: 2023-11-15 19:38:08
  * @Description: 下划线命名转成驼峰命名
  */
 
-// 示例
-
-// -hello-world => helloWorld
-// hello-world => helloWorld
-
-// 第一种：正则
 function toCamel(str) {
   // 小驼峰
   if (typeof str !== "string") {
@@ -30,11 +24,18 @@ const result = toCamel( '_a_b_c')
 
 // console.log(result)
 
-// 第二种：循环
+
+/**
+题目：中划线命名转驼峰
+示例：
+1. -hello-world => helloWorld
+2. hello-world => helloWorld
+*/
 
 function hyphenToCamelCase(str) {
   let words = str.split('-');
   if(words[0] === '') {
+    // 如果首位是-，str.split('-')以后数组为['', 'hello', 'world'],所以需要删除掉
     words = words.slice(1)
   }
   for (let i = 1; i < words.length; i++) {
