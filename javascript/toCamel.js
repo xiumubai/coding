@@ -2,27 +2,24 @@
  * @Author: 朽木白
  * @Date: 2023-11-01 15:47:42
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-11-15 19:38:08
+ * @LastEditTime: 2023-11-15 20:26:22
  * @Description: 下划线命名转成驼峰命名
  */
 
 function toCamel(str) {
   // 小驼峰
-  if (typeof str !== "string") {
-    throw Error("传入的值类型不是字符串!!!");
+  if(str?.[0] === '_') {
+    return toCamel(str.slice(1))
+  } else {
+    return str.replace(/_([a-z])/g, function(match, letter) {
+      return letter.toUpperCase()
+    })
   }
-  let camelStr = str.replace(/(\b|_)([A-Za-z])/, ($, $1, $2) =>
-    $2.toLowerCase()
-  );
-  camelStr = camelStr.replace(/_(\w)/g, ($, $1) => {
-    return $1.toUpperCase();
-  });
-  return camelStr;
 }
 
-const result = toCamel( '_a_b_c')
+const result = toCamel('____hello_world')
 
-// console.log(result)
+console.log(result)
 
 
 /**
@@ -49,4 +46,4 @@ function hyphenToCamelCase(str) {
 // 示例用法
 const hyphenString = '-hello-world';
 const camelCaseString = hyphenToCamelCase(hyphenString);
-console.log(camelCaseString); // 输出：abSfafCd
+console.log(camelCaseString); // 输出：helloWorld
