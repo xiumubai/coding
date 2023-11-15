@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-10-11 17:17:43
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-10-11 17:35:39
+ * @LastEditTime: 2023-11-14 11:29:17
  * @Description: 函数柯里化
  */
 
@@ -63,3 +63,11 @@ console.log(fn("a", "b", "c") ) // ["a", "b", "c"];
 fn("a", "b")("c") // ["a", "b", "c"]
 fn("a")("b")("c") // ["a", "b", "c"]
 fn("a")("b", "c") // ["a", "b", "c"]
+
+
+var obj = {
+  a: 1,
+  b: obj
+}
+
+console.log(obj);

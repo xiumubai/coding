@@ -2,7 +2,7 @@
   * @Author: 朽木白
   * @Date: 2023-09-15 17:40:48
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-09-15 20:07:11
+ * @LastEditTime: 2023-11-14 11:42:14
   * @Description: apply的实现
   */
 
@@ -20,13 +20,13 @@
     if (!args) {
       result = context.fn()
     } else {
-      var arr = []
-      for(var i = 0, len = args.length; i < len; i++) {
-        arr.push('args['+ i +']')
-      }
+      // var arr = []
+      // for(var i = 0, len = args.length; i < len; i++) {
+      //   arr.push('args['+ i +']')
+      // }
       // es6写法
-      // result = cotext.fn(...args)
-      result = eval('context.fn('+ arr +')')
+      result = cotext.fn(...args)
+      // result = eval('context.fn('+ arr +')')
     }
     delete context.fn
     return result
