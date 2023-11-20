@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-11-01 15:47:42
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-11-15 20:26:22
+ * @LastEditTime: 2023-11-15 20:27:40
  * @Description: 下划线命名转成驼峰命名
  */
 
@@ -17,7 +17,7 @@ function toCamel(str) {
   }
 }
 
-const result = toCamel('____hello_world')
+const result = toCamel('_hello_world')
 
 console.log(result)
 
