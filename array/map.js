@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-10-11 15:06:29
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-10-11 16:26:02
+ * @LastEditTime: 2023-11-16 16:58:37
  * @Description: map方法的实现原理
  */
 
@@ -23,8 +23,6 @@ const newArr = arr.map(i => i.name)
 
 Array.prototype.myMap = function(callback) {
   const result = []
-
-  console.log(this);
 
   for(let i = 0; i < this.length; i++) {
     result.push(callback(this[i], i, this));

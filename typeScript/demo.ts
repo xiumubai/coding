@@ -69,3 +69,5 @@ interface IRecordConfig {
 }
 
 export type RecordConfigList = IRecordConfig[]
+
+var name: string = ''

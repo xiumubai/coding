@@ -25,8 +25,7 @@ function getUserAction() {
 //   var timer = null;
 
 //   return function() {
-//     var context = this
-    
+//     
 //     clearTimeout(timer)
 //     timer = setTimeout(function() {
 //       // 在setTimeout中，this指向window，这里需要把外面正确的this指向传递进来

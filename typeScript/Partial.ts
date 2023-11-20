@@ -6,7 +6,7 @@ type MyPartial<T> = {[P in keyof T]?:T[P]}
 
 interface IUser {
   name: string
-  age: string
+  age2: string
 }
 
 type User = MyPartial<IUser>

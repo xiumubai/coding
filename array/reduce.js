@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-10-11 17:10:04
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-10-11 17:15:37
+ * @LastEditTime: 2023-11-16 15:00:22
  * @Description: reduce方法
  */
 
@@ -12,7 +12,7 @@
 
 // 使用高阶函数
 const arr = [5, 7, 1, 8, 4];
-const sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue,0);
+const sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 console.log(sum)//25
 
 // 实现
