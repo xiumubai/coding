@@ -80,4 +80,3 @@ function bar(name, age) {
 }
 
 console.log(bar.myCall(foo, 123, 34))
-
