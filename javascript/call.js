@@ -49,17 +49,17 @@ Function.prototype.myCall = function(context) {
   context.fn = this
 
   console.log(arguments)
-  // var args = []
-  // for(var i = 1, len = arguments.length; i < len; i++) {
-  //   args.push('arguments[' + i +']')
-  // }
+  var args = []
+  for(var i = 1, len = arguments.length; i < len; i++) {
+    args.push('arguments[' + i +']')
+  }
 
   // es6实现，主要是参数实现的不一样  Array.from(arguments)
   // arguments是一个伪数组，需要转化成真正的数组
-  const args = Array.prototype.slice.call(arguments).splice(1) // 删除第一个参数
-  const result = context.fn(...args)
+  // const args = Array.prototype.slice.call(arguments).splice(1) // 删除第一个参数
+  // const result = context.fn(...args)
 
-  // var result = eval('context.fn('+ args +')')
+  var result = eval('context.fn('+ args +')')
 
   delete context.fn
 
