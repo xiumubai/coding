@@ -22,7 +22,7 @@ console.log(arr4)
 
 // flat方法实现
 
-Array.prototype.myFlat = function(deep = 1) {
+Array.prototype.flatten = function(deep = 1) {
     let arr = this;
     // deep为0则返回，递归结束
     if (deep == 0) return arr;
@@ -38,4 +38,4 @@ Array.prototype.myFlat = function(deep = 1) {
 }
 
 var arr = [1, 2, [3, 4, [5, 6, [7]]]];
-console.log(arr.myFlat(2)); // [3, 4]
+console.log(arr.flatten(2)); // [3, 4]
