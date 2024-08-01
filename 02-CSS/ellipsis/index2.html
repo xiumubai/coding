@@ -1,0 +1,36 @@
+<!-- 判断文本超出隐藏 -->
+<style>
+  .title {
+    width: 640px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #00b388;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
+    white-space: nowrap;
+    /* box-sizing: border-box; */
+    padding: 0 10px;
+}
+
+</style>
+<div class="title" id="test">
+    <span class="content">近日，银行纷纷下调大额存单利率，但银行定期存款仍被疯抢。银行理财经理表示：有意向购买定期存款要尽快，不确定利率是否会再降。</span>
+</div>
+<script>
+
+// 创建一个block元素来包裹inline元素
+const content = document.querySelector('.content');
+function getBlockDomWidth(dom) {
+    const { left, right } = getPadding(dom);
+    console.log(dom.clientWidth, content.clientWidth)
+    const obj = { 
+        status: dom.clientWidth < content.clientWidth + left + right,
+        width: dom.clientWidth - left - right
+    }
+    return obj;
+}
+
+getBlockDomWidth(content)
+</script>

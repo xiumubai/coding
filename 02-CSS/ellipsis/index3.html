@@ -1,0 +1,72 @@
+<style>
+    .con {
+    font-size: 14px;
+    color: #666;
+    width: 600px;
+    margin: 50px auto;
+    border-radius: 8px;
+    padding: 15px;
+    overflow: hidden;
+    resize: horizontal;
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+}
+
+.wrap {
+    position: relative;
+    line-height: 2;
+    height: 2em;
+    padding: 0 10px;
+    overflow: hidden;
+    background: #fff;
+    margin: 5px 0;
+}
+
+.wrap:nth-child(odd) {
+    background: #f5f5f5;
+}
+
+.title {
+    display: block;
+    position: relative;
+    background: inherit;
+    text-align: justify;
+    height: 2em;
+    overflow: hidden;
+    top: -4em;
+}
+
+.txt {
+    display: block;
+    max-height: 4em;
+}
+.title::before{
+    content: attr(title);
+    width: 50%;
+    float: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;
+}
+
+
+</style>
+<ul class="con">
+    <li class="wrap">
+        <span class="txt">CSS 实现优惠券的技巧 - 2021-03-26</span>
+        <span class="title" title="CSS 实现优惠券的技巧 - 2021-03-26">CSS 实现优惠券的技巧 - 2021-03-26</span>
+    </li>
+    <li class="wrap">
+        <span class="txt">CSS 测试标题，这是一个稍微有点长的标题，超出一行以后才会有title提示，标题是 实现优惠券的技巧 - 2021-03-26</span>
+        <span class="title" title="CSS 测试标题，这是一个稍微有点长的标题，超出一行以后才会有title提示，标题是 实现优惠券的技巧 - 2021-03-26">CSS
+            测试标题，这是一个稍微有点长的标题，超出一行以后才会有title提示，标题是 实现优惠券的技巧 - 2021-03-26</span>
+    </li>
+    <li class="wrap">
+        <span class="txt">CSS 拖拽?</span>
+        <span class="title" title="CSS 拖拽?">CSS 拖拽?</span>
+    </li>
+    <li class="wrap">
+        <span class="txt">CSS 文本超出自动显示title</span>
+        <span class="title" title="CSS 文本超出自动显示title">CSS 文本超出自动显示title</span>
+    </li>
+</ul>
