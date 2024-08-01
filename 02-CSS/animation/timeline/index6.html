@@ -1,0 +1,54 @@
+<!-- 头部吸顶 -->
+<header>😀</header>
+<div>欢</div>
+<div>迎</div>
+<div>关</div>
+<div>注</div>
+<div>前</div>
+<div>端</div>
+<div>白</div>
+<div>哥</div>
+
+<style>
+  body{
+    margin: 0;
+    padding-top: 100vh;
+  }
+  header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    background-color: royalblue;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    color: #fff;
+    animation: header 1s linear forwards;
+    animation-timeline: scroll();
+    animation-range: 0 calc(100vh - 60px);
+  }
+  main{
+      padding: 10px;
+  }
+  div{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+      margin: 10px;
+      background-color: beige;
+      color: coral;
+      font-size: 80px;
+  }
+  div:nth-child(odd){
+    background-color:wheat
+  }
+  @keyframes header {
+    to { 
+        height: 60px;
+        font-size: 30px;
+      }
+  }
+</style>

@@ -1,0 +1,75 @@
+<!-- 返回顶部 -->
+<style>
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background-color: #f44336;
+    transform-origin: 0 50%;
+    animation: grow-progress 1s linear;
+    animation-timeline: scroll();
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    margin: 10px;
+    background-color: beige;
+    color: coral;
+    font-size: 80px;
+  }
+
+  div:nth-child(odd){
+    background-color:wheat
+  }
+
+  .back {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    color: white;
+    text-decoration: none;
+    background-color: royalblue;
+    border-radius: 4px;
+    padding: 10px;
+    animation: back-progress 1s linear forwards;
+    animation-timeline: scroll();
+    animation-range: entry 0 100px;
+  }
+
+  @keyframes grow-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes back-progress {
+    from {
+      transform: translateY(150%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
+</style>
+<div>欢</div>
+<div>迎</div>
+<div>关</div>
+<div>注</div>
+<div>前</div>
+<div>端</div>
+<div>白</div>
+<div>哥</div>
+<a class="back" href="#">Back</a>

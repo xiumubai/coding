@@ -1,0 +1,81 @@
+<div>欢</div>
+<div>迎</div>
+<div>关</div>
+<div>注</div>
+<div>白</div>
+<div>哥</div>
+<div>学</div>
+<div>前</div>
+<div>端</div>
+<div>欢</div>
+<div>迎</div>
+<div>关</div>
+<div>注</div>
+<div>白</div>
+<div>哥</div>
+<div>学</div>
+<div>前</div>
+<div>端</div>
+<style>
+  body{
+    margin: 0;
+}
+body::after{
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background-color: #F44336;
+    transform-origin: 0 50%;
+    animation: grow-progress 1s linear;
+    animation-timeline: scroll();
+}
+main{
+    padding: 10px;
+}
+div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    margin: 10px;
+    background-color: beige;
+    color: coral;
+    font-size: 60px;
+    animation: appear 1s linear forwards, 
+    disappear 1s linear forwards;
+    animation-timeline: view();
+    animation-range: entry, exit;
+}
+div:nth-child(odd){
+    background-color:wheat
+}
+@keyframes grow-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+@keyframes disappear {
+    100% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    0% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+</style>
