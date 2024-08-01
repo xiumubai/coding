@@ -1,0 +1,68 @@
+<div></div>
+<script>
+  const dataSource = [
+  {
+    name: "小明",
+    exam: "月考",
+    chinese: 100,
+    math: 90,
+    english: 87
+  },
+  {
+    name: "小明",
+    exam: "期中",
+    chinese: 98,
+    math: 100,
+    english: 88
+  },
+  {
+    name: "小明",
+    exam: "期末",
+    chinese: 100,
+    math: 100,
+    english: 100
+  },
+  {
+    name: "小红",
+    exam: "月考",
+    chinese: 100,
+    math: 100,
+    english: 100
+  },
+  {
+    name: "小红",
+    exam: "期中",
+    chinese: 100,
+    math: 100,
+    english: 100
+  },
+  {
+    name: "小丽",
+    exam: "月考",
+    chinese: 100,
+    math: 100,
+    english: 100
+  }
+];
+
+const mergeRows = (rows, key) => {
+    rows[0].rowSpan = 1;
+    let idx = 0;
+    return rows.slice(1).reduce(
+      (mergedRows, item, index) => {
+        if (item[key] === mergedRows[idx][key]) {
+          mergedRows[idx].rowSpan++;
+          item.colSpan = 0;
+        } else {
+          item.rowSpan = 1;
+          idx = index + 1;
+        }
+        return [...mergedRows, item];
+      },
+      [rows[0]]
+    );
+  };
+
+const result = mergeRows(dataSource, "name");
+console.log(result);
+</script>
