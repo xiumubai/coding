@@ -1,0 +1,71 @@
+<style>
+  #imageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    object-fit: cover;
+  }
+</style>
+<div id="imageContainer"></div>
+<script>
+  // ==============动态创建img开始================
+  const imageContainer = document.getElementById('imageContainer');
+  // <!-- 占位图 -->
+  const baseUrl = 'https://img0.baidu.com/it/u=428106177,2768087549&fm=253&fmt=auto&app=138&f=JPEG?w=475&h=475';
+  // <!-- 小猫图片 -->
+  const imgs = [
+    'https://img1.baidu.com/it/u=64157563,511108225&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+    'https://img1.baidu.com/it/u=1354523267,2287845438&fm=253&fmt=auto&app=138&f=JPEG?w=475&h=475',
+    'https://img1.baidu.com/it/u=1515728421,2458974555&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+    'https://img1.baidu.com/it/u=3116363813,4268158383&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+  ]
+
+  function createImgElement(url, dataSrc) {
+    const img = document.createElement('img');
+    img.src = url;
+    img.dataset.src = dataSrc;
+    return img;
+  }
+
+  function generateRandomUrl(imgList) {
+    const randomNumber = Math.floor(Math.random() * 4);
+    return imgList[randomNumber];
+  }
+
+  for (let i = 0; i < 1000; i++) {
+    const randomUrl = generateRandomUrl(imgs);
+    const img = createImgElement(baseUrl, randomUrl);
+    imageContainer.appendChild(img);
+  }
+  // ================动态创建img标签结束=================
+
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top < document.body.clientHeight
+  }
+
+  function loadImage(img) {
+    img.src = img.dataset.src;
+  }
+
+  function lazyLoadImages() {
+    const img = document.querySelectorAll('img')
+    img.forEach(img => {
+      if (isElementInViewport(img)) {
+        loadImage(img);
+      }
+    })
+  }
+
+  window.addEventListener("scroll", lazyLoadImages)
+  // 首次进入页面，可视区域的图片需要直接加载
+  lazyLoadImages()
+</script>
