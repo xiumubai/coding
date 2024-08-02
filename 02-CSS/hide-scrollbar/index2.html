@@ -1,0 +1,35 @@
+  <div class="list">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+<style>
+  html, body {
+    padding: 0;
+    margin: 0;
+  }
+  .list {
+    display: flex;
+    overflow: auto;
+    gap: 10px;
+    padding: 10px;
+    clip-path: inset(0 0 16px);
+  }
+
+  .item {
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    background-color: royalblue;
+    flex-shrink: 0;
+  }
+</style>

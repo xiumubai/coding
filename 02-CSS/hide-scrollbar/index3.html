@@ -1,0 +1,49 @@
+  <div class="list">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+<style>
+  html, body {
+    padding: 0;
+    margin: 0;
+  }
+  .list {
+    display: flex;
+    overflow: auto;
+    gap: 10px;
+    padding: 10px;
+    /* -webkit-mask: linear-gradient(red, red) 0 0/100% calc(100% - 16px) no-repeat; */
+    -webkit-mask: linear-gradient(to right, transparent, red 16px calc(100% - 16px), transparent),  
+    linear-gradient(red, red) 0 0/100% calc(100% - 16px) no-repeat;
+    -webkit-mask-composite: source-in;
+  }
+
+  .item {
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    background-color: royalblue;
+    flex-shrink: 0;
+  }
+</style>
