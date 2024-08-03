@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>检测元素之外的点击</title>
+</head>
+<style>
+  .ele {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+  }
+</style>
+<body>
+  <div class="ele">div元素</div>
+  <script>
+    const ele = document.querySelector('.ele');
+    document.addEventListener('click', function (evt) {
+      // isClickedOutside 为 true 如果点击的元素在 ele 之外
+      const isClickedOutside = !ele.contains(evt.target);
+      if (isClickedOutside) {
+        alert('点击了元素之外');
+      }
+    });
+  </script>
+</body>
+</html>
