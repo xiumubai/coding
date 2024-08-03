@@ -1,0 +1,126 @@
+<div class="swiper-container" style="timeline-scope: --t1,--t2,--t3;">
+  <div class="swiper" id="swiper">
+    <div class="swiper-item" style="--t: --t1">
+      <div class="card">1</div>
+    </div>
+    <div class="swiper-item" style="--t: --t2">
+      <div class="card">2</div>
+    </div>
+    <div class="swiper-item"  style="--t: --t3">
+      <div class="card">3</div>
+    </div>
+  </div>
+  <div class="pagination">
+    <i class="dot" style="--t: --t1" data-current="true"></i>
+    <i class="dot" style="--t: --t2"></i>
+    <i class="dot" style="--t: --t3"></i>
+  </div>
+  <style>
+    html,body{
+    font-family: -apple-system, "BlinkMacSystemFont", sans-serif;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: aliceblue;
+  }
+  .swiper-container{
+    position: relative;
+    width: 360px;
+    background-color: #FFE8A3;
+  }
+  .swiper {
+    display: flex;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior: none;
+    /* padding-bottom: 20px;
+    clip-path: inset(0 0 20px 0);
+    margin-bottom: -20px; */
+  }
+  .swiper-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    view-timeline: var(--t) x;
+  }
+  .pagination {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    gap: 4px;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    border: 0.5px solid rgba(0, 0, 0, 0.04);
+    background: rgba(255, 255, 255, 0.36);
+    transition: .2s;
+  }
+  .card {
+    width: 300px;
+    height: 150px;
+    border-radius: 12px;
+    background-color: #9747FF;
+    display: grid;
+    place-content: center;
+    color: #fff;
+    font-size: 30px;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
+  @keyframes move {
+    50% {
+      width: 12px;
+      border-radius: 3px 0px;
+      border-color: rgba(0, 0, 0, 0.12);
+      background: #fff;
+    }
+  }
+  /* .dot[data-current="true"]{
+    width: 12px;
+    border-radius: 3px 0px;
+    border-color: rgba(0, 0, 0, 0.12);
+    background: #fff;
+  } */
+  @supports (animation-timeline: scroll()) {
+    .dot{
+      animation: move 1s;
+      animation-timeline: var(--t);
+    }
+}
+  @supports not (animation-timeline: scroll()) {
+    .dot[data-current="true"]{
+      width: 12px;
+      border-radius: 3px 0px;
+      border-color: rgba(0, 0, 0, 0.12);
+      background: #fff;
+    }
+}
+  </style>
+
+  <script>
+
+swiper.addEventListener("scroll", (ev) => {
+  const index =  Math.floor(swiper.scrollLeft / swiper.offsetWidth + 0.5)
+  if (swiper.index!== index) {
+    swiper.index = index
+    console.log(index)
+    if (!CSS.supports("animation-timeline","scroll()")) {
+      document.querySelector('.dot[data-current="true"]').dataset.current = false
+      document.querySelectorAll('.dot')[index].dataset.current = true
+    }
+  }
+})
+  </script>
