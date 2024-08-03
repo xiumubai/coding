@@ -1,7 +1,7 @@
 
 ## 使用CSS实现Swiper效果
 
-- 文档参考：[CSS 实现带指示器的swiper](https://juejin.cn/post/7391380479977275401)
+- 文档参考：[CSS 实现带指示器的swiper](https://code.juejin.cn/pen/7398745627833663497)
 
 - 预览地址：[CSS swiper(stackblitz.com)](https://stackblitz.com/edit/stackblitz-starters-8ufh9y?file=package.json)
 
