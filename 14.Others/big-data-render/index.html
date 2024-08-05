@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一次性渲染十万条数据</title>
+</head>
+<body>
+    <ul id="container"></ul>
+
+    <script>
+        const total = 200000
+        let ul = document.getElementById('container')
+
+        for (let i = 0; i < total; i++) {
+            let li = document.createElement('li')
+            li.innerHTML = ~~(Math.random() * total)
+            ul.appendChild(li)
+        }
+        // 首页渲染很慢
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一次性渲染十万条数据，查看渲染页面的时间</title>
+</head>
+<body>
+    <ul id="container"></ul>
+
+    <script>
+        let prevTime = Date.now()
+        const total = 200000
+        let ul = document.getElementById('container')
+    
+        for (let i = 0; i < total; i++) {
+            let li = document.createElement('li')
+            li.innerHTML = ~~(Math.random() * total)
+            ul.appendChild(li)
+        }
+        console.log('v8执行代码的时间：', Date.now() - prevTime);  // 71ms
+        setTimeout(() => {
+            // setTimeout为hongt任务，会等同步任务执行完毕后才会执行,
+            // 页面渲染会在同步任务执行完毕后才会执行，然后执行setTimeout
+            // 所以这里能得到页面渲染的时间
+            console.log('渲染页面的时间：', Date.now() - prevTime); // 1262ms
+        }, 0)
+    </script>
+    
+</body>
+</html>
