@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>京东的瀑布流</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    #box {
+      /* width: 375px; */
+      display: flex;
+      justify-content: space-around;
+    }
+    #box img {
+      object-fit: cover;
+      background-color: #eee;
+      margin-bottom: 10px;
+    }
+    #left-box,
+    #right-box {
+      width: 180px;
+    }
+
+    .loader-box {
+      width: 375px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #loader {
+      width: 25px;
+      height: 25px;
+      border: 3px solid #ddd;
+      border-radius: 50%;
+      border-bottom: 3px solid #717171;
+      transform: rotate(0deg);
+      animation: loading 1s linear infinite;
+    }
+
+    @keyframes loading {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div id="left-box"></div>
+    <div id="right-box"></div>
+  </div>
+  <div class="loader-box">
+    <div id="loader"></div>
+    <div id="nothing" class="hidden">没有更多了~</div>
+  </div>
+  <script src="util.js"></script>
+  <script>
+  const box = document.getElementById("box"),
+    leftBox = document.getElementById("left-box"),
+    rightBox = document.getElementById("right-box"),
+    loader = document.getElementById("loader"),
+    nothing = document.getElementById("nothing");
+
+  let hasMore = true,
+    loadLock = false;
+
+  const colWidth = 180;
+
+  loadData();
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        pullUp();
+      }
+    },
+    {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0
+    }
+  );
+
+  observer.observe(loader);
+
+  function loadData() {
+    const items = getItems(200);
+    createImgs(items, colWidth, 10);
+  }
+
+  function pullUp() {
+    if (!hasMore) {
+      return;
+    }
+
+    if (loadLock) {
+      return;
+    }
+
+    setTimeout(() => {
+      const len = leftBox.children.length + rightBox.children.length;
+      loadLock = true;
+      if (len > 30) {
+        loader.className = "hidden";
+        nothing.className = "";
+        hasMore = false;
+        return;
+      }
+
+      loadData();
+      loadLock = false;
+    }, 1000);
+  }
+
+  function createImgs(items, imgWidth, rowSpace) {
+    let leftHeight = 0,
+      rightHeight = 0;
+    for (let i = 0; i < items.length; i++) {
+      const { width: w, height: h, url } = items[i];
+      const img = document.createElement("img");
+      const ratio = imgWidth / w;
+      const imgHeight = Math.floor(h * ratio);
+      img.width = imgWidth;
+      img.height = imgHeight;
+      img.src = url;
+
+      if (leftHeight <= rightHeight) {
+        leftHeight = leftHeight + imgHeight + rowSpace;
+        leftBox.appendChild(img);
+      } else {
+        rightHeight = rightHeight + imgHeight + rowSpace;
+        rightBox.appendChild(img);
+      }
+    }
+  }
+
+  </script>
+</body>
+</html>

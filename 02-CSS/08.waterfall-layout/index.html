@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小红书的瀑布流</title>
+  <style>
+    #box {
+      position: relative;
+    }
+    #box img {
+      position: absolute;
+      object-fit: cover;
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script src="util.js"></script>
+  <script>
+  /**
+   * @desc: 参数
+   * @param items 代表图片数组，也就是之前提到的工具函数 getItems() 的结果。
+   * @param colNumber 代表瀑布流有几列，之前 getColumnsInfo() 结果中包含这个结果。
+   * @param colSpace 代表瀑布流列与列之间的间隙，之前的 getColumnsInfo() 结果中也包含这个结果。
+   * @param rolSpace 代表瀑布流行与行之间的间隙，这个间隙我们可以自行设置，我们也设置 rolSpace 等于 colSpace
+   */
+
+   const box = document.getElementById("box");
+    const colWidth = 180;
+    const items = getItems(300);
+    createImgs(items, colWidth);
+
+    init();
+    window.onresize = debounce(init, 100);
+
+    function init() {
+      const { colNumber: cNumber, colSpace: cSpace } = getColumnInfo(colWidth);
+      const rSpace = cSpace; // 列之前的间隙和行之前的间隙一样
+      setPosition(items, cNumber, cSpace, rSpace);
+    }
+
+    function debounce(func, delay) {
+      let timerId;
+
+      return function () {
+        const context = this;
+        const args = arguments;
+
+        clearTimeout(timerId);
+
+        timerId = setTimeout(function () {
+          func.apply(context, args);
+        }, delay);
+      };
+    }
+
+    // 加入图片元素
+    function createImgs(items, imgWidth) {
+      for (let i = 0; i < items.length; i++) {
+        const { url, width: w, height: h } = items[i];
+        const img = document.createElement("img");
+        const ratio = imgWidth / w;
+        const imgHeight = Math.floor(h * ratio);
+
+        img.width = imgWidth;
+        img.height = imgHeight;
+        img.src = url;
+
+        box.appendChild(img);
+      }
+    }
+
+    // 计算会有多少列，以及每列的间隙
+    function getColumnInfo(imgWidth) {
+      const boxWidth = box.clientWidth;
+      const colNumber = Math.floor(boxWidth / imgWidth); // 列的数量
+
+      const spaceNumber = colNumber - 1;
+      const leftSpace = boxWidth - colNumber * imgWidth;
+      const colSpace = parseFloat((leftSpace / spaceNumber).toFixed(2), 10);
+
+      return {
+        colSpace,
+        colNumber
+      };
+    }
+
+    // 设置每张图片的位置
+    function setPosition(items, colNumber, colSpace, rowSpace) {
+      // 数组长度为列数，每一项代表下一项的图片的 top 值
+      const nextTops = new Array(colNumber).fill(0);
+
+      for (let i = 0; i < items.length; i++) {
+        const img = box.children[i];
+        const top = Math.min.apply(null, nextTops);
+        img.style.top = top + "px";
+        const index = nextTops.indexOf(top);
+        nextTops[index] = nextTops[index] + img.height + rowSpace;
+        const left = index * colSpace + index * img.width;
+        img.style.left = left + "px";
+      }
+
+      const max = Math.max.apply(null, nextTops);
+      box.style.height = max + "px";
+    }
+  </script>
+</body>
+</html>

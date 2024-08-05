@@ -11,3 +11,5 @@
 1. [图片懒加载](./05.img-lazy-loading/图片懒加载.md)
 
 1. [用纯css实现swiper](./06.swiper/用纯css实现swiper.md)
+
+1. [瀑布流布局](./08.waterfall-layout/瀑布流布局.md)
