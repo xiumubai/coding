@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一次性渲染十万条数据，requestAnimationFrame + fragment（时间分片）</title>
+</head>
+<body>
+    <ul id="container"></ul>
+
+    <script>
+        const total = 100000
+        let ul = document.getElementById('container')
+        let once = 20
+        let page = total / once
+    
+        function loop(curTotal) {
+            if (curTotal <= 0) return 
+    
+            let pageCount = Math.min(curTotal, once) 
+    
+            window.requestAnimationFrame(() => {
+                let fragment = document.createDocumentFragment() // 创建一个虚拟文档碎片
+                for (let i = 0; i < pageCount; i++) {
+                    let li = document.createElement('li')
+                    li.innerHTML = ~~(Math.random() * total)
+                    fragment.appendChild(li) // 挂到fragment上
+                }
+                ul.appendChild(fragment) // 现在才回流
+                loop(curTotal - pageCount)
+            })
+        }
+    
+        loop(total)
+
+        // 解决了定时器执行时机与屏幕刷新刷新不匹配的问题，并且用fragment优化了回流次数过多问题
+
+        // 同样会有闪屏，这个闪屏是下拉太快导致的，无法规避
+
+
+    </script>
+    
+</body>
+</html>
