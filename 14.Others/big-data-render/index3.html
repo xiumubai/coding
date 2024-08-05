@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一次性渲染十万条数据，使用定时器加载数据</title>
+</head>
+<body>
+    <ul id="container"></ul>
+
+    <script>
+        const total = 200000
+        let ul = document.getElementById('container')
+        let once = 20
+        let page = total / once
+    
+        function loop(curTotal) {
+            if (curTotal <= 0) return 
+    
+            let pageCount = Math.min(curTotal, once) // 最后一次渲染一定少于20条，因此取最小
+    
+            setTimeout(() => {
+                for (let i = 0; i < pageCount; i++) {
+                    let li = document.createElement('li')
+                    li.innerHTML = ~~(Math.random() * total)
+                    ul.appendChild(li)
+                }
+                loop(curTotal - pageCount)
+            }, 0)
+        }
+    
+        loop(total)
+
+        // 加快了首页渲染的速度
+        // 下拉快了，会有闪屏的情况出现
+        // 有个原因也导致了这个闪屏：定时器在 0ms 时走回调去创建 20 个li，但是浏览器的视图刷新需要等到 16.7ms 之后， 0ms 和 16.7ms 之间的时差就导致了闪屏，也就是说定时器的时间和屏幕的刷新率不一致
+    </script>
+    
+    
+</body>
+</html>
