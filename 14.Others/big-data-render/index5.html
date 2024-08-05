@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .v-scroll {
+            /* width: 300px; */
+            height: 100vh;
+            border: 1px solid black;
+            overflow-y: scroll;
+        }
+
+        li {
+            list-style: none;
+            padding-left: 20px;
+            line-height: 40px;
+            height: 40px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="v-scroll" @scroll="doScroll" ref="scrollBox">
+            <ul :style="blankStyle" style="height: 100%">
+                <li v-for="item in currentList" :key="item.id">
+                    {{ item }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+        const { createApp, ref, onMounted, computed } = Vue
+
+        createApp({
+            setup() {
+                const allList = ref([]);
+
+                getAllList(100000); 
+
+                function getAllList(count) {
+                    const length = allList.value.length;
+                    for (let i = 0; i < count; i++) {
+                        allList.value.push(`我是列表${length + i + 1}项`)
+                    }
+                }
+
+                const scrollBox = ref(null);
+
+                const boxHeight = ref(0);
+
+                function getScrollBoxHeight() {
+                    boxHeight.value = scrollBox.value.clientHeight;
+                }
+
+                onMounted(() => {
+                    getScrollBoxHeight();
+                    window.onresize = getScrollBoxHeight;
+                    window.onorientationchange = getScrollBoxHeight;
+                })
+
+                const itemHiehgt = ref(40);
+
+                const itemNum = computed(() => {
+                    return ~~(boxHeight.value / itemHiehgt.value) + 2;
+                });
+
+                const startIndex = ref(0);
+
+                const doScroll = _.throttle(() => {
+                    const index = ~~(scrollBox.value.scrollTop / itemHiehgt.value);
+                    if (index === startIndex.value) return;
+                    startIndex.value = index;
+                }, 200)
+
+                const endIndex = computed(() => {
+                    let index = startIndex.value + itemNum.value * 2;
+                    if (!allList.value[index]) {
+                        index = allList.value.length - 1;
+                    }
+                    return index;
+                });
+
+                const currentList = computed(() => {
+                    let index = 0;
+                    if (startIndex.value <= itemNum.value) {
+                        index = 0;
+                    } else {
+                        index = startIndex.value - itemNum.value;
+                    }
+                    return allList.value.slice(index, endIndex.value + 1);
+                });
+
+                const blankStyle = computed(() => {
+                    let index = 0;
+                    if (startIndex.value <= itemNum.value) {
+                        index = 0;
+                    } else {
+                        index = startIndex.value - itemNum.value;
+                    }
+                    return {
+                        paddingTop: index * itemHiehgt.value + "px",
+
+                        paddingBottom: (allList.value.length - endIndex.value - 1) * itemHiehgt.value + "px"           
+                    };
+                });
+
+                return {
+                    allList,
+                    currentList,
+                    boxHeight,
+                    itemHiehgt,
+                    scrollBox,
+                    doScroll,
+                    blankStyle
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
