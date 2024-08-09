@@ -1,0 +1,47 @@
+<div class="shark-wrap card">
+  <img
+    src="https://imgservices-1252317822.image.myqcloud.com/coco/b11272023/ececa9a5.7y0amw.jpg"
+  />
+</div>
+<style>
+  html,body{
+    font-family: -apple-system, "BlinkMacSystemFont", sans-serif;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: safe center;
+    flex-direction: column;
+    align-items: center;
+    background: #000;
+    gap: 20px;
+    padding: 50px;
+  }
+
+  .shark-wrap{
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .shark-wrap::after{
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255, 255, 255, 0.7), rgba(255,255,255,0) 60%);
+    animation: shark-wrap 2s infinite;
+    transform: translateX(-100%);
+  }
+  @keyframes shark-wrap {
+    to {
+      transform: translateX(100%);
+    }
+  }
+  .card{
+    width: 300px;
+    border-radius: 8px;
+    background-color: #FFE8A3;
+  }
+  .card img{
+    display: block;
+    width: 100%;
+  }
+</style>

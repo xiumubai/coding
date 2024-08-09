@@ -13,3 +13,5 @@
 1. [用纯css实现swiper](./06.swiper/用纯css实现swiper.md)
 
 1. [瀑布流布局](./08.waterfall-layout/瀑布流布局.md)
+
+1. [扫光效果](./09.shark-animation/README.md)
