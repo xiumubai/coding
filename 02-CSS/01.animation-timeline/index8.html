@@ -1,0 +1,65 @@
+<div class="view">
+ <div class="block">
+  <div class="box" style="width: 50%; background: #fff1f0;"></div>
+  <div class="box" style="width: 20%; background: #ffa39e;"></div>
+  <div class="box" style="width: 30%; background: #ffccc7;"></div>
+ </div>
+ <div class="block">
+  <div class="box" style="width: 30%; background: #ffccc7;"></div>
+  <div class="box" style="width: 20%; background: #ffa39e;"></div>
+  <div class="box" style="width: 50%; background: #fff1f0;"></div>
+ </div> 
+ <div class="block">
+  <div class="box" style="width: 50%; background: #ff7875;"></div>
+  <div class="box" style="width: 20%; background: #cf1322;"></div>
+  <div class="box" style="width: 30%; background: #ff4d4f;"></div>
+ </div>
+ <div class="block">
+  <div class="box" style="width: 30%; background: #ffd8bf;"></div>
+  <div class="box" style="width: 50%; background: #fff2e8;"></div>
+  <div class="box" style="width: 20%; background: #ff9c6e;"></div>
+ </div>
+ <div class="block">
+  <div class="box" style="width: 50%; background: #d4380d;"></div>
+  <div class="box" style="width: 30%; background: #610b00;"></div>
+  <div class="box" style="width: 20%; background: #871400;"></div>
+ </div>
+
+ <div class="footer">
+ </div>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  .block {
+    display: flex;
+    margin: 30px 30px;
+    align-items: space-between;
+    height: 300px;
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+
+  .footer {
+    height: 800px;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      clip-path: inset(100% 100% 0 0);
+    }
+    to {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .box {
+    margin: 0 20px;
+  }
+
+
+</style>
