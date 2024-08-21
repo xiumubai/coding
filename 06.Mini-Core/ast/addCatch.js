@@ -1,3 +1,6 @@
+/**
+ * 添加 catch
+ */
 const parser = require('@babel/parser') // 用于将代码转换为 AST
 const traverse = require('@babel/traverse').default // 用于对 AST 的遍历，包括节点增删改查、作用域等处理
 const generate = require('@babel/generator').default // 用于将 AST 转换成代码
