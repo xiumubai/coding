@@ -15,3 +15,5 @@
 1. [瀑布流布局](./08.waterfall-layout/瀑布流布局.md)
 
 1. [扫光效果](./09.shark-animation/README.md)
+
+1. [头像悬停效果](./10.avatar-hover/README.md)
