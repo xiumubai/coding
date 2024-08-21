@@ -1,0 +1,40 @@
+{
+  "program": {
+    "type": "Program",
+    "sourceType": "module",
+    "interpreter": null,
+    "body": [
+      {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "fn"
+            },
+            "init": {
+              "type": "ArrowFunctionExpression",
+              "id": null,
+              "generator": false,
+              "async": false,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "name": "a"
+                }
+              ],
+              "body": {
+                "type": "Identifier",
+                "name": "a"
+              }
+            }
+          }
+        ],
+        "kind": "const"
+      }
+    ],
+    "directives": []
+  },
+  "comments": []
+}

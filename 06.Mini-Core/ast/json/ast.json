@@ -1,0 +1,36 @@
+{
+  "type": "Program", // 表示这是一个程序的抽象语法树（AST）的根节点
+  "body": [
+    {
+      "type": "VariableDeclaration", // 表示一个变量声明
+      "declarations": [
+        {
+          "type": "VariableDeclarator", // 表示一个变量声明的具体内容
+          "id": {
+            "type": "Identifier", // 表示一个变量的名称
+            "name": "text123456789" // 变量名
+          },
+          "init": null // 表示该变量没有初始值
+        }
+      ],
+      "kind": "let" // 表示使用了 'let' 关键字进行变量声明
+    },
+    {
+      "type": "ExpressionStatement", // 表示一个表达式语句
+      "expression": {
+        "type": "AssignmentExpression", // 表示一个赋值表达式
+        "operator": "=", // 赋值操作符
+        "left": {
+          "type": "Identifier", // 表示左侧是一个变量
+          "name": "text" // 变量名 'text'
+        },
+        "right": {
+          "type": "Literal", // 表示右侧是一个字面量
+          "value": "变量名长一点方便辨识", // 字面量值
+          "raw": "'变量名长一点方便辨识'" // 字面量的原始表示形式
+        }
+      }
+    }
+  ],
+  "sourceType": "module" // 表示这是一个模块类型的源代码
+}
