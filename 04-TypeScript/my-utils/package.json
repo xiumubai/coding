@@ -1,0 +1,16 @@
+{
+  "name": "xiumu-utils-test",
+  "version": "1.0.0",
+  "description": "为了测试在utils包中如何打包types文件，发布到 npm 上，本地进行测试，typescript 的类型是否有友好的提示",
+  "main": "./dist/index.js",    
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  }
+}

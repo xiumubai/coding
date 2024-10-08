@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",              // 输出目录
+    "declaration": true,             // 生成声明文件
+    "declarationDir": "./dist/types",// 声明文件输出目录
+    "emitDeclarationOnly": false,     // 只生成声明文件
+    "module": "commonjs",
+    "target": "ES6",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
