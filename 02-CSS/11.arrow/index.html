@@ -1,0 +1,30 @@
+<html>
+  <div class="tag-horizontal">
+    点击这里
+  </div>
+  
+  <style>
+    .tag-horizontal {
+        position: absolute;
+        background: #00cd32;
+        padding: 0 5px;
+        display: flex;
+        align-items: center;
+        height: 26px;
+        color: #fff;
+    }
+
+    .tag-horizontal::after{
+      content: "";
+      position: absolute;
+      left: 100%; 
+      top: 0;
+      border: 13px solid transparent;
+      border-left-color: #00cd32;
+      /* border-color: #00cd32 transparent #00cd32 #00cd32;
+      border-width: 13px 13px 13px 0; */
+    }
+
+  </style>
+</html>
+</html>
