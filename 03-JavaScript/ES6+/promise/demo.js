@@ -104,8 +104,8 @@ setTimeout(() => {
   console.log('timer2')
 }, 1000)
 
-// 完整的执行顺序分析：完整的执行顺序为：同步代码的执行
-
+// 完整的执行顺序分析：
+// 同步代码的执行
 // console.log('script start') 输出：script start
 // 调用 async1() 函数（返回一个 Promise）
 // console.log('async1') 输出：async1

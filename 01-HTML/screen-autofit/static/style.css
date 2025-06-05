@@ -1,0 +1,99 @@
+/* 重置样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 4vw; /* 基础字体大小，相当于设计稿中的30px (30/750*100=4) */
+  line-height: 1.5;
+  color: #333;
+}
+
+/* 容器 */
+.container {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 0 4vw; /* 左右内边距30px (30/750*100=4) */
+}
+
+/* 头部 */
+.header {
+  height: 13.33vw; /* 100px (100/750*100=13.33) */
+  display: flex;
+  align-items: center;
+  border-bottom: 0.27vw solid #eee; /* 2px (2/750*100=0.27) */
+}
+
+.title {
+  font-size: 5.33vw; /* 40px (40/750*100=5.33) */
+  font-weight: bold;
+}
+
+/* Banner */
+.banner {
+  margin: 4vw 0; /* 上下边距30px */
+}
+
+.banner img {
+  width: 100%;
+  height: 53.33vw; /* 400px (400/750*100=53.33) */
+  object-fit: cover;
+  border-radius: 2.67vw; /* 20px (20/750*100=2.67) */
+}
+
+/* 功能区 */
+.features {
+  display: flex;
+  justify-content: space-between;
+  margin: 6.67vw 0; /* 50px (50/750*100=6.67) */
+}
+
+.feature-item {
+  width: 29.33vw; /* 220px (220/750*100=29.33) */
+  text-align: center;
+}
+
+.icon {
+  width: 16vw; /* 120px (120/750*100=16) */
+  height: 16vw; /* 120px */
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  margin: 0 auto 2.67vw; /* 下边距20px */
+}
+
+.feature-item h3 {
+  font-size: 4.8vw; /* 36px (36/750*100=4.8) */
+  margin-bottom: 1.33vw; /* 10px (10/750*100=1.33) */
+}
+
+.feature-item p {
+  font-size: 3.73vw; /* 28px (28/750*100=3.73) */
+  color: #666;
+}
+
+/* 页脚 */
+.footer {
+  padding: 5.33vw 0; /* 40px (40/750*100=5.33) */
+  text-align: center;
+  border-top: 0.27vw solid #eee; /* 2px */
+  font-size: 3.2vw; /* 24px (24/750*100=3.2) */
+  color: #999;
+}
+
+/* 媒体查询，防止在大屏设备上字体过大 */
+@media screen and (min-width: 750px) {
+  body {
+    font-size: 16px;
+  }
+  
+  .container {
+    width: 750px;
+    padding: 0 15px;
+  }
+  
+  /* 其他元素也可以在这里设置最大值 */
+}
