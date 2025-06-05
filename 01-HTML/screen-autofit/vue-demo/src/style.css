@@ -1,0 +1,14 @@
+
+/* 全局样式 */
+#app {
+  max-width: 750px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+/* PC端适配 */
+@media screen and (min-width: 750px) {
+  #app {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+}

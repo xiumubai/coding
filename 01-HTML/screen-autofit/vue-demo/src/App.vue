@@ -53,7 +53,7 @@ import TheWelcome from './components/TheWelcome.vue'
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 30px; /* 基础字体大小，相当于设计稿中的30px (30/750*100=4) */
+  font-size: 15px; /* 基础字体大小，相当于设计稿中的30px (30/750*100=4) */
   line-height: 1.5;
   color: #333;
 }
@@ -63,52 +63,52 @@ body {
   width: 100%;
   max-width: 100vw;
   margin: 0 auto;
-  padding: 0 30px; /* 左右内边距30px (30/750*100=4) */
+  padding: 0 15px; /* 左右内边距30px (30/750*100=4) */
 }
 
 /* 头部 */
 .header {
-  height: 100px; /* 100px (100/750*100=13.33) */
+  height: 50px; /* 100px (100/750*100=13.33) */
   display: flex;
   align-items: center;
-  /* border-bottom: 2px solid #eee; 2px (2/750*100=0.27) */
+  /* border-bottom: 2px solid #eee; // 2px (2/750*100=0.27) */
 }
 
 .title {
-  font-size: 40px; /* 40px (40/750*100=5.33) */
+  font-size: 20px; /* 40px (40/750*100=5.33) */
   font-weight: bold;
 }
 
 /* Banner */
 .banner {
-  margin: 30px 0; /* 上下边距30px */
+  margin: 15px 0; /* 上下边距30px */
 }
 
 .banner img {
   width: 100%;
-  height: 400px; /* 400px (400/750*100=53.33) */
+  height: 200px; /* 400px (400/750*100=53.33) */
   object-fit: cover;
-  border-radius: 20px; /* 20px (20/750*100=2.67) */
+  border-radius: 10px; /* 20px (20/750*100=2.67) */
 }
 
 /* 功能区 */
 .features {
   display: flex;
   justify-content: space-between;
-  margin: 50px 0; /* 50px (50/750*100=6.67) */
+  margin: 25px 0; /* 50px (50/750*100=6.67) */
 }
 
 .feature-item {
-  width: 200px; /* 220px (220/750*100=29.33) */
+  width: 100px; /* 220px (220/750*100=29.33) */
   text-align: center;
 }
 
 .icon {
-  width: 120px; /* 120px (120/750*100=16) */
-  height: 120px; /* 120px */
+  width: 60px; /* 120px (120/750*100=16) */
+  height: 60px; /* 120px */
   background-color: #f5f5f5;
   border-radius: 50%;
-  margin: 0 auto 20px; /* 下边距20px */
+  margin: 0 auto 10px; /* 下边距20px */
 }
 
 .icon img {
@@ -118,21 +118,21 @@ body {
   object-fit: cover;
 }
 .feature-item h3 {
-  font-size: 36px; /* 36px (36/750*100=4.8) */
-  margin-bottom: 10px; /* 10px (10/750*100=1.33) */
+  font-size: 18px; /* 36px (36/750*100=4.8) */
+  margin-bottom: 5px; /* 10px (10/750*100=1.33) */
 }
 
 .feature-item p {
-  font-size: 28px; /* 28px (28/750*100=3.73) */
+  font-size: 14px; /* 28px (28/750*100=3.73) */
   color: #666;
 }
 
 /* 页脚 */
 .footer {
-  padding: 40px 0; /* 40px (40/750*100=5.33) */
+  padding: 20px 0; /* 40px (40/750*100=5.33) */
   text-align: center;
-  border-top: 2px solid #eee; /* 2px */
-  font-size: 24px; /* 24px (24/750*100=3.2) */
+  border-top: 1px solid #eee; /* 2px */
+  font-size: 12px; /* 24px (24/750*100=3.2) */
   color: #999;
 }
 
