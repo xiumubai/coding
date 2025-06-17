@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活动优惠券</title>
+  <style>
+    :root {
+      /* 定义可动态替换的颜色变量 */
+      --coupon-bg-color: #FFF5F2;
+      --coupon-text-color: #F27B54;
+      --title-bg-color: #F27B54; /* 快送背景色变量 */
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #fff;
+    }
+
+    .coupon {
+      width: 280px;
+      height: 140px;
+      background-color: var(--coupon-bg-color);
+      border-radius: 20px;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+    }
+
+    /* 左右两侧的半圆缺口 - 修正版本 */
+    .coupon::before,
+    .coupon::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 32px;
+      background-color: #fff;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 0 16px 16px 0;
+    }
+
+    .coupon::before {
+      left: -8px;
+      border-radius: 0 16px 16px 0;
+    }
+
+    .coupon::after {
+      right: -8px;
+      border-radius: 16px 0 0 16px;
+    }
+
+    /* 快送标题容器 */
+    .coupon-title {
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    /* 快送文字 */
+    .coupon-title-text {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 400;
+      position: relative;
+      z-index: 2;
+      padding: 4px 12px;
+    }
+
+    /* 快送的不规则梯形背景 */
+    .coupon-title::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 24px;
+      background-color: var(--title-bg-color);
+      clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+      z-index: 1;
+    }
+
+    /* 优惠金额 - 主要内容 */
+    .coupon-amount {
+      color: var(--coupon-text-color);
+      font-size: 42px;
+      font-weight: bold;
+      margin: 8px 0;
+      line-height: 1;
+    }
+
+    /* 虚线分隔 */
+    .coupon-divider {
+      width: 200px;
+      height: 1px;
+      border-top: 1px dashed rgba(242, 123, 84, 0.3);
+      margin: 12px 0 8px 0;
+    }
+
+    /* 无门槛文字 */
+    .coupon-desc {
+      color: var(--coupon-text-color);
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    /* 动态切换背景颜色的按钮 */
+    .color-switcher {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .color-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .color-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .color-btn.active {
+      border-color: #333;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="coupon">
+    <div class="coupon-title">
+      <div class="coupon-title-text">快送</div>
+    </div>
+    <div class="coupon-amount">1元 x 2</div>
+    <div class="coupon-divider"></div>
+    <div class="coupon-desc">无门槛</div>
+  </div>
+
+  <div class="color-switcher">
+    <div class="color-btn active" style="background-color: #FFF5F2;" data-color="#FFF5F2" data-text="#F27B54" data-title="#F27B54"></div>
+    <div class="color-btn" style="background-color: #F0F9FF;" data-color="#F0F9FF" data-text="#4A9FE8" data-title="#4A9FE8"></div>
+    <div class="color-btn" style="background-color: #F3FFF0;" data-color="#F3FFF0" data-text="#6BC655" data-title="#6BC655"></div>
+    <div class="color-btn" style="background-color: #FFF8E0;" data-color="#FFF8E0" data-text="#E8B74A" data-title="#E8B74A"></div>
+    <div class="color-btn" style="background-color: #F8F0FF;" data-color="#F8F0FF" data-text="#9B59B6" data-title="#9B59B6"></div>
+  </div>
+
+  <script>
+    // 动态切换背景颜色的脚本
+    document.querySelectorAll('.color-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // 移除所有按钮的active类
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+        
+        // 为当前点击的按钮添加active类
+        this.classList.add('active');
+        
+        // 获取数据属性中的颜色值
+        const bgColor = this.getAttribute('data-color');
+        const textColor = this.getAttribute('data-text');
+        const titleBgColor = this.getAttribute('data-title');
+        
+        // 更新CSS变量
+        document.documentElement.style.setProperty('--coupon-bg-color', bgColor);
+        document.documentElement.style.setProperty('--coupon-text-color', textColor);
+        document.documentElement.style.setProperty('--title-bg-color', titleBgColor);
+      });
+    });
+  </script>
+</body>
+</html>

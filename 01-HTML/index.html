@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    input:disabled {
+      background-color: #f0f0f0;
+      color: #ccc;
+    }
+    .auto-wrap-text {
+      width: 100px;
+      resize: none;
+      overflow-y: auto;
+      white-space: normal;
+      word-wrap: break-word;
+      line-height: 1.5;
+      height: 1.5em; /* 默认显示一行的高度 */
+    }
+  </style>
+</head>
+<body>
+  <input disabled="disabled" type="text" value="123" />
+  <textarea class="auto-wrap-text">123123123123123123</textarea>
+</body>
+</html>
