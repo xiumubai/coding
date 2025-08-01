@@ -146,4 +146,37 @@ module.exports = class LinkedList {
     }
     return result
   }
+
+  // 反转链表
+  reverse() {
+    if (!this.head || !this.head.next) {
+      // 空链表或只有一个节点的链表，无需反转
+      return this;
+    }
+
+    let prev = null;
+    let current = this.head;
+    let next = null;
+    
+    // 保存原来的尾节点，反转后会变成头节点
+    this.tail = this.head;
+    
+    // 遍历链表，反转每个节点的指针
+    while (current) {
+      // 保存下一个节点
+      next = current.next;
+      
+      // 反转当前节点的指针
+      current.next = prev;
+      
+      // 移动指针
+      prev = current;
+      current = next;
+    }
+    
+    // 更新头节点为原链表的最后一个节点
+    this.head = prev;
+    
+    return this;
+  }
 }
