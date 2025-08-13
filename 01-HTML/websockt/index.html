@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket 聊天室</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .message-container {
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 #f1f5f9;
+    }
+    .message-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .message-container::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 3px;
+    }
+    .message-container::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    .message-container::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto max-w-4xl h-screen flex flex-col">
+    <!-- 头部 -->
+    <header class="bg-blue-600 text-white p-4 shadow-lg">
+      <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-bold">WebSocket 聊天室</h1>
+        <div class="flex items-center space-x-2">
+          <div id="connectionStatus" class="w-3 h-3 rounded-full bg-red-500"></div>
+          <span id="statusText" class="text-sm">未连接</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="flex-1 flex flex-col bg-white shadow-lg">
+      <!-- 用户名设置区域 -->
+      <div id="usernameSection" class="p-4 bg-gray-50 border-b">
+        <div class="flex items-center space-x-3">
+          <label for="usernameInput" class="text-sm font-medium text-gray-700">用户名:</label>
+          <input 
+            type="text" 
+            id="usernameInput" 
+            placeholder="请输入您的用户名" 
+            class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            maxlength="20"
+          >
+          <button 
+            id="setUsernameBtn" 
+            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+          >
+            设置
+          </button>
+        </div>
+      </div>
+
+      <!-- 消息显示区域 -->
+      <div class="flex-1 p-4 overflow-hidden">
+        <div id="messagesContainer" class="h-full overflow-y-auto message-container space-y-3">
+          <!-- 消息将在这里显示 -->
+        </div>
+      </div>
+
+      <!-- 消息输入区域 -->
+      <div class="p-4 bg-gray-50 border-t">
+        <div class="flex space-x-3">
+          <input 
+            type="text" 
+            id="messageInput" 
+            placeholder="输入消息..." 
+            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            disabled
+          >
+          <button 
+            id="sendBtn" 
+            class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+            disabled
+          >
+            发送
+          </button>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">
+          按 Enter 键发送消息
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部信息 -->
+    <footer class="p-3 text-center text-sm text-gray-500 bg-gray-50">
+      <p>在多个浏览器标签页中打开此页面来测试聊天功能</p>
+    </footer>
+  </div>
+
+  <script>
+    class ChatApp {
+      constructor() {
+        this.ws = null;
+        this.username = '';
+        this.isConnected = false;
+        
+        // 获取DOM元素
+        this.elements = {
+          usernameInput: document.getElementById('usernameInput'),
+          setUsernameBtn: document.getElementById('setUsernameBtn'),
+          usernameSection: document.getElementById('usernameSection'),
+          messageInput: document.getElementById('messageInput'),
+          sendBtn: document.getElementById('sendBtn'),
+          messagesContainer: document.getElementById('messagesContainer'),
+          connectionStatus: document.getElementById('connectionStatus'),
+          statusText: document.getElementById('statusText')
+        };
+        
+        this.init();
+      }
+      
+      init() {
+        this.bindEvents();
+        this.connect();
+      }
+      
+      bindEvents() {
+        // 设置用户名
+        this.elements.setUsernameBtn.addEventListener('click', () => {
+          this.setUsername();
+        });
+        
+        this.elements.usernameInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.setUsername();
+          }
+        });
+        
+        // 发送消息
+        this.elements.sendBtn.addEventListener('click', () => {
+          this.sendMessage();
+        });
+        
+        this.elements.messageInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            this.sendMessage();
+          }
+        });
+      }
+      
+      connect() {
+        try {
+          // 连接到WebSocket服务器
+          const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+          const wsUrl = `${protocol}//${window.location.host}`;
+          
+          this.ws = new WebSocket(wsUrl);
+          
+          this.ws.onopen = () => {
+            console.log('WebSocket连接已建立');
+            this.isConnected = true;
+            this.updateConnectionStatus(true);
+            this.addSystemMessage('已连接到聊天服务器');
+          };
+          
+          this.ws.onmessage = (event) => {
+            try {
+              const data = JSON.parse(event.data);
+              this.handleMessage(data);
+            } catch (error) {
+              console.error('解析消息错误:', error);
+            }
+          };
+          
+          this.ws.onclose = () => {
+            console.log('WebSocket连接已关闭');
+            this.isConnected = false;
+            this.updateConnectionStatus(false);
+            this.addSystemMessage('与服务器的连接已断开');
+            
+            // 尝试重连
+            setTimeout(() => {
+              if (!this.isConnected) {
+                this.addSystemMessage('正在尝试重新连接...');
+                this.connect();
+              }
+            }, 3000);
+          };
+          
+          this.ws.onerror = (error) => {
+            console.error('WebSocket错误:', error);
+            this.addSystemMessage('连接错误，请检查服务器是否运行');
+          };
+          
+        } catch (error) {
+          console.error('连接失败:', error);
+          this.addSystemMessage('无法连接到服务器');
+        }
+      }
+      
+      setUsername() {
+        const username = this.elements.usernameInput.value.trim();
+        if (username) {
+          this.username = username;
+          this.elements.usernameSection.style.display = 'none';
+          this.elements.messageInput.disabled = false;
+          this.elements.sendBtn.disabled = false;
+          this.elements.messageInput.focus();
+          this.addSystemMessage(`欢迎，${username}！您现在可以开始聊天了。`);
+        } else {
+          alert('请输入有效的用户名');
+        }
+      }
+      
+      sendMessage() {
+        const message = this.elements.messageInput.value.trim();
+        if (message && this.isConnected && this.username) {
+          const messageData = {
+            username: this.username,
+            message: message
+          };
+          
+          this.ws.send(JSON.stringify(messageData));
+          this.elements.messageInput.value = '';
+        }
+      }
+      
+      handleMessage(data) {
+        if (data.type === 'system') {
+          this.addSystemMessage(data.message, data.timestamp);
+        } else if (data.type === 'user') {
+          this.addUserMessage(data.username, data.message, data.timestamp);
+        }
+      }
+      
+      addSystemMessage(message, timestamp = null) {
+        const messageElement = document.createElement('div');
+        messageElement.className = 'flex justify-center';
+        
+        const time = timestamp || new Date().toLocaleTimeString();
+        
+        messageElement.innerHTML = `
+          <div class="bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm max-w-md text-center">
+            <div class="font-medium">${this.escapeHtml(message)}</div>
+            <div class="text-xs text-gray-500 mt-1">${time}</div>
+          </div>
+        `;
+        
+        this.elements.messagesContainer.appendChild(messageElement);
+        this.scrollToBottom();
+      }
+      
+      addUserMessage(username, message, timestamp) {
+        const messageElement = document.createElement('div');
+        const isOwnMessage = username === this.username;
+        
+        messageElement.className = `flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`;
+        
+        const bgColor = isOwnMessage ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800';
+        const alignment = isOwnMessage ? 'text-right' : 'text-left';
+        
+        messageElement.innerHTML = `
+          <div class="max-w-xs lg:max-w-md">
+            <div class="${bgColor} px-4 py-2 rounded-lg">
+              <div class="font-medium text-sm mb-1 ${isOwnMessage ? 'text-blue-100' : 'text-gray-600'}">
+                ${this.escapeHtml(username)}
+              </div>
+              <div class="break-words">${this.escapeHtml(message)}</div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1 ${alignment}">
+              ${timestamp}
+            </div>
+          </div>
+        `;
+        
+        this.elements.messagesContainer.appendChild(messageElement);
+        this.scrollToBottom();
+      }
+      
+      updateConnectionStatus(connected) {
+        if (connected) {
+          this.elements.connectionStatus.className = 'w-3 h-3 rounded-full bg-green-500';
+          this.elements.statusText.textContent = '已连接';
+        } else {
+          this.elements.connectionStatus.className = 'w-3 h-3 rounded-full bg-red-500';
+          this.elements.statusText.textContent = '未连接';
+        }
+      }
+      
+      scrollToBottom() {
+        this.elements.messagesContainer.scrollTop = this.elements.messagesContainer.scrollHeight;
+      }
+      
+      escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+    }
+    
+    // 页面加载完成后初始化聊天应用
+    document.addEventListener('DOMContentLoaded', () => {
+      new ChatApp();
+    });
+  </script>
+</body>
+</html>
