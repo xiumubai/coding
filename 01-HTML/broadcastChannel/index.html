@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BroadcastChannel Timer</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded shadow-md w-80 flex flex-col items-center">
+    <h1 class="text-2xl font-bold mb-6">跨页签计时器</h1>
+    <div id="timer" class="text-4xl font-mono mb-6">00:00:00</div>
+    <div class="flex gap-4 mb-4">
+      <button id="start" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">开始</button>
+      <button id="pause" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">暂停</button>
+      <button id="reset" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">重置</button>
+    </div>
+    <div class="text-xs text-gray-500">所有浏览器页签同步</div>
+  </div>
+  <script>
+    // BroadcastChannel 实例
+    const channel = new BroadcastChannel('timer_channel');
+    let timer = 0;
+    let interval = null;
+    let running = false;
+
+    function formatTime(sec) {
+      const h = String(Math.floor(sec / 3600)).padStart(2, '0');
+      const m = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
+      const s = String(sec % 60).padStart(2, '0');
+      return `${h}:${m}:${s}`;
+    }
+
+    function updateDisplay() {
+      document.getElementById('timer').textContent = formatTime(timer);
+    }
+
+    function startTimer() {
+      if (!running) {
+        running = true;
+        interval = setInterval(() => {
+          timer++;
+          updateDisplay();
+        }, 1000);
+      }
+    }
+
+    function pauseTimer() {
+      running = false;
+      clearInterval(interval);
+    }
+
+    function resetTimer() {
+      pauseTimer();
+      timer = 0;
+      updateDisplay();
+    }
+
+    // 按钮事件
+    document.getElementById('start').onclick = () => {
+      startTimer();
+      channel.postMessage({ action: 'start', timer });
+    };
+    document.getElementById('pause').onclick = () => {
+      pauseTimer();
+      channel.postMessage({ action: 'pause', timer });
+    };
+    document.getElementById('reset').onclick = () => {
+      resetTimer();
+      channel.postMessage({ action: 'reset', timer });
+    };
+
+    // 监听 BroadcastChannel 消息
+    channel.onmessage = (e) => {
+      const { action, timer: remoteTimer } = e.data;
+      if (action === 'start') {
+        timer = remoteTimer;
+        updateDisplay();
+        startTimer();
+      } else if (action === 'pause') {
+        timer = remoteTimer;
+        updateDisplay();
+        pauseTimer();
+      } else if (action === 'reset') {
+        timer = 0;
+        updateDisplay();
+        pauseTimer();
+      }
+    };
+
+    // 初始化显示
+    updateDisplay();
+  </script>
+</body>
+</html>
