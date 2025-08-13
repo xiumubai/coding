@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox - 个人中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mockup {
+            width: 375px;
+            height: 812px;
+            border: 8px solid #1f2937;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 20px;
+            flex-shrink: 0;
+        }
+        .mockup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #1f2937;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        .page-content {
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 40px;
+        }
+        .floating-btn {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="flex overflow-x-auto space-x-6 pb-4">
+        
+        <!-- 个人资料页面 -->
+        <div class="mockup">
+            <div class="page-content bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white">
+                <!-- 状态栏 -->
+                <div class="flex justify-between items-center px-6 py-2 text-sm">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-6 h-2 bg-green-400 rounded-sm"></div>
+                    </div>
+                </div>
+
+                <!-- 头部 -->
+                <div class="px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-6 h-6 filter invert" alt="返回">
+                        <h1 class="text-xl font-bold">个人中心</h1>
+                        <img src="https://unpkg.com/lucide-static@latest/icons/settings.svg" class="w-6 h-6 filter invert" alt="设置">
+                    </div>
+                </div>
+
+                <!-- 用户信息卡片 -->
+                <div class="px-6 mb-6">
+                    <div class="glass rounded-3xl p-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-20 h-20 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/user.svg" class="w-10 h-10 filter invert" alt="头像">
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold">张小明</h2>
+                                <p class="text-purple-200">高效工作者</p>
+                                <div class="flex items-center mt-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/calendar.svg" class="w-4 h-4 filter invert mr-2" alt="日期">
+                                    <span class="text-sm text-purple-200">加入 365 天</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 统计数据 -->
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-yellow-400">128</div>
+                                <div class="text-xs text-purple-200">完成任务</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-400">45</div>
+                                <div class="text-xs text-purple-200">笔记数量</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-400">89h</div>
+                                <div class="text-xs text-purple-200">专注时长</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 功能菜单 -->
+                <div class="px-6 space-y-3">
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/user-circle.svg" class="w-6 h-6 filter invert" alt="个人信息">
+                                </div>
+                                <span class="font-medium">个人信息</span>
+                            </div>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-5 h-5 filter invert opacity-60" alt="箭头">
+                        </div>
+                    </div>
+
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/shield-check.svg" class="w-6 h-6 filter invert" alt="隐私安全">
+                                </div>
+                                <span class="font-medium">隐私安全</span>
+                            </div>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-5 h-5 filter invert opacity-60" alt="箭头">
+                        </div>
+                    </div>
+
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/database.svg" class="w-6 h-6 filter invert" alt="数据管理">
+                                </div>
+                                <span class="font-medium">数据管理</span>
+                            </div>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-5 h-5 filter invert opacity-60" alt="箭头">
+                        </div>
+                    </div>
+
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-pink-400 to-red-500 rounded-xl flex items-center justify-center">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/palette.svg" class="w-6 h-6 filter invert" alt="主题设置">
+                                </div>
+                                <span class="font-medium">主题设置</span>
+                            </div>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-5 h-5 filter invert opacity-60" alt="箭头">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 底部操作 -->
+                <div class="px-6 mt-8">
+                    <button class="w-full glass-dark rounded-2xl p-4 flex items-center justify-center space-x-2 mb-4">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/log-out.svg" class="w-5 h-5 filter invert" alt="退出登录">
+                        <span class="font-medium">退出登录</span>
+                    </button>
+                    
+                    <div class="text-center text-purple-300 text-sm">
+                        <p>ToolBox v2.1.0</p>
+                        <p>© 2024 All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 应用设置页面 -->
+        <div class="mockup">
+            <div class="page-content bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white">
+                <!-- 状态栏 -->
+                <div class="flex justify-between items-center px-6 py-2 text-sm">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-6 h-2 bg-green-400 rounded-sm"></div>
+                    </div>
+                </div>
+
+                <!-- 头部 -->
+                <div class="px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-6 h-6 filter invert" alt="返回">
+                        <h1 class="text-xl font-bold">应用设置</h1>
+                        <div class="w-6"></div>
+                    </div>
+                </div>
+
+                <!-- 通知设置 -->
+                <div class="px-6 mb-6">
+                    <h2 class="text-lg font-semibold mb-4 text-purple-200">通知设置</h2>
+                    <div class="glass-dark rounded-2xl p-4 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/bell.svg" class="w-5 h-5 filter invert" alt="推送通知">
+                                <span>推送通知</span>
+                            </div>
+                            <div class="w-12 h-6 bg-green-500 rounded-full relative">
+                                <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/clock.svg" class="w-5 h-5 filter invert" alt="任务提醒">
+                                <span>任务提醒</span>
+                            </div>
+                            <div class="w-12 h-6 bg-green-500 rounded-full relative">
+                                <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/volume-2.svg" class="w-5 h-5 filter invert" alt="声音提醒">
+                                <span>声音提醒</span>
+                            </div>
+                            <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                                <div class="w-5 h-5 bg-white rounded-full absolute left-0.5 top-0.5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数据同步 -->
+                <div class="px-6 mb-6">
+                    <h2 class="text-lg font-semibold mb-4 text-purple-200">数据同步</h2>
+                    <div class="glass-dark rounded-2xl p-4 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/cloud.svg" class="w-5 h-5 filter invert" alt="云端同步">
+                                <div>
+                                    <div>云端同步</div>
+                                    <div class="text-xs text-purple-300">最后同步: 2分钟前</div>
+                                </div>
+                            </div>
+                            <div class="w-12 h-6 bg-green-500 rounded-full relative">
+                                <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/wifi.svg" class="w-5 h-5 filter invert" alt="仅WiFi同步">
+                                <span>仅WiFi同步</span>
+                            </div>
+                            <div class="w-12 h-6 bg-green-500 rounded-full relative">
+                                <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-3 font-medium">
+                            立即同步数据
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 应用偏好 -->
+                <div class="px-6 mb-6">
+                    <h2 class="text-lg font-semibold mb-4 text-purple-200">应用偏好</h2>
+                    <div class="glass-dark rounded-2xl p-4 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/moon.svg" class="w-5 h-5 filter invert" alt="深色模式">
+                                <span>深色模式</span>
+                            </div>
+                            <div class="w-12 h-6 bg-green-500 rounded-full relative">
+                                <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/zap.svg" class="w-5 h-5 filter invert" alt="动画效果">
+                                <span>动画效果</span>
+                            </div>
+                            <div class="w-12 h-6 bg-green-500 rounded-full relative">
+                                <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/smartphone.svg" class="w-5 h-5 filter invert" alt="触觉反馈">
+                                <span>触觉反馈</span>
+                            </div>
+                            <div class="w-12 h-6 bg-gray-600 rounded-full relative">
+                                <div class="w-5 h-5 bg-white rounded-full absolute left-0.5 top-0.5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 语言设置 -->
+                <div class="px-6">
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/globe.svg" class="w-5 h-5 filter invert" alt="语言">
+                                <div>
+                                    <div>语言</div>
+                                    <div class="text-xs text-purple-300">简体中文</div>
+                                </div>
+                            </div>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-5 h-5 filter invert opacity-60" alt="箭头">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据统计页面 -->
+        <div class="mockup">
+            <div class="page-content bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white">
+                <!-- 状态栏 -->
+                <div class="flex justify-between items-center px-6 py-2 text-sm">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-6 h-2 bg-green-400 rounded-sm"></div>
+                    </div>
+                </div>
+
+                <!-- 头部 -->
+                <div class="px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-6 h-6 filter invert" alt="返回">
+                        <h1 class="text-xl font-bold">数据统计</h1>
+                        <img src="https://unpkg.com/lucide-static@latest/icons/download.svg" class="w-6 h-6 filter invert" alt="导出">
+                    </div>
+                </div>
+
+                <!-- 时间选择器 -->
+                <div class="px-6 mb-6">
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl text-sm font-medium">今天</button>
+                        <button class="px-4 py-2 glass-dark rounded-xl text-sm">本周</button>
+                        <button class="px-4 py-2 glass-dark rounded-xl text-sm">本月</button>
+                        <button class="px-4 py-2 glass-dark rounded-xl text-sm">本年</button>
+                    </div>
+                </div>
+
+                <!-- 总览卡片 -->
+                <div class="px-6 mb-6">
+                    <div class="glass rounded-3xl p-6">
+                        <h2 class="text-lg font-semibold mb-4">今日概览</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/check-circle.svg" class="w-8 h-8 filter invert" alt="完成任务">
+                                </div>
+                                <div class="text-2xl font-bold text-green-400">8</div>
+                                <div class="text-xs text-purple-200">完成任务</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/edit.svg" class="w-8 h-8 filter invert" alt="新增笔记">
+                                </div>
+                                <div class="text-2xl font-bold text-purple-400">3</div>
+                                <div class="text-xs text-purple-200">新增笔记</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-white/20">
+                            <div class="flex items-center justify-between">
+                                <span class="text-purple-200">专注时长</span>
+                                <span class="text-xl font-bold text-yellow-400">4h 32m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 详细统计 -->
+                <div class="px-6 space-y-4">
+                    <!-- 任务完成趋势 -->
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold">任务完成趋势</h3>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/trending-up.svg" class="w-5 h-5 filter invert text-green-400" alt="趋势">
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-purple-200">周一</span>
+                                <div class="flex-1 mx-3 bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                                <span class="text-sm font-medium">12</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-purple-200">周二</span>
+                                <div class="flex-1 mx-3 bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <span class="text-sm font-medium">9</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-purple-200">周三</span>
+                                <div class="flex-1 mx-3 bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                                <span class="text-sm font-medium">15</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-purple-200">今天</span>
+                                <div class="flex-1 mx-3 bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 h-2 rounded-full" style="width: 53%"></div>
+                                </div>
+                                <span class="text-sm font-medium">8</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 分类统计 -->
+                    <div class="glass-dark rounded-2xl p-4">
+                        <h3 class="font-semibold mb-4">任务分类统计</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                                    <span class="text-sm">工作</span>
+                                </div>
+                                <span class="text-sm font-medium">45%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                                    <span class="text-sm">学习</span>
+                                </div>
+                                <span class="text-sm font-medium">30%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
+                                    <span class="text-sm">生活</span>
+                                </div>
+                                <span class="text-sm font-medium">25%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 成就徽章 -->
+                    <div class="glass-dark rounded-2xl p-4">
+                        <h3 class="font-semibold mb-4">最近成就</h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/trophy.svg" class="w-6 h-6 filter invert" alt="奖杯">
+                                </div>
+                                <div class="text-xs text-purple-200">连续7天</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/target.svg" class="w-6 h-6 filter invert" alt="目标">
+                                </div>
+                                <div class="text-xs text-purple-200">100个任务</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/clock.svg" class="w-6 h-6 filter invert" alt="时钟">
+                                </div>
+                                <div class="text-xs text-purple-200">50小时专注</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关于应用页面 -->
+        <div class="mockup">
+            <div class="page-content bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white">
+                <!-- 状态栏 -->
+                <div class="flex justify-between items-center px-6 py-2 text-sm">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-4 h-2 bg-white rounded-sm"></div>
+                        <div class="w-6 h-2 bg-green-400 rounded-sm"></div>
+                    </div>
+                </div>
+
+                <!-- 头部 -->
+                <div class="px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-6 h-6 filter invert" alt="返回">
+                        <h1 class="text-xl font-bold">关于应用</h1>
+                        <div class="w-6"></div>
+                    </div>
+                </div>
+
+                <!-- 应用信息 -->
+                <div class="px-6 mb-8">
+                    <div class="glass rounded-3xl p-6 text-center">
+                        <div class="w-24 h-24 bg-gradient-to-br from-purple-400 via-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-4 floating-btn">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/box.svg" class="w-12 h-12 filter invert" alt="ToolBox">
+                        </div>
+                        <h2 class="text-2xl font-bold mb-2">ToolBox</h2>
+                        <p class="text-purple-200 mb-4">多功能效率工具箱</p>
+                        <div class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-xl text-sm font-medium">
+                            版本 2.1.0
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 功能介绍 -->
+                <div class="px-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-4 text-purple-200">核心功能</h3>
+                    <div class="space-y-3">
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/check-square.svg" class="w-6 h-6 filter invert" alt="待办事项">
+                                </div>
+                                <div>
+                                    <div class="font-medium">智能待办</div>
+                                    <div class="text-xs text-purple-300">高效任务管理与提醒</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl flex items-center justify-center">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/edit-3.svg" class="w-6 h-6 filter invert" alt="笔记">
+                                </div>
+                                <div>
+                                    <div class="font-medium">智能笔记</div>
+                                    <div class="text-xs text-purple-300">富文本编辑与云端同步</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/calculator.svg" class="w-6 h-6 filter invert" alt="计算器">
+                                </div>
+                                <div>
+                                    <div class="font-medium">多功能计算器</div>
+                                    <div class="text-xs text-purple-300">科学计算与单位转换</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-red-400 to-pink-500 rounded-xl flex items-center justify-center">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/timer.svg" class="w-6 h-6 filter invert" alt="专注计时器">
+                                </div>
+                                <div>
+                                    <div class="font-medium">专注计时器</div>
+                                    <div class="text-xs text-purple-300">番茄工作法与专注统计</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 联系信息 -->
+                <div class="px-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-4 text-purple-200">联系我们</h3>
+                    <div class="space-y-3">
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/mail.svg" class="w-5 h-5 filter invert" alt="邮箱">
+                                    <span>意见反馈</span>
+                                </div>
+                                <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-5 h-5 filter invert opacity-60" alt="箭头">
+                            </div>
+                        </div>
+                        
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/star.svg" class="w-5 h-5 filter invert" alt="评分">
+                                    <span>应用评分</span>
+                                </div>
+                                <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-5 h-5 filter invert opacity-60" alt="箭头">
+                            </div>
+                        </div>
+                        
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/share-2.svg" class="w-5 h-5 filter invert" alt="分享">
+                                    <span>分享应用</span>
+                                </div>
+                                <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-5 h-5 filter invert opacity-60" alt="箭头">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 法律信息 -->
+                <div class="px-6">
+                    <div class="glass-dark rounded-2xl p-4 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">隐私政策</span>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-4 h-4 filter invert opacity-60" alt="箭头">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">服务条款</span>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-4 h-4 filter invert opacity-60" alt="箭头">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">开源许可</span>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" class="w-4 h-4 filter invert opacity-60" alt="箭头">
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-6 text-purple-300 text-xs">
+                        <p>© 2024 ToolBox Team</p>
+                        <p>Made with ❤️ for productivity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

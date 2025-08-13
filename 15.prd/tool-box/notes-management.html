@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox - 智能笔记</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .mockup-frame {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 10px;
+            min-height: 600px;
+        }
+        .note-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        .note-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+        .floating-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+        .search-bar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .tag {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white font-sans">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-8 gradient-text">ToolBox - 智能笔记功能</h1>
+        
+        <div class="flex flex-wrap justify-center">
+            
+            <!-- 笔记列表页面 -->
+            <div class="mockup-frame w-full max-w-sm">
+                <div class="text-center mb-4">
+                    <h2 class="text-lg font-semibold text-purple-200">笔记列表</h2>
+                </div>
+                
+                <!-- 顶部搜索栏 -->
+                <div class="search-bar rounded-2xl p-3 mb-4 flex items-center">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/search.svg" class="w-5 h-5 mr-3 opacity-70" alt="搜索">
+                    <input type="text" placeholder="搜索笔记..." class="bg-transparent flex-1 outline-none text-white placeholder-gray-300">
+                </div>
+                
+                <!-- 分类标签 -->
+                <div class="flex gap-2 mb-4 overflow-x-auto">
+                    <span class="tag px-3 py-1 rounded-full text-sm whitespace-nowrap">全部</span>
+                    <span class="tag px-3 py-1 rounded-full text-sm whitespace-nowrap">工作</span>
+                    <span class="tag px-3 py-1 rounded-full text-sm whitespace-nowrap">学习</span>
+                    <span class="tag px-3 py-1 rounded-full text-sm whitespace-nowrap">生活</span>
+                </div>
+                
+                <!-- 笔记卡片列表 -->
+                <div class="space-y-3 mb-20">
+                    <div class="note-card rounded-2xl p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-semibold text-white">项目会议记录</h3>
+                            <span class="text-xs text-gray-300">2小时前</span>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-2 line-clamp-2">今天的项目会议讨论了新功能的开发进度，需要在下周完成UI设计...</p>
+                        <div class="flex justify-between items-center">
+                            <span class="tag px-2 py-1 rounded-full text-xs">工作</span>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/bookmark.svg" class="w-4 h-4 opacity-60" alt="收藏">
+                        </div>
+                    </div>
+                    
+                    <div class="note-card rounded-2xl p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-semibold text-white">React学习笔记</h3>
+                            <span class="text-xs text-gray-300">1天前</span>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-2 line-clamp-2">Hook的使用方法和最佳实践，包括useState、useEffect等...</p>
+                        <div class="flex justify-between items-center">
+                            <span class="tag px-2 py-1 rounded-full text-xs">学习</span>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/bookmark-check.svg" class="w-4 h-4 text-purple-400" alt="已收藏">
+                        </div>
+                    </div>
+                    
+                    <div class="note-card rounded-2xl p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-semibold text-white">购物清单</h3>
+                            <span class="text-xs text-gray-300">3天前</span>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-2 line-clamp-2">周末需要购买的物品清单，包括生活用品和食材...</p>
+                        <div class="flex justify-between items-center">
+                            <span class="tag px-2 py-1 rounded-full text-xs">生活</span>
+                            <img src="https://unpkg.com/lucide-static@latest/icons/bookmark.svg" class="w-4 h-4 opacity-60" alt="收藏">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 浮动添加按钮 -->
+                <button class="floating-button fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/plus.svg" class="w-6 h-6" alt="添加">
+                </button>
+            </div>
+            
+            <!-- 新建/编辑笔记页面 -->
+            <div class="mockup-frame w-full max-w-sm">
+                <div class="text-center mb-4">
+                    <h2 class="text-lg font-semibold text-purple-200">新建笔记</h2>
+                </div>
+                
+                <!-- 顶部工具栏 -->
+                <div class="flex justify-between items-center mb-4">
+                    <button class="glass-effect rounded-full p-2">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-5 h-5" alt="返回">
+                    </button>
+                    <div class="flex gap-2">
+                        <button class="glass-effect rounded-full p-2">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/bookmark.svg" class="w-5 h-5" alt="收藏">
+                        </button>
+                        <button class="floating-button rounded-full px-4 py-2 text-sm font-medium">
+                            保存
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 标题输入 -->
+                <div class="glass-effect rounded-2xl p-4 mb-4">
+                    <input type="text" placeholder="输入笔记标题..." class="bg-transparent w-full text-lg font-semibold outline-none text-white placeholder-gray-300">
+                </div>
+                
+                <!-- 分类选择 -->
+                <div class="glass-effect rounded-2xl p-4 mb-4">
+                    <div class="flex items-center mb-2">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/folder.svg" class="w-5 h-5 mr-2 opacity-70" alt="分类">
+                        <span class="text-sm text-gray-300">选择分类</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="tag px-3 py-1 rounded-full text-sm bg-purple-500 border-purple-400">工作</span>
+                        <span class="tag px-3 py-1 rounded-full text-sm">学习</span>
+                        <span class="tag px-3 py-1 rounded-full text-sm">生活</span>
+                    </div>
+                </div>
+                
+                <!-- 内容编辑区 -->
+                <div class="glass-effect rounded-2xl p-4 mb-4 flex-1">
+                    <textarea placeholder="开始记录你的想法..." class="bg-transparent w-full h-64 outline-none text-white placeholder-gray-300 resize-none"></textarea>
+                </div>
+                
+                <!-- 底部工具栏 -->
+                <div class="glass-effect rounded-2xl p-3 flex justify-between items-center">
+                    <div class="flex gap-3">
+                        <button class="opacity-70 hover:opacity-100">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/image.svg" class="w-5 h-5" alt="图片">
+                        </button>
+                        <button class="opacity-70 hover:opacity-100">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/link.svg" class="w-5 h-5" alt="链接">
+                        </button>
+                        <button class="opacity-70 hover:opacity-100">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/list.svg" class="w-5 h-5" alt="列表">
+                        </button>
+                    </div>
+                    <span class="text-xs text-gray-400">字数: 0</span>
+                </div>
+            </div>
+            
+            <!-- 笔记详情查看页面 -->
+            <div class="mockup-frame w-full max-w-sm">
+                <div class="text-center mb-4">
+                    <h2 class="text-lg font-semibold text-purple-200">笔记详情</h2>
+                </div>
+                
+                <!-- 顶部工具栏 -->
+                <div class="flex justify-between items-center mb-4">
+                    <button class="glass-effect rounded-full p-2">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-5 h-5" alt="返回">
+                    </button>
+                    <div class="flex gap-2">
+                        <button class="glass-effect rounded-full p-2">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/share.svg" class="w-5 h-5" alt="分享">
+                        </button>
+                        <button class="glass-effect rounded-full p-2">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/edit.svg" class="w-5 h-5" alt="编辑">
+                        </button>
+                        <button class="glass-effect rounded-full p-2">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/more-vertical.svg" class="w-5 h-5" alt="更多">
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 笔记头部信息 -->
+                <div class="glass-effect rounded-2xl p-4 mb-4">
+                    <h1 class="text-xl font-bold text-white mb-2">项目会议记录</h1>
+                    <div class="flex items-center justify-between text-sm text-gray-300">
+                        <div class="flex items-center gap-4">
+                            <span>2024-01-15</span>
+                            <span class="tag px-2 py-1 rounded-full text-xs">工作</span>
+                        </div>
+                        <img src="https://unpkg.com/lucide-static@latest/icons/bookmark-check.svg" class="w-4 h-4 text-purple-400" alt="已收藏">
+                    </div>
+                </div>
+                
+                <!-- 笔记内容 -->
+                <div class="glass-effect rounded-2xl p-4 mb-4">
+                    <div class="text-white space-y-4">
+                        <h3 class="font-semibold text-purple-200">会议要点</h3>
+                        <p class="text-gray-200 leading-relaxed">
+                            今天的项目会议主要讨论了以下几个重要议题：
+                        </p>
+                        <ul class="list-disc list-inside text-gray-200 space-y-2 ml-4">
+                            <li>新功能UI设计进度确认</li>
+                            <li>后端API接口开发时间安排</li>
+                            <li>测试用例编写分工</li>
+                            <li>项目上线时间节点确定</li>
+                        </ul>
+                        
+                        <h3 class="font-semibold text-purple-200 pt-4">行动项</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" checked class="rounded">
+                                <span class="text-gray-200 line-through">完成登录页面设计</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" class="rounded">
+                                <span class="text-gray-200">编写用户注册API</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" class="rounded">
+                                <span class="text-gray-200">准备测试数据</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部信息 -->
+                <div class="glass-effect rounded-2xl p-3 flex justify-between items-center text-sm text-gray-400">
+                    <span>最后编辑: 2小时前</span>
+                    <span>字数: 156</span>
+                </div>
+            </div>
+            
+            <!-- 笔记搜索页面 -->
+            <div class="mockup-frame w-full max-w-sm">
+                <div class="text-center mb-4">
+                    <h2 class="text-lg font-semibold text-purple-200">搜索笔记</h2>
+                </div>
+                
+                <!-- 搜索栏 -->
+                <div class="search-bar rounded-2xl p-3 mb-4 flex items-center">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/search.svg" class="w-5 h-5 mr-3 opacity-70" alt="搜索">
+                    <input type="text" value="React" class="bg-transparent flex-1 outline-none text-white placeholder-gray-300">
+                    <button class="ml-2">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/x.svg" class="w-5 h-5 opacity-70" alt="清除">
+                    </button>
+                </div>
+                
+                <!-- 搜索筛选 -->
+                <div class="glass-effect rounded-2xl p-4 mb-4">
+                    <h3 class="text-sm font-semibold text-purple-200 mb-3">筛选条件</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <span class="text-sm text-gray-300 block mb-2">分类</span>
+                            <div class="flex gap-2">
+                                <span class="tag px-3 py-1 rounded-full text-xs">全部</span>
+                                <span class="tag px-3 py-1 rounded-full text-xs bg-purple-500 border-purple-400">学习</span>
+                                <span class="tag px-3 py-1 rounded-full text-xs">工作</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-sm text-gray-300 block mb-2">时间</span>
+                            <div class="flex gap-2">
+                                <span class="tag px-3 py-1 rounded-full text-xs bg-purple-500 border-purple-400">最近一周</span>
+                                <span class="tag px-3 py-1 rounded-full text-xs">最近一月</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 搜索结果 -->
+                <div class="mb-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm text-gray-300">找到 2 条结果</span>
+                        <button class="text-sm text-purple-400">按相关性排序</button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="note-card rounded-2xl p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-semibold text-white">
+                                    <span class="bg-yellow-400 text-black px-1 rounded">React</span>学习笔记
+                                </h3>
+                                <span class="text-xs text-gray-300">1天前</span>
+                            </div>
+                            <p class="text-sm text-gray-300 mb-2">
+                                Hook的使用方法和最佳实践，包括useState、useEffect等<span class="bg-yellow-400 text-black px-1 rounded">React</span>核心概念...
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="tag px-2 py-1 rounded-full text-xs">学习</span>
+                                <span class="text-xs text-gray-400">匹配度: 95%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="note-card rounded-2xl p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-semibold text-white">前端开发总结</h3>
+                                <span class="text-xs text-gray-300">5天前</span>
+                            </div>
+                            <p class="text-sm text-gray-300 mb-2">
+                                最近在学习<span class="bg-yellow-400 text-black px-1 rounded">React</span>框架，发现了很多有趣的特性和开发技巧...
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="tag px-2 py-1 rounded-full text-xs">学习</span>
+                                <span class="text-xs text-gray-400">匹配度: 78%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 搜索建议 -->
+                <div class="glass-effect rounded-2xl p-4">
+                    <h3 class="text-sm font-semibold text-purple-200 mb-3">相关搜索</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-purple-500">React Hook</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-purple-500">前端开发</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-purple-500">JavaScript</span>
+                        <span class="tag px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-purple-500">学习笔记</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

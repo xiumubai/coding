@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox - 多功能计算器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mockup {
+            width: 375px;
+            height: 812px;
+            border: 8px solid #1f2937;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 20px;
+            flex-shrink: 0;
+        }
+        
+        .mockup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #1f2937;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        
+        .btn-calc {
+            transition: all 0.2s ease;
+        }
+        
+        .btn-calc:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-calc:active {
+            transform: translateY(0);
+        }
+        
+        .operator {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        }
+        
+        .number {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .function {
+            background: linear-gradient(135deg, #4834d4, #686de0);
+        }
+        
+        .display {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="p-8 overflow-x-auto">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="flex space-x-8">
+            
+            <!-- 基础计算器页面 -->
+            <div class="mockup">
+                <div class="h-full bg-gradient-to-br from-gray-900 to-gray-800 p-6 pt-12">
+                    <!-- 状态栏 -->
+                    <div class="flex justify-between items-center text-white text-sm mb-8">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <div class="w-4 h-2 bg-white rounded-full"></div>
+                            <div class="w-4 h-2 bg-white rounded-full opacity-60"></div>
+                            <div class="w-4 h-2 bg-white rounded-full opacity-30"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                    
+                    <!-- 标题栏 -->
+                    <div class="flex items-center justify-between mb-8">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-6 h-6 text-white" alt="返回">
+                        <h1 class="text-white text-xl font-semibold">基础计算器</h1>
+                        <img src="https://unpkg.com/lucide-static@latest/icons/history.svg" class="w-6 h-6 text-white" alt="历史">
+                    </div>
+                    
+                    <!-- 显示屏 -->
+                    <div class="display rounded-2xl p-6 mb-6 h-32 flex flex-col justify-end">
+                        <div class="text-gray-400 text-right text-lg mb-2">12 + 34 =</div>
+                        <div class="text-white text-right text-4xl font-light">46</div>
+                    </div>
+                    
+                    <!-- 按钮网格 -->
+                    <div class="grid grid-cols-4 gap-4">
+                        <!-- 第一行 -->
+                        <button class="btn-calc function rounded-2xl h-16 text-white font-medium text-lg">AC</button>
+                        <button class="btn-calc function rounded-2xl h-16 text-white font-medium text-lg">±</button>
+                        <button class="btn-calc function rounded-2xl h-16 text-white font-medium text-lg">%</button>
+                        <button class="btn-calc operator rounded-2xl h-16 text-white font-medium text-xl">÷</button>
+                        
+                        <!-- 第二行 -->
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">7</button>
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">8</button>
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">9</button>
+                        <button class="btn-calc operator rounded-2xl h-16 text-white font-medium text-xl">×</button>
+                        
+                        <!-- 第三行 -->
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">4</button>
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">5</button>
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">6</button>
+                        <button class="btn-calc operator rounded-2xl h-16 text-white font-medium text-xl">-</button>
+                        
+                        <!-- 第四行 -->
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">1</button>
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">2</button>
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">3</button>
+                        <button class="btn-calc operator rounded-2xl h-16 text-white font-medium text-xl">+</button>
+                        
+                        <!-- 第五行 -->
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl col-span-2">0</button>
+                        <button class="btn-calc number rounded-2xl h-16 text-white font-medium text-xl">.</button>
+                        <button class="btn-calc operator rounded-2xl h-16 text-white font-medium text-xl">=</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 科学计算器页面 -->
+            <div class="mockup">
+                <div class="h-full bg-gradient-to-br from-gray-900 to-gray-800 p-6 pt-12">
+                    <!-- 状态栏 -->
+                    <div class="flex justify-between items-center text-white text-sm mb-8">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <div class="w-4 h-2 bg-white rounded-full"></div>
+                            <div class="w-4 h-2 bg-white rounded-full opacity-60"></div>
+                            <div class="w-4 h-2 bg-white rounded-full opacity-30"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                    
+                    <!-- 标题栏 -->
+                    <div class="flex items-center justify-between mb-6">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-6 h-6 text-white" alt="返回">
+                        <h1 class="text-white text-xl font-semibold">科学计算器</h1>
+                        <img src="https://unpkg.com/lucide-static@latest/icons/rotate-ccw.svg" class="w-6 h-6 text-white" alt="旋转">
+                    </div>
+                    
+                    <!-- 显示屏 -->
+                    <div class="display rounded-2xl p-4 mb-4 h-24 flex flex-col justify-end">
+                        <div class="text-gray-400 text-right text-sm mb-1">sin(30°)</div>
+                        <div class="text-white text-right text-2xl font-light">0.5</div>
+                    </div>
+                    
+                    <!-- 科学函数按钮 -->
+                    <div class="grid grid-cols-5 gap-2 mb-4">
+                        <button class="btn-calc function rounded-xl h-12 text-white font-medium text-sm">sin</button>
+                        <button class="btn-calc function rounded-xl h-12 text-white font-medium text-sm">cos</button>
+                        <button class="btn-calc function rounded-xl h-12 text-white font-medium text-sm">tan</button>
+                        <button class="btn-calc function rounded-xl h-12 text-white font-medium text-sm">ln</button>
+                        <button class="btn-calc function rounded-xl h-12 text-white font-medium text-sm">log</button>
+                    </div>
+                    
+                    <!-- 基础按钮网格 -->
+                    <div class="grid grid-cols-4 gap-3">
+                        <!-- 第一行 -->
+                        <button class="btn-calc function rounded-xl h-12 text-white font-medium text-sm">AC</button>
+                        <button class="btn-calc function rounded-xl h-12 text-white font-medium text-sm">x²</button>
+                        <button class="btn-calc function rounded-xl h-12 text-white font-medium text-sm">√</button>
+                        <button class="btn-calc operator rounded-xl h-12 text-white font-medium text-lg">÷</button>
+                        
+                        <!-- 第二行 -->
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">7</button>
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">8</button>
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">9</button>
+                        <button class="btn-calc operator rounded-xl h-12 text-white font-medium text-lg">×</button>
+                        
+                        <!-- 第三行 -->
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">4</button>
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">5</button>
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">6</button>
+                        <button class="btn-calc operator rounded-xl h-12 text-white font-medium text-lg">-</button>
+                        
+                        <!-- 第四行 -->
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">1</button>
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">2</button>
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">3</button>
+                        <button class="btn-calc operator rounded-xl h-12 text-white font-medium text-lg">+</button>
+                        
+                        <!-- 第五行 -->
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg col-span-2">0</button>
+                        <button class="btn-calc number rounded-xl h-12 text-white font-medium text-lg">.</button>
+                        <button class="btn-calc operator rounded-xl h-12 text-white font-medium text-lg">=</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 单位转换页面 -->
+            <div class="mockup">
+                <div class="h-full bg-gradient-to-br from-gray-900 to-gray-800 p-6 pt-12">
+                    <!-- 状态栏 -->
+                    <div class="flex justify-between items-center text-white text-sm mb-8">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <div class="w-4 h-2 bg-white rounded-full"></div>
+                            <div class="w-4 h-2 bg-white rounded-full opacity-60"></div>
+                            <div class="w-4 h-2 bg-white rounded-full opacity-30"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                    
+                    <!-- 标题栏 -->
+                    <div class="flex items-center justify-between mb-8">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-6 h-6 text-white" alt="返回">
+                        <h1 class="text-white text-xl font-semibold">单位转换</h1>
+                        <img src="https://unpkg.com/lucide-static@latest/icons/settings.svg" class="w-6 h-6 text-white" alt="设置">
+                    </div>
+                    
+                    <!-- 转换类型选择 -->
+                    <div class="glass-dark rounded-2xl p-4 mb-6">
+                        <div class="grid grid-cols-3 gap-3">
+                            <button class="glass rounded-xl p-3 text-center">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/ruler.svg" class="w-6 h-6 text-white mx-auto mb-2" alt="长度">
+                                <span class="text-white text-sm">长度</span>
+                            </button>
+                            <button class="glass rounded-xl p-3 text-center bg-gradient-to-r from-purple-500 to-blue-500">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/weight.svg" class="w-6 h-6 text-white mx-auto mb-2" alt="重量">
+                                <span class="text-white text-sm">重量</span>
+                            </button>
+                            <button class="glass rounded-xl p-3 text-center">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/thermometer.svg" class="w-6 h-6 text-white mx-auto mb-2" alt="温度">
+                                <span class="text-white text-sm">温度</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 转换输入区域 -->
+                    <div class="space-y-4 mb-8">
+                        <!-- 输入单位 -->
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-gray-400 text-sm">从</span>
+                                <button class="glass rounded-lg px-3 py-1 text-white text-sm flex items-center">
+                                    千克 (kg)
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/chevron-down.svg" class="w-4 h-4 ml-1" alt="下拉">
+                                </button>
+                            </div>
+                            <input type="text" value="1" class="w-full bg-transparent text-white text-2xl font-light text-right outline-none">
+                        </div>
+                        
+                        <!-- 转换按钮 -->
+                        <div class="flex justify-center">
+                            <button class="glass rounded-full p-3">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/arrow-up-down.svg" class="w-6 h-6 text-white" alt="转换">
+                            </button>
+                        </div>
+                        
+                        <!-- 输出单位 -->
+                        <div class="glass-dark rounded-2xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-gray-400 text-sm">到</span>
+                                <button class="glass rounded-lg px-3 py-1 text-white text-sm flex items-center">
+                                    磅 (lb)
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/chevron-down.svg" class="w-4 h-4 ml-1" alt="下拉">
+                                </button>
+                            </div>
+                            <div class="text-white text-2xl font-light text-right">2.20462</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 常用转换 -->
+                    <div class="glass-dark rounded-2xl p-4">
+                        <h3 class="text-white font-medium mb-3">常用转换</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-400 text-sm">1 kg</span>
+                                <span class="text-white text-sm">2.20462 lb</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-400 text-sm">1 kg</span>
+                                <span class="text-white text-sm">1000 g</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-400 text-sm">1 kg</span>
+                                <span class="text-white text-sm">35.274 oz</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 计算历史页面 -->
+            <div class="mockup">
+                <div class="h-full bg-gradient-to-br from-gray-900 to-gray-800 p-6 pt-12">
+                    <!-- 状态栏 -->
+                    <div class="flex justify-between items-center text-white text-sm mb-8">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <div class="w-4 h-2 bg-white rounded-full"></div>
+                            <div class="w-4 h-2 bg-white rounded-full opacity-60"></div>
+                            <div class="w-4 h-2 bg-white rounded-full opacity-30"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                    
+                    <!-- 标题栏 -->
+                    <div class="flex items-center justify-between mb-8">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-6 h-6 text-white" alt="返回">
+                        <h1 class="text-white text-xl font-semibold">计算历史</h1>
+                        <img src="https://unpkg.com/lucide-static@latest/icons/trash-2.svg" class="w-6 h-6 text-white" alt="清空">
+                    </div>
+                    
+                    <!-- 搜索栏 -->
+                    <div class="glass-dark rounded-2xl p-4 mb-6 flex items-center">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/search.svg" class="w-5 h-5 text-gray-400 mr-3" alt="搜索">
+                        <input type="text" placeholder="搜索计算记录..." class="flex-1 bg-transparent text-white placeholder-gray-400 outline-none">
+                    </div>
+                    
+                    <!-- 日期分组 -->
+                    <div class="space-y-6">
+                        <!-- 今天 -->
+                        <div>
+                            <h3 class="text-gray-400 text-sm font-medium mb-3">今天</h3>
+                            <div class="space-y-3">
+                                <div class="glass-dark rounded-xl p-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div class="text-gray-400 text-sm">15:30</div>
+                                        <button class="text-gray-400">
+                                            <img src="https://unpkg.com/lucide-static@latest/icons/copy.svg" class="w-4 h-4" alt="复制">
+                                        </button>
+                                    </div>
+                                    <div class="text-white text-lg">125 + 75 = 200</div>
+                                </div>
+                                
+                                <div class="glass-dark rounded-xl p-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div class="text-gray-400 text-sm">14:45</div>
+                                        <button class="text-gray-400">
+                                            <img src="https://unpkg.com/lucide-static@latest/icons/copy.svg" class="w-4 h-4" alt="复制">
+                                        </button>
+                                    </div>
+                                    <div class="text-white text-lg">sin(30°) = 0.5</div>
+                                </div>
+                                
+                                <div class="glass-dark rounded-xl p-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div class="text-gray-400 text-sm">13:20</div>
+                                        <button class="text-gray-400">
+                                            <img src="https://unpkg.com/lucide-static@latest/icons/copy.svg" class="w-4 h-4" alt="复制">
+                                        </button>
+                                    </div>
+                                    <div class="text-white text-lg">√144 = 12</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 昨天 -->
+                        <div>
+                            <h3 class="text-gray-400 text-sm font-medium mb-3">昨天</h3>
+                            <div class="space-y-3">
+                                <div class="glass-dark rounded-xl p-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div class="text-gray-400 text-sm">18:15</div>
+                                        <button class="text-gray-400">
+                                            <img src="https://unpkg.com/lucide-static@latest/icons/copy.svg" class="w-4 h-4" alt="复制">
+                                        </button>
+                                    </div>
+                                    <div class="text-white text-lg">1 kg = 2.20462 lb</div>
+                                    <div class="text-gray-400 text-sm mt-1">单位转换</div>
+                                </div>
+                                
+                                <div class="glass-dark rounded-xl p-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div class="text-gray-400 text-sm">16:30</div>
+                                        <button class="text-gray-400">
+                                            <img src="https://unpkg.com/lucide-static@latest/icons/copy.svg" class="w-4 h-4" alt="复制">
+                                        </button>
+                                    </div>
+                                    <div class="text-white text-lg">25% × 400 = 100</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

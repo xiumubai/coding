@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox - 专注计时器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-purple {
+            background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+        }
+        
+        .gradient-green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .gradient-orange {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        .mockup {
+            width: 375px;
+            height: 812px;
+            border: 8px solid #1f2937;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 20px;
+            flex-shrink: 0;
+        }
+        
+        .mockup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #1f2937;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            stroke-dasharray: 628;
+            stroke-dashoffset: 628;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4 overflow-x-auto">
+    <div class="flex items-center justify-center min-w-max">
+        
+        <!-- 番茄钟主界面 -->
+        <div class="mockup">
+            <div class="h-full gradient-bg flex flex-col">
+                <!-- 状态栏 -->
+                <div class="flex justify-between items-center px-6 pt-12 pb-4">
+                    <div class="text-white/80 text-sm font-medium">9:41</div>
+                    <div class="flex items-center space-x-1">
+                        <div class="w-4 h-2 bg-white/60 rounded-sm"></div>
+                        <div class="w-6 h-2 bg-white/80 rounded-sm"></div>
+                        <div class="w-1 h-4 bg-white/90 rounded-full"></div>
+                    </div>
+                </div>
+                
+                <!-- 头部 -->
+                <div class="px-6 pb-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-white text-2xl font-bold">专注计时</h1>
+                            <p class="text-white/70 text-sm mt-1">保持专注，提升效率</p>
+                        </div>
+                        <button class="glass-dark rounded-full p-3">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/settings.svg" class="w-5 h-5 filter invert" alt="设置">
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 计时器主体 -->
+                <div class="flex-1 flex flex-col items-center justify-center px-6">
+                    <!-- 圆形进度条 -->
+                    <div class="relative mb-8">
+                        <svg class="progress-ring w-64 h-64" viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="90" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="none"/>
+                            <circle cx="100" cy="100" r="90" stroke="url(#gradient)" stroke-width="8" fill="none" 
+                                    class="progress-ring-circle" style="stroke-dashoffset: 157;"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#10b981"/>
+                                    <stop offset="100%" style="stop-color:#059669"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        
+                        <!-- 时间显示 -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <div class="text-white text-5xl font-bold mb-2">18:32</div>
+                            <div class="text-white/70 text-sm">专注时间</div>
+                            <div class="glass-dark rounded-full px-4 py-2 mt-4">
+                                <span class="text-white/90 text-xs font-medium">第 2 个番茄钟</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 当前任务 -->
+                    <div class="glass-dark rounded-2xl p-4 w-full mb-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse-slow"></div>
+                            <div>
+                                <p class="text-white font-medium">完成项目文档</p>
+                                <p class="text-white/60 text-sm">工作 · 高优先级</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 控制按钮 -->
+                    <div class="flex items-center space-x-6">
+                        <button class="glass-dark rounded-full p-4">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/skip-forward.svg" class="w-6 h-6 filter invert" alt="跳过">
+                        </button>
+                        
+                        <button class="gradient-green rounded-full p-6 shadow-lg">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/pause.svg" class="w-8 h-8 filter invert" alt="暂停">
+                        </button>
+                        
+                        <button class="glass-dark rounded-full p-4">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/square.svg" class="w-6 h-6 filter invert" alt="停止">
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 底部统计 -->
+                <div class="px-6 pb-8">
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="flex justify-between items-center">
+                            <div class="text-center">
+                                <div class="text-white text-xl font-bold">4</div>
+                                <div class="text-white/60 text-xs">今日完成</div>
+                            </div>
+                            <div class="w-px h-8 bg-white/20"></div>
+                            <div class="text-center">
+                                <div class="text-white text-xl font-bold">2h 15m</div>
+                                <div class="text-white/60 text-xs">专注时长</div>
+                            </div>
+                            <div class="w-px h-8 bg-white/20"></div>
+                            <div class="text-center">
+                                <div class="text-white text-xl font-bold">85%</div>
+                                <div class="text-white/60 text-xs">完成率</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 计时器设置页面 -->
+        <div class="mockup">
+            <div class="h-full gradient-bg flex flex-col">
+                <!-- 状态栏 -->
+                <div class="flex justify-between items-center px-6 pt-12 pb-4">
+                    <div class="text-white/80 text-sm font-medium">9:41</div>
+                    <div class="flex items-center space-x-1">
+                        <div class="w-4 h-2 bg-white/60 rounded-sm"></div>
+                        <div class="w-6 h-2 bg-white/80 rounded-sm"></div>
+                        <div class="w-1 h-4 bg-white/90 rounded-full"></div>
+                    </div>
+                </div>
+                
+                <!-- 头部 -->
+                <div class="px-6 pb-6">
+                    <div class="flex items-center space-x-4">
+                        <button class="glass-dark rounded-full p-2">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/arrow-left.svg" class="w-5 h-5 filter invert" alt="返回">
+                        </button>
+                        <div>
+                            <h1 class="text-white text-xl font-bold">计时器设置</h1>
+                            <p class="text-white/70 text-sm">自定义你的专注时间</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 设置内容 -->
+                <div class="flex-1 px-6 space-y-6">
+                    <!-- 番茄钟时长 -->
+                    <div class="glass-dark rounded-2xl p-6">
+                        <h3 class="text-white font-semibold mb-4">番茄钟时长</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-white/80">专注时间</span>
+                            <div class="flex items-center space-x-4">
+                                <button class="glass rounded-full p-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/minus.svg" class="w-4 h-4 filter invert" alt="减少">
+                                </button>
+                                <span class="text-white font-bold text-lg w-16 text-center">25 分钟</span>
+                                <button class="glass rounded-full p-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/plus.svg" class="w-4 h-4 filter invert" alt="增加">
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mt-4">
+                            <span class="text-white/80">短休息</span>
+                            <div class="flex items-center space-x-4">
+                                <button class="glass rounded-full p-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/minus.svg" class="w-4 h-4 filter invert" alt="减少">
+                                </button>
+                                <span class="text-white font-bold text-lg w-16 text-center">5 分钟</span>
+                                <button class="glass rounded-full p-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/plus.svg" class="w-4 h-4 filter invert" alt="增加">
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mt-4">
+                            <span class="text-white/80">长休息</span>
+                            <div class="flex items-center space-x-4">
+                                <button class="glass rounded-full p-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/minus.svg" class="w-4 h-4 filter invert" alt="减少">
+                                </button>
+                                <span class="text-white font-bold text-lg w-16 text-center">15 分钟</span>
+                                <button class="glass rounded-full p-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/plus.svg" class="w-4 h-4 filter invert" alt="增加">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 提醒设置 -->
+                    <div class="glass-dark rounded-2xl p-6">
+                        <h3 class="text-white font-semibold mb-4">提醒设置</h3>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-white/90">声音提醒</span>
+                                <p class="text-white/60 text-sm">计时结束时播放提示音</p>
+                            </div>
+                            <div class="relative">
+                                <input type="checkbox" class="sr-only" checked>
+                                <div class="w-12 h-6 gradient-green rounded-full shadow-inner"></div>
+                                <div class="absolute top-0.5 right-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-white/90">振动提醒</span>
+                                <p class="text-white/60 text-sm">设备振动提醒</p>
+                            </div>
+                            <div class="relative">
+                                <input type="checkbox" class="sr-only">
+                                <div class="w-12 h-6 bg-white/20 rounded-full shadow-inner"></div>
+                                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white/60 rounded-full shadow transition-transform"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-white/90">自动开始下一个</span>
+                                <p class="text-white/60 text-sm">休息结束后自动开始</p>
+                            </div>
+                            <div class="relative">
+                                <input type="checkbox" class="sr-only" checked>
+                                <div class="w-12 h-6 gradient-green rounded-full shadow-inner"></div>
+                                <div class="absolute top-0.5 right-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 主题设置 -->
+                    <div class="glass-dark rounded-2xl p-6">
+                        <h3 class="text-white font-semibold mb-4">主题颜色</h3>
+                        <div class="grid grid-cols-4 gap-3">
+                            <button class="w-12 h-12 gradient-green rounded-xl border-2 border-white/50"></button>
+                            <button class="w-12 h-12 gradient-purple rounded-xl border border-white/20"></button>
+                            <button class="w-12 h-12 gradient-orange rounded-xl border border-white/20"></button>
+                            <button class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl border border-white/20"></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 保存按钮 -->
+                <div class="px-6 pb-8">
+                    <button class="w-full gradient-green rounded-2xl py-4 font-semibold text-white shadow-lg">
+                        保存设置
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 专注统计页面 -->
+        <div class="mockup">
+            <div class="h-full gradient-bg flex flex-col">
+                <!-- 状态栏 -->
+                <div class="flex justify-between items-center px-6 pt-12 pb-4">
+                    <div class="text-white/80 text-sm font-medium">9:41</div>
+                    <div class="flex items-center space-x-1">
+                        <div class="w-4 h-2 bg-white/60 rounded-sm"></div>
+                        <div class="w-6 h-2 bg-white/80 rounded-sm"></div>
+                        <div class="w-1 h-4 bg-white/90 rounded-full"></div>
+                    </div>
+                </div>
+                
+                <!-- 头部 -->
+                <div class="px-6 pb-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-white text-2xl font-bold">专注统计</h1>
+                            <p class="text-white/70 text-sm mt-1">查看你的专注数据</p>
+                        </div>
+                        <div class="glass-dark rounded-xl px-3 py-2">
+                            <span class="text-white/90 text-sm font-medium">本周</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 统计卡片 -->
+                <div class="px-6 space-y-4 mb-6">
+                    <div class="glass-dark rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-white font-semibold">今日概览</h3>
+                            <div class="text-green-400 text-2xl font-bold">4</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <div class="text-white text-lg font-bold">2h 15m</div>
+                                <div class="text-white/60 text-xs">专注时长</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-white text-lg font-bold">85%</div>
+                                <div class="text-white/60 text-xs">完成率</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-white text-lg font-bold">6</div>
+                                <div class="text-white/60 text-xs">总任务</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 周统计 -->
+                    <div class="glass-dark rounded-2xl p-6">
+                        <h3 class="text-white font-semibold mb-4">本周趋势</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-white/80 text-sm">周一</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-20 h-2 bg-white/20 rounded-full overflow-hidden">
+                                        <div class="w-4/5 h-full gradient-green rounded-full"></div>
+                                    </div>
+                                    <span class="text-white/90 text-sm font-medium">3h</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-white/80 text-sm">周二</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-20 h-2 bg-white/20 rounded-full overflow-hidden">
+                                        <div class="w-3/5 h-full gradient-green rounded-full"></div>
+                                    </div>
+                                    <span class="text-white/90 text-sm font-medium">2.5h</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-white/80 text-sm">周三</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-20 h-2 bg-white/20 rounded-full overflow-hidden">
+                                        <div class="w-full h-full gradient-green rounded-full"></div>
+                                    </div>
+                                    <span class="text-white/90 text-sm font-medium">4h</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-white/80 text-sm">周四</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-20 h-2 bg-white/20 rounded-full overflow-hidden">
+                                        <div class="w-1/2 h-full gradient-green rounded-full"></div>
+                                    </div>
+                                    <span class="text-white/90 text-sm font-medium">2h</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-white/80 text-sm">周五</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-20 h-2 bg-white/20 rounded-full overflow-hidden">
+                                        <div class="w-2/3 h-full gradient-green rounded-full"></div>
+                                    </div>
+                                    <span class="text-white/90 text-sm font-medium">2.8h</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 成就徽章 -->
+                <div class="px-6 mb-6">
+                    <div class="glass-dark rounded-2xl p-6">
+                        <h3 class="text-white font-semibold mb-4">本周成就</h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <div class="w-12 h-12 gradient-green rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/target.svg" class="w-6 h-6 filter invert" alt="目标">
+                                </div>
+                                <div class="text-white/90 text-xs font-medium">目标达成</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 gradient-orange rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/flame.svg" class="w-6 h-6 filter invert" alt="连击">
+                                </div>
+                                <div class="text-white/90 text-xs font-medium">5天连击</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 gradient-purple rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/clock.svg" class="w-6 h-6 filter invert" alt="时长">
+                                </div>
+                                <div class="text-white/90 text-xs font-medium">时长王者</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航占位 -->
+                <div class="mt-auto px-6 pb-8">
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="text-center">
+                            <div class="text-white/60 text-sm">继续保持专注</div>
+                            <div class="text-white font-semibold">距离下个成就还需 2 个番茄钟</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 休息提醒页面 -->
+        <div class="mockup">
+            <div class="h-full gradient-bg flex flex-col">
+                <!-- 状态栏 -->
+                <div class="flex justify-between items-center px-6 pt-12 pb-4">
+                    <div class="text-white/80 text-sm font-medium">9:41</div>
+                    <div class="flex items-center space-x-1">
+                        <div class="w-4 h-2 bg-white/60 rounded-sm"></div>
+                        <div class="w-6 h-2 bg-white/80 rounded-sm"></div>
+                        <div class="w-1 h-4 bg-white/90 rounded-full"></div>
+                    </div>
+                </div>
+                
+                <!-- 休息提醒内容 -->
+                <div class="flex-1 flex flex-col items-center justify-center px-6 text-center">
+                    <!-- 动画图标 -->
+                    <div class="floating mb-8">
+                        <div class="w-32 h-32 gradient-orange rounded-full flex items-center justify-center shadow-2xl">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/coffee.svg" class="w-16 h-16 filter invert" alt="休息">
+                        </div>
+                    </div>
+                    
+                    <!-- 提醒文字 -->
+                    <div class="mb-8">
+                        <h1 class="text-white text-3xl font-bold mb-4">该休息一下了！</h1>
+                        <p class="text-white/80 text-lg mb-2">你已经专注了 25 分钟</p>
+                        <p class="text-white/60">放松一下，为下一个番茄钟做准备</p>
+                    </div>
+                    
+                    <!-- 休息倒计时 -->
+                    <div class="glass-dark rounded-2xl p-6 mb-8 w-full max-w-sm">
+                        <div class="text-center">
+                            <div class="text-white/70 text-sm mb-2">休息时间</div>
+                            <div class="text-white text-4xl font-bold mb-2">04:32</div>
+                            <div class="w-full h-2 bg-white/20 rounded-full overflow-hidden">
+                                <div class="w-1/3 h-full gradient-orange rounded-full transition-all duration-1000"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 休息建议 -->
+                    <div class="glass-dark rounded-2xl p-6 mb-8 w-full">
+                        <h3 class="text-white font-semibold mb-4 text-center">休息建议</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 gradient-green rounded-full flex items-center justify-center flex-shrink-0">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/eye.svg" class="w-4 h-4 filter invert" alt="眼睛">
+                                </div>
+                                <span class="text-white/90 text-sm">远眺窗外，放松眼部肌肉</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 gradient-purple rounded-full flex items-center justify-center flex-shrink-0">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/move.svg" class="w-4 h-4 filter invert" alt="运动">
+                                </div>
+                                <span class="text-white/90 text-sm">起身活动，伸展身体</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 gradient-orange rounded-full flex items-center justify-center flex-shrink-0">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/droplets.svg" class="w-4 h-4 filter invert" alt="水">
+                                </div>
+                                <span class="text-white/90 text-sm">喝一杯水，保持水分</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 控制按钮 -->
+                    <div class="flex items-center space-x-4">
+                        <button class="glass-dark rounded-2xl px-6 py-3 font-medium text-white">
+                            跳过休息
+                        </button>
+                        <button class="gradient-green rounded-2xl px-8 py-3 font-semibold text-white shadow-lg">
+                            开始下一个
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 底部统计 -->
+                <div class="px-6 pb-8">
+                    <div class="glass-dark rounded-2xl p-4">
+                        <div class="flex justify-center items-center space-x-8">
+                            <div class="text-center">
+                                <div class="text-white text-lg font-bold">3</div>
+                                <div class="text-white/60 text-xs">已完成</div>
+                            </div>
+                            <div class="w-px h-8 bg-white/20"></div>
+                            <div class="text-center">
+                                <div class="text-white text-lg font-bold">1h 15m</div>
+                                <div class="text-white/60 text-xs">专注时长</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

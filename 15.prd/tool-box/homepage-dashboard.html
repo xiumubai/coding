@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox - 主页入口管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .tool-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 1; }
+            80%, 100% { transform: scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg overflow-x-hidden">
+    <!-- 主页入口管理界面 -->
+    <div class="min-h-screen p-4 space-y-6">
+        
+        <!-- 顶部用户信息栏 -->
+        <div class="glass-effect rounded-2xl p-6 text-white">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" 
+                             alt="用户头像" class="w-12 h-12 rounded-full border-2 border-white/30">
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white"></div>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-semibold">早上好，张三</h2>
+                        <p class="text-sm text-white/70">今天是高效的一天</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <p class="text-sm text-white/70">今日使用</p>
+                        <p class="text-xl font-bold">12 次</p>
+                    </div>
+                    <img src="https://unpkg.com/lucide-static@latest/icons/bell.svg" alt="通知" class="w-6 h-6 text-white/80">
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索和快速访问 -->
+        <div class="glass-effect rounded-2xl p-6 text-white">
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="relative flex-1">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/search.svg" alt="搜索" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/60">
+                    <input type="text" placeholder="搜索工具或功能..." 
+                           class="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30">
+                </div>
+                <button class="bg-white/20 hover:bg-white/30 rounded-xl p-3 transition-all duration-300">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/filter.svg" alt="筛选" class="w-5 h-5">
+                </button>
+            </div>
+            
+            <!-- 快速访问工具栏 -->
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-medium text-white/80">快速访问</h3>
+                <div class="flex space-x-2">
+                    <div class="w-8 h-8 bg-blue-500/30 rounded-lg flex items-center justify-center">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/check-square.svg" alt="待办" class="w-4 h-4">
+                    </div>
+                    <div class="w-8 h-8 bg-purple-500/30 rounded-lg flex items-center justify-center">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/edit-3.svg" alt="笔记" class="w-4 h-4">
+                    </div>
+                    <div class="w-8 h-8 bg-green-500/30 rounded-lg flex items-center justify-center">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/calculator.svg" alt="计算器" class="w-4 h-4">
+                    </div>
+                    <div class="w-8 h-8 bg-orange-500/30 rounded-lg flex items-center justify-center">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/clock.svg" alt="计时器" class="w-4 h-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 工具分类导航 -->
+        <div class="glass-effect rounded-2xl p-6 text-white">
+            <h3 class="text-lg font-semibold mb-4">工具分类</h3>
+            <div class="grid grid-cols-4 gap-3">
+                <button class="bg-gradient-to-br from-blue-500/30 to-blue-600/30 rounded-xl p-4 text-center hover:from-blue-500/40 hover:to-blue-600/40 transition-all duration-300">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/briefcase.svg" alt="效率工具" class="w-6 h-6 mx-auto mb-2">
+                    <p class="text-xs font-medium">效率工具</p>
+                    <p class="text-xs text-white/60">5个</p>
+                </button>
+                <button class="bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-xl p-4 text-center hover:from-purple-500/40 hover:to-purple-600/40 transition-all duration-300">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/zap.svg" alt="创意工具" class="w-6 h-6 mx-auto mb-2">
+                    <p class="text-xs font-medium">创意工具</p>
+                    <p class="text-xs text-white/60">3个</p>
+                </button>
+                <button class="bg-gradient-to-br from-green-500/30 to-green-600/30 rounded-xl p-4 text-center hover:from-green-500/40 hover:to-green-600/40 transition-all duration-300">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/trending-up.svg" alt="数据分析" class="w-6 h-6 mx-auto mb-2">
+                    <p class="text-xs font-medium">数据分析</p>
+                    <p class="text-xs text-white/60">4个</p>
+                </button>
+                <button class="bg-gradient-to-br from-orange-500/30 to-orange-600/30 rounded-xl p-4 text-center hover:from-orange-500/40 hover:to-orange-600/40 transition-all duration-300">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/settings.svg" alt="系统工具" class="w-6 h-6 mx-auto mb-2">
+                    <p class="text-xs font-medium">系统工具</p>
+                    <p class="text-xs text-white/60">6个</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- 推荐工具 -->
+        <div class="glass-effect rounded-2xl p-6 text-white">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">为你推荐</h3>
+                <button class="text-sm text-white/70 hover:text-white transition-colors">查看全部</button>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="tool-card bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rounded-xl p-4 border border-white/10">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 bg-indigo-500/30 rounded-lg flex items-center justify-center">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/image.svg" alt="图片工具" class="w-5 h-5">
+                        </div>
+                        <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">新功能</span>
+                    </div>
+                    <h4 class="font-semibold mb-1">图片处理</h4>
+                    <p class="text-xs text-white/70 mb-3">压缩、裁剪、格式转换</p>
+                    <button class="w-full bg-white/10 hover:bg-white/20 rounded-lg py-2 text-sm font-medium transition-all duration-300">
+                        立即使用
+                    </button>
+                </div>
+                <div class="tool-card bg-gradient-to-br from-emerald-500/20 to-teal-600/20 rounded-xl p-4 border border-white/10">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 bg-emerald-500/30 rounded-lg flex items-center justify-center">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/code.svg" alt="代码工具" class="w-5 h-5">
+                        </div>
+                        <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">热门</span>
+                    </div>
+                    <h4 class="font-semibold mb-1">代码格式化</h4>
+                    <p class="text-xs text-white/70 mb-3">美化、压缩、转换代码</p>
+                    <button class="w-full bg-white/10 hover:bg-white/20 rounded-lg py-2 text-sm font-medium transition-all duration-300">
+                        立即使用
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心工具网格 -->
+        <div class="glass-effect rounded-2xl p-6 text-white">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold">核心工具</h3>
+                <div class="flex space-x-2">
+                    <button class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-lg flex items-center justify-center transition-all duration-300">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/grid-3x3.svg" alt="网格视图" class="w-4 h-4">
+                    </button>
+                    <button class="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all duration-300">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/list.svg" alt="列表视图" class="w-4 h-4">
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <!-- 待办事项 -->
+                <div class="tool-card bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-xl p-5 border border-white/10 relative overflow-hidden">
+                    <div class="absolute top-2 right-2">
+                        <div class="w-2 h-2 bg-green-400 rounded-full pulse-ring"></div>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-500/30 rounded-xl flex items-center justify-center mb-4 floating-animation">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/check-square.svg" alt="待办事项" class="w-6 h-6">
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">待办事项</h4>
+                    <p class="text-sm text-white/70 mb-4">智能任务管理与提醒</p>
+                    <div class="flex items-center justify-between text-xs text-white/60 mb-3">
+                        <span>今日完成: 8/12</span>
+                        <span>67%</span>
+                    </div>
+                    <div class="w-full bg-white/10 rounded-full h-2 mb-4">
+                        <div class="bg-blue-400 h-2 rounded-full" style="width: 67%"></div>
+                    </div>
+                    <button class="w-full bg-blue-500/30 hover:bg-blue-500/40 rounded-lg py-2.5 text-sm font-medium transition-all duration-300">
+                        打开工具
+                    </button>
+                </div>
+
+                <!-- 智能笔记 -->
+                <div class="tool-card bg-gradient-to-br from-purple-500/20 to-purple-600/20 rounded-xl p-5 border border-white/10 relative overflow-hidden">
+                    <div class="absolute top-2 right-2">
+                        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-500/30 rounded-xl flex items-center justify-center mb-4 floating-animation" style="animation-delay: -1s;">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/edit-3.svg" alt="智能笔记" class="w-6 h-6">
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">智能笔记</h4>
+                    <p class="text-sm text-white/70 mb-4">富文本编辑与云端同步</p>
+                    <div class="flex items-center justify-between text-xs text-white/60 mb-3">
+                        <span>笔记数量: 24</span>
+                        <span>最近更新</span>
+                    </div>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">工作</span>
+                        <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full">学习</span>
+                    </div>
+                    <button class="w-full bg-purple-500/30 hover:bg-purple-500/40 rounded-lg py-2.5 text-sm font-medium transition-all duration-300">
+                        打开工具
+                    </button>
+                </div>
+
+                <!-- 多功能计算器 -->
+                <div class="tool-card bg-gradient-to-br from-green-500/20 to-green-600/20 rounded-xl p-5 border border-white/10 relative overflow-hidden">
+                    <div class="absolute top-2 right-2">
+                        <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                    </div>
+                    <div class="w-12 h-12 bg-green-500/30 rounded-xl flex items-center justify-center mb-4 floating-animation" style="animation-delay: -2s;">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/calculator.svg" alt="计算器" class="w-6 h-6">
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">多功能计算器</h4>
+                    <p class="text-sm text-white/70 mb-4">科学计算与单位转换</p>
+                    <div class="flex items-center justify-between text-xs text-white/60 mb-3">
+                        <span>使用次数: 156</span>
+                        <span>常用</span>
+                    </div>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">基础</span>
+                        <span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">科学</span>
+                    </div>
+                    <button class="w-full bg-green-500/30 hover:bg-green-500/40 rounded-lg py-2.5 text-sm font-medium transition-all duration-300">
+                        打开工具
+                    </button>
+                </div>
+
+                <!-- 专注计时器 -->
+                <div class="tool-card bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-xl p-5 border border-white/10 relative overflow-hidden">
+                    <div class="absolute top-2 right-2">
+                        <div class="w-2 h-2 bg-red-400 rounded-full pulse-ring"></div>
+                    </div>
+                    <div class="w-12 h-12 bg-orange-500/30 rounded-xl flex items-center justify-center mb-4 floating-animation" style="animation-delay: -3s;">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/clock.svg" alt="专注计时器" class="w-6 h-6">
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">专注计时器</h4>
+                    <p class="text-sm text-white/70 mb-4">番茄工作法与专注统计</p>
+                    <div class="flex items-center justify-between text-xs text-white/60 mb-3">
+                        <span>今日专注: 2h 30m</span>
+                        <span>进行中</span>
+                    </div>
+                    <div class="w-full bg-white/10 rounded-full h-2 mb-4">
+                        <div class="bg-orange-400 h-2 rounded-full" style="width: 45%"></div>
+                    </div>
+                    <button class="w-full bg-orange-500/30 hover:bg-orange-500/40 rounded-lg py-2.5 text-sm font-medium transition-all duration-300">
+                        打开工具
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最近使用和统计 -->
+        <div class="glass-effect rounded-2xl p-6 text-white">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">最近使用</h3>
+                <button class="text-sm text-white/70 hover:text-white transition-colors">清除历史</button>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-blue-500/30 rounded-lg flex items-center justify-center">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/check-square.svg" alt="待办事项" class="w-4 h-4">
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium">待办事项</p>
+                            <p class="text-xs text-white/60">5分钟前</p>
+                        </div>
+                    </div>
+                    <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" alt="进入" class="w-4 h-4 text-white/60">
+                </div>
+                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-500/30 rounded-lg flex items-center justify-center">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/calculator.svg" alt="计算器" class="w-4 h-4">
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium">多功能计算器</p>
+                            <p class="text-xs text-white/60">15分钟前</p>
+                        </div>
+                    </div>
+                    <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" alt="进入" class="w-4 h-4 text-white/60">
+                </div>
+                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-purple-500/30 rounded-lg flex items-center justify-center">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/edit-3.svg" alt="笔记" class="w-4 h-4">
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium">智能笔记</p>
+                            <p class="text-xs text-white/60">1小时前</p>
+                        </div>
+                    </div>
+                    <img src="https://unpkg.com/lucide-static@latest/icons/chevron-right.svg" alt="进入" class="w-4 h-4 text-white/60">
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div class="glass-effect rounded-2xl p-4 text-white">
+            <div class="flex items-center justify-around">
+                <button class="flex flex-col items-center space-y-1 p-2 rounded-lg bg-white/20">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/home.svg" alt="首页" class="w-5 h-5">
+                    <span class="text-xs font-medium">首页</span>
+                </button>
+                <button class="flex flex-col items-center space-y-1 p-2 rounded-lg hover:bg-white/10 transition-all duration-300">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/grid-3x3.svg" alt="工具" class="w-5 h-5 text-white/70">
+                    <span class="text-xs text-white/70">工具</span>
+                </button>
+                <button class="flex flex-col items-center space-y-1 p-2 rounded-lg hover:bg-white/10 transition-all duration-300">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/bookmark.svg" alt="收藏" class="w-5 h-5 text-white/70">
+                    <span class="text-xs text-white/70">收藏</span>
+                </button>
+                <button class="flex flex-col items-center space-y-1 p-2 rounded-lg hover:bg-white/10 transition-all duration-300">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/user.svg" alt="我的" class="w-5 h-5 text-white/70">
+                    <span class="text-xs text-white/70">我的</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
