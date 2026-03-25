@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康管理App - 登录页面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#06B6D4',
+                        accent: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        surface: '#F8FAFC',
+                        'surface-dark': '#1E293B'
+                    },
+                    fontFamily: {
+                        'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">健康管理App - 登录页面设计</h1>
+        
+        <!-- 页面预览容器 -->
+        <div class="flex gap-6 overflow-x-auto pb-4">
+            
+            <!-- 登录页面 - 主页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部装饰背景 -->
+                <div class="bg-gradient-to-br from-primary via-secondary to-accent h-48 relative overflow-hidden">
+                    <!-- 装饰性几何图形 -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"></div>
+                    <div class="absolute top-1/2 left-1/2 w-16 h-16 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                    
+                    <!-- Logo和标题 -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4">
+                            <i class="fas fa-heartbeat text-2xl"></i>
+                        </div>
+                        <h1 class="text-2xl font-bold mb-1">健康管家</h1>
+                        <p class="text-sm opacity-90">您的专属健康助手</p>
+                    </div>
+                </div>
+                
+                <!-- 登录表单区域 -->
+                <div class="p-6 space-y-6">
+                    <!-- 欢迎文字 -->
+                    <div class="text-center">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">欢迎回来</h2>
+                        <p class="text-sm text-gray-500">登录您的健康账户，继续您的健康之旅</p>
+                    </div>
+                    
+                    <!-- 登录表单 -->
+                    <form class="space-y-4">
+                        <!-- 手机号输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">手机号</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-mobile-alt text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="请输入手机号" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 密码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请输入密码" 
+                                       class="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 记住密码和忘记密码 -->
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary/20">
+                                <span class="ml-2 text-sm text-gray-600">记住密码</span>
+                            </label>
+                            <button type="button" class="text-sm text-primary hover:text-primary/80 font-medium">
+                                忘记密码？
+                            </button>
+                        </div>
+                        
+                        <!-- 登录按钮 -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            登录
+                        </button>
+                    </form>
+                    
+                    <!-- 分割线 -->
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-200"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-4 bg-white text-gray-500">或者使用以下方式登录</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 第三方登录 -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                            <i class="fab fa-weixin text-green-500 text-xl"></i>
+                        </button>
+                        <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                            <i class="fab fa-qq text-blue-500 text-xl"></i>
+                        </button>
+                        <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                            <i class="fab fa-apple text-gray-800 text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 注册链接 -->
+                    <div class="text-center">
+                        <span class="text-sm text-gray-500">还没有账户？</span>
+                        <button class="text-sm text-primary hover:text-primary/80 font-medium ml-1">
+                            立即注册
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    登录页面
+                </div>
+            </div>
+            
+            <!-- 注册页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">注册账户</h2>
+                        <div></div>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-6">
+                    <!-- 注册说明 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-plus text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">创建新账户</h2>
+                        <p class="text-sm text-gray-500">加入我们，开启您的健康管理之旅</p>
+                    </div>
+                    
+                    <!-- 注册表单 -->
+                    <form class="space-y-4">
+                        <!-- 姓名输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">姓名</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" placeholder="请输入您的姓名" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 手机号输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">手机号</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-mobile-alt text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="请输入手机号" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 验证码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">验证码</label>
+                            <div class="flex space-x-3">
+                                <div class="relative flex-1">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-shield-alt text-gray-400"></i>
+                                    </div>
+                                    <input type="text" placeholder="请输入验证码" 
+                                           class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                                </div>
+                                <button type="button" class="px-4 py-3 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
+                                    获取验证码
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 密码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">设置密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请设置登录密码" 
+                                       class="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
+                                </button>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                密码长度8-20位，包含字母和数字
+                            </div>
+                        </div>
+                        
+                        <!-- 确认密码 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">确认密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请再次输入密码" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 用户协议 -->
+                        <div class="flex items-start space-x-2">
+                            <input type="checkbox" class="w-4 h-4 text-accent border-gray-300 rounded focus:ring-accent/20 mt-0.5">
+                            <div class="text-sm text-gray-600">
+                                我已阅读并同意
+                                <button type="button" class="text-accent hover:text-accent/80 font-medium">《用户协议》</button>
+                                和
+                                <button type="button" class="text-accent hover:text-accent/80 font-medium">《隐私政策》</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 注册按钮 -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-accent to-secondary text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            立即注册
+                        </button>
+                    </form>
+                    
+                    <!-- 登录链接 -->
+                    <div class="text-center">
+                        <span class="text-sm text-gray-500">已有账户？</span>
+                        <button class="text-sm text-accent hover:text-accent/80 font-medium ml-1">
+                            立即登录
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    注册页面
+                </div>
+            </div>
+            
+            <!-- 忘记密码页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">找回密码</h2>
+                        <div></div>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-6">
+                    <!-- 说明图标 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-warning to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-key text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">重置密码</h2>
+                        <p class="text-sm text-gray-500">请输入您的手机号，我们将发送验证码帮您重置密码</p>
+                    </div>
+                    
+                    <!-- 重置密码表单 -->
+                    <form class="space-y-4">
+                        <!-- 手机号输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">手机号</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-mobile-alt text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="请输入注册时的手机号" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-warning/20 focus:border-warning outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 验证码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">验证码</label>
+                            <div class="flex space-x-3">
+                                <div class="relative flex-1">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-shield-alt text-gray-400"></i>
+                                    </div>
+                                    <input type="text" placeholder="请输入验证码" 
+                                           class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-warning/20 focus:border-warning outline-none transition-colors">
+                                </div>
+                                <button type="button" class="px-4 py-3 bg-warning text-white rounded-xl text-sm font-medium hover:bg-warning/90 transition-colors">
+                                    发送验证码
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 新密码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">新密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请输入新密码" 
+                                       class="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-warning/20 focus:border-warning outline-none transition-colors">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 确认新密码 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">确认新密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请再次输入新密码" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-warning/20 focus:border-warning outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 重置按钮 -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-warning to-orange-500 text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            重置密码
+                        </button>
+                    </form>
+                    
+                    <!-- 其他选项 -->
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-200"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-4 bg-white text-gray-500">其他找回方式</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                                <i class="fas fa-envelope text-blue-500 mr-2"></i>
+                                <span class="text-sm text-gray-700">邮箱找回</span>
+                            </button>
+                            <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                                <i class="fas fa-headset text-green-500 mr-2"></i>
+                                <span class="text-sm text-gray-700">联系客服</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 返回登录 -->
+                    <div class="text-center">
+                        <button class="text-sm text-warning hover:text-warning/80 font-medium">
+                            返回登录页面
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    忘记密码页面
+                </div>
+            </div>
+            
+            <!-- 手机验证码登录页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">验证码登录</h2>
+                        <div></div>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-6">
+                    <!-- 说明图标 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-mobile-alt text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">快速登录</h2>
+                        <p class="text-sm text-gray-500">使用手机验证码快速登录，无需输入密码</p>
+                    </div>
+                    
+                    <!-- 验证码登录表单 -->
+                    <form class="space-y-4">
+                        <!-- 手机号输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">手机号</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-mobile-alt text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="请输入手机号" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 验证码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">验证码</label>
+                            <div class="flex space-x-3">
+                                <div class="relative flex-1">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-shield-alt text-gray-400"></i>
+                                    </div>
+                                    <input type="text" placeholder="请输入验证码" 
+                                           class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-colors">
+                                </div>
+                                <button type="button" class="px-4 py-3 bg-secondary text-white rounded-xl text-sm font-medium hover:bg-secondary/90 transition-colors">
+                                    <span class="countdown-text">获取验证码</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 登录按钮 -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-secondary to-blue-500 text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            立即登录
+                        </button>
+                    </form>
+                    
+                    <!-- 登录方式切换 -->
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-200"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-4 bg-white text-gray-500">其他登录方式</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-lock text-primary mr-2"></i>
+                            <span class="text-sm text-gray-700">密码登录</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 注册链接 -->
+                    <div class="text-center">
+                        <span class="text-sm text-gray-500">还没有账户？</span>
+                        <button class="text-sm text-secondary hover:text-secondary/80 font-medium ml-1">
+                            立即注册
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    验证码登录页面
+                </div>
+            </div>
+            
+            <!-- 首次使用引导页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 引导内容 -->
+                <div class="p-6 space-y-6">
+                    <!-- 引导图标和标题 -->
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-accent via-secondary to-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-rocket text-white text-2xl"></i>
+                        </div>
+                        <h1 class="text-2xl font-bold text-gray-800 mb-2">欢迎使用健康管家</h1>
+                        <p class="text-sm text-gray-500">让我们一起开启您的健康管理之旅</p>
+                    </div>
+                    
+                    <!-- 功能介绍 -->
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-heartbeat text-accent"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-1">健康监测</h3>
+                                <p class="text-sm text-gray-500">实时监测您的生命体征，全面了解健康状况</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-running text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-1">运动计划</h3>
+                                <p class="text-sm text-gray-500">个性化运动方案，科学指导您的健身之路</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-utensils text-secondary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-1">饮食管理</h3>
+                                <p class="text-sm text-gray-500">智能营养分析，帮您养成健康饮食习惯</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-moon text-indigo-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-1">睡眠追踪</h3>
+                                <p class="text-sm text-gray-500">深度分析睡眠质量，优化您的休息时间</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 开始使用按钮 -->
+                    <div class="space-y-3 pt-4">
+                        <button class="w-full bg-gradient-to-r from-accent to-secondary text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            开始使用
+                        </button>
+                        
+                        <button class="w-full text-gray-500 py-2 text-sm hover:text-gray-700 transition-colors">
+                            跳过引导
+                        </button>
+                    </div>
+                    
+                    <!-- 页面指示器 -->
+                    <div class="flex justify-center space-x-2">
+                        <div class="w-2 h-2 bg-accent rounded-full"></div>
+                        <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
+                        <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    首次使用引导页面
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // 简单的倒计时功能演示
+        document.addEventListener('DOMContentLoaded', function() {
+            const countdownButtons = document.querySelectorAll('.countdown-text');
+            
+            countdownButtons.forEach(button => {
+                button.parentElement.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let countdown = 60;
+                    const originalText = button.textContent;
+                    
+                    const timer = setInterval(() => {
+                        button.textContent = `${countdown}s后重发`;
+                        countdown--;
+                        
+                        if (countdown < 0) {
+                            clearInterval(timer);
+                            button.textContent = originalText;
+                        }
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

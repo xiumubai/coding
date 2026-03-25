@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字超出两行显示省略号并跟随图片</title>
+  <style>
+    .container {
+      width: 406px;
+      margin-bottom: 20px;
+    }
+    .text-container {
+      position: relative;
+      height: 3em; /* 固定两行文字的高度 */
+      line-height: 1.5;
+      overflow: hidden;
+      background-color: #f5f5f5;
+    }
+    .text {
+      display: inline;
+      word-break: break-all; /* 确保文字可以在任意位置换行 */
+    }
+    /* 图片和省略号作为一个整体 */
+    .ellipsis-image-container {
+      display: none;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background-color: #f5f5f5; /* 与容器背景色相同 */
+      padding-left: 5px; /* 增加左内边距，确保与文本有足够间距 */
+      z-index: 2; /* 确保在文字上层 */
+      min-width: 45px; /* 确保容器有足够宽度 */
+    }
+    .ellipsis {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .image {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+    /* 当文本超出时显示省略号和图片容器 */
+    .text-container.overflow .ellipsis-image-container {
+      display: inline-block;
+    }
+    /* 当文本不超出时，图片直接跟随文本 */
+    .text-container:not(.overflow) .image {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h2>文字超出两行显示省略号并跟随图片示例</h2>
+  
+  <div class="container">
+    <p>JS实现（根据文本长度自动处理）：</p>
+    <div class="text-container" id="longText">
+      <span class="text">这里是文字内容，图片将跟在这段文字后面显示。这里是文字内容，图片将跟在这段文字后面显示这里是文字内容，图片将跟在这段文字后面显示</span>
+      <div class="ellipsis-image-container">
+        <span class="ellipsis">...</span>
+        <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23333' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E" class="image">
+      </div>
+      <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23333' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E" class="image">
+    </div>
+  </div>
+
+  <!-- 添加一个短文本的示例，用于对比 -->
+  <div class="container">
+    <p>短文本示例（不会显示省略号）：</p>
+    <div class="text-container" id="shortText">
+      <span class="text">这是一行短文本</span>
+      <div class="ellipsis-image-container">
+        <span class="ellipsis">...</span>
+        <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23333' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E" class="image">
+      </div>
+      <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23333' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E" class="image">
+    </div>
+  </div>
+
+  <!-- 添加一个中等长度文本的示例 -->
+  <div class="container">
+    <p>中等长度文本示例（接近两行但不超过）：</p>
+    <div class="text-container" id="mediumText">
+      <span class="text">这是一个中等长度的文本示例，图片将跟在这段文字后面显示。这个文本长度接近两行但不会超过两行。</span>
+      <div class="ellipsis-image-container">
+        <span class="ellipsis">...</span>
+        <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23333' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E" class="image">
+      </div>
+      <img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23333' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E" class="image">
+    </div>
+  </div>
+
+  <script>
+    // 页面加载完成后执行
+    window.onload = function() {
+      const textContainers = document.querySelectorAll('.text-container');
+      const imgWidth = 25; // 图片宽度加上一些间距
+      const ellipsisWidth = 20; // 省略号宽度估计值
+      
+      textContainers.forEach(container => {
+        const textElement = container.querySelector('.text');
+        const ellipsisImageContainer = container.querySelector('.ellipsis-image-container');
+        const originalText = textElement.textContent;
+        const imageElement = container.querySelector('.image:not(.ellipsis-image-container .image)');
+        
+        // 检查文本是否超出容器高度
+        if (container.scrollHeight > container.clientHeight) {
+          // 标记容器为溢出状态
+          container.classList.add('overflow');
+          
+          // 计算每行能容纳的字符数
+          const containerWidth = container.clientWidth;
+          const charWidth = getAverageCharWidth(textElement);
+          // 添加一个安全系数，避免计算误差
+          const safetyFactor = 0.9; // 90%的容量，留出一些余量
+          const charsPerLine = Math.floor((containerWidth * safetyFactor) / charWidth);
+          
+          // 计算两行文本的总字符数，并为省略号和图片预留空间
+          const reservedWidth = imgWidth + ellipsisWidth + 25; // 额外增加25px的安全边界
+          const safetyMargin = 1.5; // 增加50%的安全边界
+          const reservedChars = Math.ceil((reservedWidth * safetyMargin) / charWidth);
+          // 确保至少预留8个字符的空间
+          const minReservedChars = 8;
+          const finalReservedChars = Math.max(minReservedChars, reservedChars);
+          
+          // 计算第二行应该截止的位置
+          const maxChars = Math.min(
+            originalText.length,
+            charsPerLine * 2 - finalReservedChars // 两行文字减去预留空间
+          );
+          
+          // 截取文本，确保不会太短也不会太长
+          if (originalText.length > maxChars) {
+            // 确保至少显示一定比例的文本
+            const minChars = Math.max(charsPerLine, Math.floor(originalText.length * 0.5));
+            const finalChars = Math.max(minChars, maxChars);
+            
+            // 确保截取位置在完整字符边界上，避免出现半个字
+            // 向前查找最近的完整字符边界
+            let safeEndPos = finalChars;
+            // 额外减少几个字符，确保不会出现半个字
+            safeEndPos = Math.max(0, safeEndPos - 2);
+            
+            textElement.textContent = originalText.substring(0, safeEndPos);
+          }
+          
+          // 隐藏单独的图片
+          imageElement.style.display = 'none';
+          
+          // 在文本截取后，再次检查容器高度，确保省略号和图片位置正确
+          setTimeout(() => {
+            // 无论是否超出高度，都进一步减少文本长度，确保有足够空间
+            const currentText = textElement.textContent;
+            if (currentText.length > charsPerLine) {
+              // 计算第二行应该有多少字符
+              const secondLineChars = currentText.length - charsPerLine;
+              // 如果第二行字符数超过了安全阈值，进一步减少
+              if (secondLineChars > (charsPerLine - finalReservedChars)) {
+                // 计算需要减少的字符数，确保第二行末尾有足够空间
+                const targetSecondLineChars = Math.floor((charsPerLine - finalReservedChars) * 0.8); // 使用80%的安全阈值
+                const newLength = charsPerLine + targetSecondLineChars;
+                // 额外减少几个字符，确保不会出现半个字
+                const safeNewLength = Math.max(0, newLength - 3);
+                textElement.textContent = currentText.substring(0, safeNewLength);
+              }
+            }
+            
+            // 再次检查是否仍然超出
+            if (container.scrollHeight > container.clientHeight) {
+              // 如果仍然超出，进一步减少文本长度
+              const furtherText = textElement.textContent;
+              const additionalReduction = Math.ceil(reservedChars * 0.5); // 额外减少50%
+              // 确保截取位置在完整字符边界上
+              const finalLength = Math.max(0, furtherText.length - additionalReduction - 2); // 额外减少2个字符
+              textElement.textContent = furtherText.substring(0, finalLength);
+            }
+          }, 0);
+        } else {
+          // 如果文本不超过两行，隐藏省略号和图片容器，显示单独的图片
+          container.classList.remove('overflow');
+          // 隐藏省略号和图片容器
+          if (ellipsisImageContainer) {
+            ellipsisImageContainer.style.display = 'none';
+          }
+          // 显示单独的图片
+          if (imageElement) {
+            imageElement.style.display = 'inline-block';
+            imageElement.style.verticalAlign = 'middle';
+          }
+        }
+      });
+      
+      // 辅助函数：计算文本的平均字符宽度
+      function getAverageCharWidth(element) {
+        const text = element.textContent;
+        const testSpan = document.createElement('span');
+        testSpan.style.visibility = 'hidden';
+        testSpan.style.position = 'absolute';
+        testSpan.style.fontSize = window.getComputedStyle(element).fontSize;
+        testSpan.style.fontFamily = window.getComputedStyle(element).fontFamily;
+        testSpan.textContent = text;
+        document.body.appendChild(testSpan);
+        const width = testSpan.getBoundingClientRect().width;
+        document.body.removeChild(testSpan);
+        return width / text.length;
+      }
+    };
+  </script>
+</body>
+</html>

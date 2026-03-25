@@ -1,0 +1,2554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康管理App - UI设计</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#06B6D4',
+                        accent: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        surface: '#F8FAFC',
+                        'surface-dark': '#1E293B'
+                    },
+                    fontFamily: {
+                        'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">健康管理App - UI设计方案</h1>
+        
+        <!-- 页面预览容器 -->
+        <div class="flex gap-6 overflow-x-auto pb-4">
+            
+          <!-- 登录页面 - 主页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部装饰背景 -->
+                <div class="bg-gradient-to-br from-primary via-secondary to-accent h-48 relative overflow-hidden">
+                    <!-- 装饰性几何图形 -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"></div>
+                    <div class="absolute top-1/2 left-1/2 w-16 h-16 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                    
+                    <!-- Logo和标题 -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4">
+                            <i class="fas fa-heartbeat text-2xl"></i>
+                        </div>
+                        <h1 class="text-2xl font-bold mb-1">健康管家</h1>
+                        <p class="text-sm opacity-90">您的专属健康助手</p>
+                    </div>
+                </div>
+                
+                <!-- 登录表单区域 -->
+                <div class="p-6 space-y-6">
+                    <!-- 欢迎文字 -->
+                    <div class="text-center">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">欢迎回来</h2>
+                        <p class="text-sm text-gray-500">登录您的健康账户，继续您的健康之旅</p>
+                    </div>
+                    
+                    <!-- 登录表单 -->
+                    <form class="space-y-4">
+                        <!-- 手机号输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">手机号</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-mobile-alt text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="请输入手机号" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 密码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请输入密码" 
+                                       class="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 记住密码和忘记密码 -->
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary/20">
+                                <span class="ml-2 text-sm text-gray-600">记住密码</span>
+                            </label>
+                            <button type="button" class="text-sm text-primary hover:text-primary/80 font-medium">
+                                忘记密码？
+                            </button>
+                        </div>
+                        
+                        <!-- 登录按钮 -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            登录
+                        </button>
+                    </form>
+                    
+                    <!-- 分割线 -->
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-200"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-4 bg-white text-gray-500">或者使用以下方式登录</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 第三方登录 -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                            <i class="fab fa-weixin text-green-500 text-xl"></i>
+                        </button>
+                        <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                            <i class="fab fa-qq text-blue-500 text-xl"></i>
+                        </button>
+                        <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                            <i class="fab fa-apple text-gray-800 text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 注册链接 -->
+                    <div class="text-center">
+                        <span class="text-sm text-gray-500">还没有账户？</span>
+                        <button class="text-sm text-primary hover:text-primary/80 font-medium ml-1">
+                            立即注册
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    登录页面
+                </div>
+            </div>
+            
+            <!-- 注册页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">注册账户</h2>
+                        <div></div>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-6">
+                    <!-- 注册说明 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-plus text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">创建新账户</h2>
+                        <p class="text-sm text-gray-500">加入我们，开启您的健康管理之旅</p>
+                    </div>
+                    
+                    <!-- 注册表单 -->
+                    <form class="space-y-4">
+                        <!-- 姓名输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">姓名</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" placeholder="请输入您的姓名" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 手机号输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">手机号</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-mobile-alt text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="请输入手机号" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 验证码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">验证码</label>
+                            <div class="flex space-x-3">
+                                <div class="relative flex-1">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-shield-alt text-gray-400"></i>
+                                    </div>
+                                    <input type="text" placeholder="请输入验证码" 
+                                           class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                                </div>
+                                <button type="button" class="px-4 py-3 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">
+                                    获取验证码
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 密码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">设置密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请设置登录密码" 
+                                       class="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
+                                </button>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                密码长度8-20位，包含字母和数字
+                            </div>
+                        </div>
+                        
+                        <!-- 确认密码 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">确认密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请再次输入密码" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 用户协议 -->
+                        <div class="flex items-start space-x-2">
+                            <input type="checkbox" class="w-4 h-4 text-accent border-gray-300 rounded focus:ring-accent/20 mt-0.5">
+                            <div class="text-sm text-gray-600">
+                                我已阅读并同意
+                                <button type="button" class="text-accent hover:text-accent/80 font-medium">《用户协议》</button>
+                                和
+                                <button type="button" class="text-accent hover:text-accent/80 font-medium">《隐私政策》</button>
+                            </div>
+                        </div>
+                        
+                        <!-- 注册按钮 -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-accent to-secondary text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            立即注册
+                        </button>
+                    </form>
+                    
+                    <!-- 登录链接 -->
+                    <div class="text-center">
+                        <span class="text-sm text-gray-500">已有账户？</span>
+                        <button class="text-sm text-accent hover:text-accent/80 font-medium ml-1">
+                            立即登录
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    注册页面
+                </div>
+            </div>
+            
+            <!-- 忘记密码页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">找回密码</h2>
+                        <div></div>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-6">
+                    <!-- 说明图标 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-warning to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-key text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">重置密码</h2>
+                        <p class="text-sm text-gray-500">请输入您的手机号，我们将发送验证码帮您重置密码</p>
+                    </div>
+                    
+                    <!-- 重置密码表单 -->
+                    <form class="space-y-4">
+                        <!-- 手机号输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">手机号</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-mobile-alt text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="请输入注册时的手机号" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-warning/20 focus:border-warning outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 验证码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">验证码</label>
+                            <div class="flex space-x-3">
+                                <div class="relative flex-1">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-shield-alt text-gray-400"></i>
+                                    </div>
+                                    <input type="text" placeholder="请输入验证码" 
+                                           class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-warning/20 focus:border-warning outline-none transition-colors">
+                                </div>
+                                <button type="button" class="px-4 py-3 bg-warning text-white rounded-xl text-sm font-medium hover:bg-warning/90 transition-colors">
+                                    发送验证码
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 新密码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">新密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请输入新密码" 
+                                       class="w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-warning/20 focus:border-warning outline-none transition-colors">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 确认新密码 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">确认新密码</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                                <input type="password" placeholder="请再次输入新密码" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-warning/20 focus:border-warning outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 重置按钮 -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-warning to-orange-500 text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            重置密码
+                        </button>
+                    </form>
+                    
+                    <!-- 其他选项 -->
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-200"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-4 bg-white text-gray-500">其他找回方式</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                                <i class="fas fa-envelope text-blue-500 mr-2"></i>
+                                <span class="text-sm text-gray-700">邮箱找回</span>
+                            </button>
+                            <button class="flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                                <i class="fas fa-headset text-green-500 mr-2"></i>
+                                <span class="text-sm text-gray-700">联系客服</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 返回登录 -->
+                    <div class="text-center">
+                        <button class="text-sm text-warning hover:text-warning/80 font-medium">
+                            返回登录页面
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    忘记密码页面
+                </div>
+            </div>
+            
+            <!-- 手机验证码登录页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">验证码登录</h2>
+                        <div></div>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-6">
+                    <!-- 说明图标 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-mobile-alt text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2">快速登录</h2>
+                        <p class="text-sm text-gray-500">使用手机验证码快速登录，无需输入密码</p>
+                    </div>
+                    
+                    <!-- 验证码登录表单 -->
+                    <form class="space-y-4">
+                        <!-- 手机号输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">手机号</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-mobile-alt text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="请输入手机号" 
+                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <!-- 验证码输入 -->
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700">验证码</label>
+                            <div class="flex space-x-3">
+                                <div class="relative flex-1">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-shield-alt text-gray-400"></i>
+                                    </div>
+                                    <input type="text" placeholder="请输入验证码" 
+                                           class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-colors">
+                                </div>
+                                <button type="button" class="px-4 py-3 bg-secondary text-white rounded-xl text-sm font-medium hover:bg-secondary/90 transition-colors">
+                                    <span class="countdown-text">获取验证码</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 登录按钮 -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-secondary to-blue-500 text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            立即登录
+                        </button>
+                    </form>
+                    
+                    <!-- 登录方式切换 -->
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-200"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-4 bg-white text-gray-500">其他登录方式</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full flex items-center justify-center p-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-lock text-primary mr-2"></i>
+                            <span class="text-sm text-gray-700">密码登录</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 注册链接 -->
+                    <div class="text-center">
+                        <span class="text-sm text-gray-500">还没有账户？</span>
+                        <button class="text-sm text-secondary hover:text-secondary/80 font-medium ml-1">
+                            立即注册
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    验证码登录页面
+                </div>
+            </div>
+            
+            <!-- 首次使用引导页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 引导内容 -->
+                <div class="p-6 space-y-6">
+                    <!-- 引导图标和标题 -->
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-gradient-to-br from-accent via-secondary to-primary rounded-3xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-rocket text-white text-2xl"></i>
+                        </div>
+                        <h1 class="text-2xl font-bold text-gray-800 mb-2">欢迎使用健康管家</h1>
+                        <p class="text-sm text-gray-500">让我们一起开启您的健康管理之旅</p>
+                    </div>
+                    
+                    <!-- 功能介绍 -->
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-heartbeat text-accent"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-1">健康监测</h3>
+                                <p class="text-sm text-gray-500">实时监测您的生命体征，全面了解健康状况</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-running text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-1">运动计划</h3>
+                                <p class="text-sm text-gray-500">个性化运动方案，科学指导您的健身之路</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-utensils text-secondary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-1">饮食管理</h3>
+                                <p class="text-sm text-gray-500">智能营养分析，帮您养成健康饮食习惯</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-moon text-indigo-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-1">睡眠追踪</h3>
+                                <p class="text-sm text-gray-500">深度分析睡眠质量，优化您的休息时间</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 开始使用按钮 -->
+                    <div class="space-y-3 pt-4">
+                        <button class="w-full bg-gradient-to-r from-accent to-secondary text-white py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02]">
+                            开始使用
+                        </button>
+                        
+                        <button class="w-full text-gray-500 py-2 text-sm hover:text-gray-700 transition-colors">
+                            跳过引导
+                        </button>
+                    </div>
+                    
+                    <!-- 页面指示器 -->
+                    <div class="flex justify-center space-x-2">
+                        <div class="w-2 h-2 bg-accent rounded-full"></div>
+                        <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
+                        <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    首次使用引导页面
+                </div>
+            </div>
+            <!-- 首页Dashboard -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <div class="bg-gradient-to-r from-primary to-secondary p-4 text-white">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h2 class="text-lg font-semibold">早上好，张先生</h2>
+                            <p class="text-sm opacity-90">今天是美好的一天</p>
+                        </div>
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 今日概览卡片 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3">
+                        <div class="flex justify-between items-center">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">8,547</div>
+                                <div class="text-xs opacity-80">步数</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">7.5h</div>
+                                <div class="text-xs opacity-80">睡眠</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">1,850</div>
+                                <div class="text-xs opacity-80">卡路里</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 主要功能区域 -->
+                <div class="p-4 space-y-4">
+                    <!-- 健康指标快览 -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-gradient-to-br from-accent/10 to-accent/5 p-3 rounded-xl border border-accent/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <i class="fas fa-heartbeat text-accent text-lg"></i>
+                                <span class="text-xs text-gray-500">正常</span>
+                            </div>
+                            <div class="text-xl font-bold text-gray-800">72</div>
+                            <div class="text-xs text-gray-600">心率 bpm</div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-warning/10 to-warning/5 p-3 rounded-xl border border-warning/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <i class="fas fa-weight text-warning text-lg"></i>
+                                <span class="text-xs text-gray-500">-0.5kg</span>
+                            </div>
+                            <div class="text-xl font-bold text-gray-800">68.5</div>
+                            <div class="text-xs text-gray-600">体重 kg</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 今日任务 -->
+                    <div class="bg-surface rounded-xl p-4">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-tasks text-primary mr-2"></i>
+                            今日任务
+                        </h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between p-2 bg-white rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    <span class="text-sm">喝水 8 杯</span>
+                                </div>
+                                <span class="text-xs text-accent font-medium">6/8</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2 bg-white rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    <span class="text-sm">运动 30 分钟</span>
+                                </div>
+                                <span class="text-xs text-primary font-medium">完成</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 快捷功能 -->
+                    <div class="grid grid-cols-4 gap-3">
+                        <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-running text-primary"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">运动</span>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+                            <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-utensils text-accent"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">饮食</span>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+                            <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-moon text-secondary"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">睡眠</span>
+                        </div>
+                        <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+                            <div class="w-10 h-10 bg-warning/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-chart-line text-warning"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">报告</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航 -->
+                <div class="bg-white border-t border-gray-100 px-4 py-3">
+                    <div class="flex justify-around">
+                        <div class="text-center">
+                            <i class="fas fa-home text-primary text-lg mb-1"></i>
+                            <div class="text-xs text-primary font-medium">首页</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-chart-bar text-gray-400 text-lg mb-1"></i>
+                            <div class="text-xs text-gray-400">数据</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-plus-circle text-gray-400 text-lg mb-1"></i>
+                            <div class="text-xs text-gray-400">记录</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-users text-gray-400 text-lg mb-1"></i>
+                            <div class="text-xs text-gray-400">社区</div>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-user text-gray-400 text-lg mb-1"></i>
+                            <div class="text-xs text-gray-400">我的</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    首页Dashboard
+                </div>
+            </div>
+            
+            <!-- 健康监测页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">健康监测</h2>
+                        <i class="fas fa-bell text-gray-600"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 今日健康评分 -->
+                    <div class="bg-gradient-to-r from-accent to-secondary rounded-2xl p-4 text-white">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold mb-1">85</div>
+                            <div class="text-sm opacity-90 mb-3">今日健康评分</div>
+                            <div class="flex justify-center">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    <div class="w-2 h-2 bg-white/50 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-white/50 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 生命体征监测 -->
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-gray-800 flex items-center">
+                            <i class="fas fa-heartbeat text-danger mr-2"></i>
+                            生命体征
+                        </h3>
+                        
+                        <!-- 心率 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-danger/10 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-heartbeat text-danger"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">心率</div>
+                                        <div class="text-xs text-gray-500">2分钟前</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xl font-bold text-gray-800">72</div>
+                                    <div class="text-xs text-gray-500">bpm</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="flex-1 bg-gray-100 rounded-full h-2 mr-3">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="text-xs text-accent font-medium">正常</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 血压 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-tint text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">血压</div>
+                                        <div class="text-xs text-gray-500">1小时前</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-gray-800">120/80</div>
+                                    <div class="text-xs text-gray-500">mmHg</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="flex-1 bg-gray-100 rounded-full h-2 mr-3">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                                <span class="text-xs text-accent font-medium">理想</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 体温 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-warning/10 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-thermometer-half text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">体温</div>
+                                        <div class="text-xs text-gray-500">30分钟前</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xl font-bold text-gray-800">36.5</div>
+                                    <div class="text-xs text-gray-500">°C</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="flex-1 bg-gray-100 rounded-full h-2 mr-3">
+                                    <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="text-xs text-accent font-medium">正常</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速记录按钮 -->
+                    <div class="grid grid-cols-2 gap-3 mt-6">
+                        <button class="bg-primary text-white p-3 rounded-xl font-medium flex items-center justify-center">
+                            <i class="fas fa-plus mr-2"></i>
+                            记录数据
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 p-3 rounded-xl font-medium flex items-center justify-center">
+                            <i class="fas fa-history mr-2"></i>
+                            查看历史
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    健康监测页面
+                </div>
+            </div>
+            
+            <!-- 运动计划页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">运动计划</h2>
+                        <i class="fas fa-calendar-alt text-gray-600"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 今日运动目标 -->
+                    <div class="bg-gradient-to-r from-primary to-purple-600 rounded-2xl p-4 text-white">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <div class="text-sm opacity-90">今日目标</div>
+                                <div class="text-2xl font-bold">45分钟</div>
+                            </div>
+                            <div class="w-16 h-16 relative">
+                                <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+                                          fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+                                          fill="none" stroke="white" stroke-width="2" stroke-dasharray="75, 100"/>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span class="text-sm font-bold">75%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-sm opacity-90">已完成 34分钟 · 还需 11分钟</div>
+                    </div>
+                    
+                    <!-- 推荐训练计划 -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-gray-800">推荐训练</h3>
+                            <span class="text-xs text-primary font-medium">查看全部</span>
+                        </div>
+                        
+                        <!-- 训练卡片1 -->
+                        <div class="bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-running text-accent text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">晨跑训练</div>
+                                        <div class="text-xs text-gray-500">有氧运动 · 初级</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">30分钟</div>
+                                    <div class="text-xs text-gray-500">350卡路里</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-xs text-gray-600">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    <span>6:00 AM</span>
+                                </div>
+                                <button class="bg-accent text-white px-4 py-1.5 rounded-full text-xs font-medium">
+                                    开始训练
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 训练卡片2 -->
+                        <div class="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-dumbbell text-primary text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">力量训练</div>
+                                        <div class="text-xs text-gray-500">无氧运动 · 中级</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">45分钟</div>
+                                    <div class="text-xs text-gray-500">280卡路里</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-xs text-gray-600">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    <span>7:00 PM</span>
+                                </div>
+                                <button class="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-medium">
+                                    开始训练
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 训练卡片3 -->
+                        <div class="bg-gradient-to-r from-secondary/10 to-secondary/5 border border-secondary/20 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-leaf text-secondary text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">瑜伽冥想</div>
+                                        <div class="text-xs text-gray-500">放松训练 · 初级</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">20分钟</div>
+                                    <div class="text-xs text-gray-500">120卡路里</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-xs text-gray-600">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    <span>9:00 PM</span>
+                                </div>
+                                <button class="bg-secondary text-white px-4 py-1.5 rounded-full text-xs font-medium">
+                                    开始训练
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速操作 -->
+                    <div class="grid grid-cols-3 gap-2 mt-4">
+                        <button class="bg-white border border-gray-200 p-3 rounded-xl text-center shadow-sm">
+                            <i class="fas fa-plus text-primary text-lg mb-1"></i>
+                            <div class="text-xs text-gray-600">自定义</div>
+                        </button>
+                        <button class="bg-white border border-gray-200 p-3 rounded-xl text-center shadow-sm">
+                            <i class="fas fa-history text-primary text-lg mb-1"></i>
+                            <div class="text-xs text-gray-600">历史记录</div>
+                        </button>
+                        <button class="bg-white border border-gray-200 p-3 rounded-xl text-center shadow-sm">
+                            <i class="fas fa-trophy text-primary text-lg mb-1"></i>
+                            <div class="text-xs text-gray-600">成就</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    运动计划页面
+                </div>
+            </div>
+            
+            <!-- 健身记录页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">健身记录</h2>
+                        <i class="fas fa-filter text-gray-600"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 本周统计 -->
+                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-4 text-white">
+                        <div class="text-center mb-4">
+                            <div class="text-sm opacity-90 mb-1">本周运动时长</div>
+                            <div class="text-3xl font-bold">4小时32分</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="text-lg font-bold">12</div>
+                                <div class="text-xs opacity-80">次训练</div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold">2,450</div>
+                                <div class="text-xs opacity-80">卡路里</div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold">38</div>
+                                <div class="text-xs opacity-80">平均心率</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 运动类型分布 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3">运动类型分布</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-accent rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">跑步</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-20 h-2 bg-gray-100 rounded-full mr-2">
+                                        <div class="w-3/4 h-2 bg-accent rounded-full"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">45%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-primary rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">力量训练</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-20 h-2 bg-gray-100 rounded-full mr-2">
+                                        <div class="w-1/2 h-2 bg-primary rounded-full"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">30%</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-secondary rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">瑜伽</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-20 h-2 bg-gray-100 rounded-full mr-2">
+                                        <div class="w-1/4 h-2 bg-secondary rounded-full"></div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">25%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 最近记录 -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-gray-800">最近记录</h3>
+                            <span class="text-xs text-primary font-medium">查看全部</span>
+                        </div>
+                        
+                        <!-- 记录项1 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-running text-accent"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">晨跑</div>
+                                        <div class="text-xs text-gray-500">今天 06:30</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">5.2km</div>
+                                    <div class="text-xs text-gray-500">28分钟</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center text-xs text-gray-600 bg-gray-50 rounded-lg p-2">
+                                <div>
+                                    <div class="font-medium text-gray-800">350</div>
+                                    <div>卡路里</div>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-800">142</div>
+                                    <div>平均心率</div>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-800">5'23"</div>
+                                    <div>配速</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 记录项2 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-dumbbell text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">力量训练</div>
+                                        <div class="text-xs text-gray-500">昨天 19:00</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">12组</div>
+                                    <div class="text-xs text-gray-500">45分钟</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center text-xs text-gray-600 bg-gray-50 rounded-lg p-2">
+                                <div>
+                                    <div class="font-medium text-gray-800">280</div>
+                                    <div>卡路里</div>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-800">125</div>
+                                    <div>平均心率</div>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-800">85kg</div>
+                                    <div>总重量</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 记录项3 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-leaf text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">瑜伽冥想</div>
+                                        <div class="text-xs text-gray-500">昨天 21:00</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">8个动作</div>
+                                    <div class="text-xs text-gray-500">20分钟</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center text-xs text-gray-600 bg-gray-50 rounded-lg p-2">
+                                <div>
+                                    <div class="font-medium text-gray-800">120</div>
+                                    <div>卡路里</div>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-800">95</div>
+                                    <div>平均心率</div>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-800">85%</div>
+                                    <div>完成度</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    健身记录页面
+                </div>
+            </div>
+            
+            <!-- 饮食管理页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">饮食管理</h2>
+                        <i class="fas fa-search text-gray-600"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 今日卡路里摄入 -->
+                    <div class="bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl p-4 text-white">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <div class="text-sm opacity-90">今日摄入</div>
+                                <div class="text-2xl font-bold">1,650</div>
+                                <div class="text-xs opacity-80">目标: 2,000 卡路里</div>
+                            </div>
+                            <div class="w-16 h-16 relative">
+                                <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+                                          fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+                                          fill="none" stroke="white" stroke-width="2" stroke-dasharray="82, 100"/>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span class="text-sm font-bold">82%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-sm opacity-90">还可摄入 350 卡路里</div>
+                    </div>
+                    
+                    <!-- 营养素分布 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-chart-pie text-accent mr-2"></i>
+                            营养素分布
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-bread-slice text-blue-500"></i>
+                                </div>
+                                <div class="text-sm font-bold text-gray-800">45%</div>
+                                <div class="text-xs text-gray-500">碳水化合物</div>
+                                <div class="text-xs text-blue-500 font-medium">185g</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-drumstick-bite text-red-500"></i>
+                                </div>
+                                <div class="text-sm font-bold text-gray-800">25%</div>
+                                <div class="text-xs text-gray-500">蛋白质</div>
+                                <div class="text-xs text-red-500 font-medium">103g</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-cheese text-yellow-500"></i>
+                                </div>
+                                <div class="text-sm font-bold text-gray-800">30%</div>
+                                <div class="text-xs text-gray-500">脂肪</div>
+                                <div class="text-xs text-yellow-500 font-medium">55g</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 今日用餐记录 -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-gray-800">今日用餐</h3>
+                            <button class="text-xs text-primary font-medium bg-primary/10 px-3 py-1 rounded-full">
+                                + 添加
+                            </button>
+                        </div>
+                        
+                        <!-- 早餐 -->
+                        <div class="bg-gradient-to-r from-yellow-50 to-orange-50 border border-orange-100 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-sun text-orange-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">早餐</div>
+                                        <div class="text-xs text-gray-500">08:30</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">450</div>
+                                    <div class="text-xs text-gray-500">卡路里</div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">燕麦粥 + 蓝莓</span>
+                                    <span class="text-gray-500">280 kcal</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">全麦面包</span>
+                                    <span class="text-gray-500">120 kcal</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">牛奶</span>
+                                    <span class="text-gray-500">50 kcal</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 午餐 -->
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-sun text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">午餐</div>
+                                        <div class="text-xs text-gray-500">12:30</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">680</div>
+                                    <div class="text-xs text-gray-500">卡路里</div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">鸡胸肉沙拉</span>
+                                    <span class="text-gray-500">350 kcal</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">糙米饭</span>
+                                    <span class="text-gray-500">220 kcal</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">蔬菜汤</span>
+                                    <span class="text-gray-500">110 kcal</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 晚餐 -->
+                        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-100 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-moon text-purple-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">晚餐</div>
+                                        <div class="text-xs text-gray-500">18:30</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-gray-800">520</div>
+                                    <div class="text-xs text-gray-500">卡路里</div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">三文鱼</span>
+                                    <span class="text-gray-500">280 kcal</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">蒸蔬菜</span>
+                                    <span class="text-gray-500">80 kcal</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-700">红薯</span>
+                                    <span class="text-gray-500">160 kcal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速添加 -->
+                    <div class="grid grid-cols-2 gap-3 mt-4">
+                        <button class="bg-accent text-white p-3 rounded-xl font-medium flex items-center justify-center">
+                            <i class="fas fa-camera mr-2"></i>
+                            拍照识别
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 p-3 rounded-xl font-medium flex items-center justify-center">
+                            <i class="fas fa-barcode mr-2"></i>
+                            扫码添加
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    饮食管理页面
+                </div>
+            </div>
+            
+            <!-- 营养分析页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">营养分析</h2>
+                        <i class="fas fa-calendar-week text-gray-600"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 本周营养评分 -->
+                    <div class="bg-gradient-to-r from-emerald-400 to-teal-500 rounded-2xl p-4 text-white">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold mb-1">B+</div>
+                            <div class="text-sm opacity-90 mb-3">本周营养评分</div>
+                            <div class="flex justify-center space-x-4 text-xs">
+                                <div class="text-center">
+                                    <div class="font-bold">85</div>
+                                    <div class="opacity-80">均衡度</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold">78</div>
+                                    <div class="opacity-80">健康度</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold">92</div>
+                                    <div class="opacity-80">规律性</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 营养素摄入趋势 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-chart-line text-primary mr-2"></i>
+                            营养素摄入趋势
+                        </h3>
+                        <div class="space-y-4">
+                            <!-- 蛋白质 -->
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                                        <span class="text-sm text-gray-700">蛋白质</span>
+                                    </div>
+                                    <div class="text-sm">
+                                        <span class="font-bold text-gray-800">98g</span>
+                                        <span class="text-gray-500">/120g</span>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2">
+                                    <div class="bg-red-500 h-2 rounded-full" style="width: 82%"></div>
+                                </div>
+                                <div class="text-xs text-gray-500 mt-1">建议增加 22g</div>
+                            </div>
+                            
+                            <!-- 维生素C -->
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+                                        <span class="text-sm text-gray-700">维生素C</span>
+                                    </div>
+                                    <div class="text-sm">
+                                        <span class="font-bold text-gray-800">85mg</span>
+                                        <span class="text-gray-500">/90mg</span>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2">
+                                    <div class="bg-orange-500 h-2 rounded-full" style="width: 94%"></div>
+                                </div>
+                                <div class="text-xs text-accent mt-1">摄入充足</div>
+                            </div>
+                            
+                            <!-- 膳食纤维 -->
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                                        <span class="text-sm text-gray-700">膳食纤维</span>
+                                    </div>
+                                    <div class="text-sm">
+                                        <span class="font-bold text-gray-800">18g</span>
+                                        <span class="text-gray-500">/25g</span>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                                <div class="text-xs text-gray-500 mt-1">建议增加 7g</div>
+                            </div>
+                            
+                            <!-- 钙质 -->
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                                        <span class="text-sm text-gray-700">钙质</span>
+                                    </div>
+                                    <div class="text-sm">
+                                        <span class="font-bold text-gray-800">950mg</span>
+                                        <span class="text-gray-500">/1000mg</span>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                                <div class="text-xs text-accent mt-1">摄入充足</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 饮食建议 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-lightbulb text-warning mr-2"></i>
+                            个性化建议
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="bg-blue-50 border border-blue-100 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                        <i class="fas fa-fish text-blue-500 text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-800 mb-1">增加蛋白质摄入</div>
+                                        <div class="text-xs text-gray-600">建议添加鸡蛋、鱼类或豆制品</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 border border-green-100 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                        <i class="fas fa-leaf text-green-500 text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-800 mb-1">多吃绿叶蔬菜</div>
+                                        <div class="text-xs text-gray-600">补充膳食纤维和维生素</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-orange-50 border border-orange-100 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                        <i class="fas fa-tint text-orange-500 text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-800 mb-1">保持充足水分</div>
+                                        <div class="text-xs text-gray-600">每天至少8杯水，促进新陈代谢</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 健康食谱推荐 -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-gray-800">推荐食谱</h3>
+                            <span class="text-xs text-primary font-medium">查看更多</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white border border-gray-100 rounded-xl p-3 shadow-sm">
+                                <div class="w-full h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-lg mb-2 flex items-center justify-center">
+                                    <i class="fas fa-seedling text-green-600 text-2xl"></i>
+                                </div>
+                                <div class="text-sm font-medium text-gray-800 mb-1">蔬菜沙拉</div>
+                                <div class="text-xs text-gray-500">低卡 · 高纤维</div>
+                                <div class="text-xs text-accent font-medium mt-1">280 kcal</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-100 rounded-xl p-3 shadow-sm">
+                                <div class="w-full h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg mb-2 flex items-center justify-center">
+                                    <i class="fas fa-fish text-orange-600 text-2xl"></i>
+                                </div>
+                                <div class="text-sm font-medium text-gray-800 mb-1">烤三文鱼</div>
+                                <div class="text-xs text-gray-500">高蛋白 · Omega-3</div>
+                                <div class="text-xs text-accent font-medium mt-1">320 kcal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    营养分析页面
+                </div>
+            </div>
+            
+            <!-- 睡眠追踪页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">睡眠追踪</h2>
+                        <i class="fas fa-moon text-gray-600"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 昨夜睡眠概览 -->
+                    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-4 text-white">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <div class="text-sm opacity-90">昨夜睡眠</div>
+                                <div class="text-2xl font-bold">7小时32分</div>
+                                <div class="text-xs opacity-80">22:30 - 06:02</div>
+                            </div>
+                            <div class="w-16 h-16 relative">
+                                <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+                                          fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+                                          fill="none" stroke="white" stroke-width="2" stroke-dasharray="88, 100"/>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span class="text-sm font-bold">88%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-sm opacity-90">睡眠质量：良好</div>
+                    </div>
+                    
+                    <!-- 睡眠阶段分析 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-bed text-indigo-500 mr-2"></i>
+                            睡眠阶段分析
+                        </h3>
+                        <div class="space-y-3">
+                            <!-- 深度睡眠 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-indigo-600 rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">深度睡眠</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-24 h-2 bg-gray-100 rounded-full mr-2">
+                                        <div class="w-3/4 h-2 bg-indigo-600 rounded-full"></div>
+                                    </div>
+                                    <span class="text-sm font-bold text-gray-800">2h 15m</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 浅度睡眠 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-blue-400 rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">浅度睡眠</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-24 h-2 bg-gray-100 rounded-full mr-2">
+                                        <div class="w-4/5 h-2 bg-blue-400 rounded-full"></div>
+                                    </div>
+                                    <span class="text-sm font-bold text-gray-800">4h 20m</span>
+                                </div>
+                            </div>
+                            
+                            <!-- REM睡眠 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-purple-500 rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">REM睡眠</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-24 h-2 bg-gray-100 rounded-full mr-2">
+                                        <div class="w-1/2 h-2 bg-purple-500 rounded-full"></div>
+                                    </div>
+                                    <span class="text-sm font-bold text-gray-800">57m</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 清醒时间 -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-yellow-400 rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">清醒时间</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-24 h-2 bg-gray-100 rounded-full mr-2">
+                                        <div class="w-1/6 h-2 bg-yellow-400 rounded-full"></div>
+                                    </div>
+                                    <span class="text-sm font-bold text-gray-800">12m</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 睡眠环境监测 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-thermometer-half text-secondary mr-2"></i>
+                            睡眠环境
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-thermometer-half text-blue-500"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-800">22°C</div>
+                                <div class="text-xs text-gray-500">室温</div>
+                                <div class="text-xs text-accent font-medium mt-1">理想</div>
+                            </div>
+                            
+                            <div class="text-center p-3 bg-cyan-50 rounded-lg">
+                                <div class="w-8 h-8 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-tint text-cyan-500"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-800">65%</div>
+                                <div class="text-xs text-gray-500">湿度</div>
+                                <div class="text-xs text-accent font-medium mt-1">适宜</div>
+                            </div>
+                            
+                            <div class="text-center p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-volume-down text-gray-500"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-800">35dB</div>
+                                <div class="text-xs text-gray-500">噪音</div>
+                                <div class="text-xs text-accent font-medium mt-1">安静</div>
+                            </div>
+                            
+                            <div class="text-center p-3 bg-yellow-50 rounded-lg">
+                                <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-lightbulb text-yellow-500"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-800">5lux</div>
+                                <div class="text-xs text-gray-500">光照</div>
+                                <div class="text-xs text-accent font-medium mt-1">昏暗</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 睡眠趋势 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-chart-line text-primary mr-2"></i>
+                            本周睡眠趋势
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">平均睡眠时长</span>
+                                <span class="font-bold text-gray-800">7小时18分</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">平均入睡时间</span>
+                                <span class="font-bold text-gray-800">22:45</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">平均起床时间</span>
+                                <span class="font-bold text-gray-800">06:15</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">睡眠效率</span>
+                                <span class="font-bold text-accent">85%</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 简化的睡眠图表 -->
+                        <div class="mt-4 pt-4 border-t border-gray-100">
+                            <div class="flex items-end justify-between h-16 space-x-1">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 bg-indigo-300 rounded-t" style="height: 45%"></div>
+                                    <span class="text-xs text-gray-500 mt-1">周一</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 bg-indigo-400 rounded-t" style="height: 60%"></div>
+                                    <span class="text-xs text-gray-500 mt-1">周二</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 bg-indigo-500 rounded-t" style="height: 80%"></div>
+                                    <span class="text-xs text-gray-500 mt-1">周三</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 bg-indigo-400 rounded-t" style="height: 70%"></div>
+                                    <span class="text-xs text-gray-500 mt-1">周四</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 bg-indigo-600 rounded-t" style="height: 90%"></div>
+                                    <span class="text-xs text-gray-500 mt-1">周五</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 bg-indigo-500 rounded-t" style="height: 85%"></div>
+                                    <span class="text-xs text-gray-500 mt-1">周六</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-6 bg-indigo-400 rounded-t" style="height: 75%"></div>
+                                    <span class="text-xs text-gray-500 mt-1">周日</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速操作 -->
+                    <div class="grid grid-cols-2 gap-3 mt-4">
+                        <button class="bg-indigo-500 text-white p-3 rounded-xl font-medium flex items-center justify-center">
+                            <i class="fas fa-bed mr-2"></i>
+                            开始睡眠
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 p-3 rounded-xl font-medium flex items-center justify-center">
+                            <i class="fas fa-history mr-2"></i>
+                            睡眠历史
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    睡眠追踪页面
+                </div>
+            </div>
+            
+            <!-- 睡眠分析页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">睡眠分析</h2>
+                        <i class="fas fa-cog text-gray-600"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 睡眠质量评分 -->
+                    <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-4 text-white">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold mb-1">B+</div>
+                            <div class="text-sm opacity-90 mb-3">本周睡眠质量</div>
+                            <div class="flex justify-center space-x-4 text-xs">
+                                <div class="text-center">
+                                    <div class="font-bold">85</div>
+                                    <div class="opacity-80">深度睡眠</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold">78</div>
+                                    <div class="opacity-80">睡眠效率</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold">92</div>
+                                    <div class="opacity-80">规律性</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 睡眠问题分析 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-exclamation-triangle text-warning mr-2"></i>
+                            睡眠问题识别
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="bg-red-50 border border-red-100 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                        <i class="fas fa-clock text-red-500 text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-800 mb-1">入睡困难</div>
+                                        <div class="text-xs text-gray-600">平均入睡时间超过30分钟</div>
+                                        <div class="text-xs text-red-500 font-medium mt-1">出现3次</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 border border-yellow-100 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                        <i class="fas fa-moon text-yellow-500 text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-800 mb-1">夜间觉醒</div>
+                                        <div class="text-xs text-gray-600">夜间醒来次数较多</div>
+                                        <div class="text-xs text-yellow-500 font-medium mt-1">平均2.3次/夜</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 睡眠改善建议 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-lightbulb text-accent mr-2"></i>
+                            改善建议
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="bg-blue-50 border border-blue-100 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                        <i class="fas fa-bed text-blue-500 text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-800 mb-1">建立睡前仪式</div>
+                                        <div class="text-xs text-gray-600">睡前1小时避免使用电子设备</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 border border-green-100 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                        <i class="fas fa-thermometer-half text-green-500 text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-800 mb-1">优化睡眠环境</div>
+                                        <div class="text-xs text-gray-600">保持室温在18-22°C之间</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-purple-50 border border-purple-100 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                        <i class="fas fa-leaf text-purple-500 text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-800 mb-1">放松练习</div>
+                                        <div class="text-xs text-gray-600">尝试深呼吸或冥想练习</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 睡眠目标设置 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-target text-primary mr-2"></i>
+                            睡眠目标
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-primary mr-3"></i>
+                                    <span class="text-sm text-gray-700">目标睡眠时长</span>
+                                </div>
+                                <div class="text-sm font-bold text-gray-800">8小时</div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-moon text-indigo-500 mr-3"></i>
+                                    <span class="text-sm text-gray-700">目标就寝时间</span>
+                                </div>
+                                <div class="text-sm font-bold text-gray-800">22:30</div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-sun text-yellow-500 mr-3"></i>
+                                    <span class="text-sm text-gray-700">目标起床时间</span>
+                                </div>
+                                <div class="text-sm font-bold text-gray-800">06:30</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 睡眠辅助工具 -->
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-gray-800">睡眠辅助</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white border border-gray-100 rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-music text-indigo-500"></i>
+                                </div>
+                                <div class="text-sm font-medium text-gray-800 mb-1">白噪音</div>
+                                <div class="text-xs text-gray-500">助眠音乐</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-100 rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-leaf text-purple-500"></i>
+                                </div>
+                                <div class="text-sm font-medium text-gray-800 mb-1">冥想引导</div>
+                                <div class="text-xs text-gray-500">放松练习</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-100 rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-bell text-blue-500"></i>
+                                </div>
+                                <div class="text-sm font-medium text-gray-800 mb-1">智能闹钟</div>
+                                <div class="text-xs text-gray-500">浅睡眠唤醒</div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-100 rounded-xl p-3 shadow-sm text-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-chart-line text-green-500"></i>
+                                </div>
+                                <div class="text-sm font-medium text-gray-800 mb-1">睡眠报告</div>
+                                <div class="text-xs text-gray-500">详细分析</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    睡眠分析页面
+                </div>
+            </div>
+            
+            <!-- 个人中心页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部用户信息 -->
+                <div class="bg-gradient-to-r from-primary to-secondary p-4 text-white">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-semibold">张先生</h2>
+                            <p class="text-sm opacity-90">健康达人 · 连续打卡 28 天</p>
+                            <div class="flex items-center mt-1">
+                                <i class="fas fa-star text-yellow-300 text-xs mr-1"></i>
+                                <span class="text-xs">健康等级 Lv.5</span>
+                            </div>
+                        </div>
+                        </div>
+                    
+                    <!-- 健康徽章 -->
+                    <div class="flex space-x-2">
+                        <div class="bg-white/20 backdrop-blur-sm rounded-lg px-2 py-1">
+                            <i class="fas fa-trophy text-yellow-300 text-xs mr-1"></i>
+                            <span class="text-xs">运动达人</span>
+                        </div>
+                        <div class="bg-white/20 backdrop-blur-sm rounded-lg px-2 py-1">
+                            <i class="fas fa-leaf text-green-300 text-xs mr-1"></i>
+                            <span class="text-xs">饮食专家</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 本月成就 -->
+                    <div class="bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20 rounded-xl p-4">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-medal text-accent mr-2"></i>
+                            本月成就
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div>
+                                <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-running text-accent"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-800">156</div>
+                                <div class="text-xs text-gray-500">运动次数</div>
+                            </div>
+                            <div>
+                                <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-fire text-primary"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-800">12,450</div>
+                                <div class="text-xs text-gray-500">消耗卡路里</div>
+                            </div>
+                            <div>
+                                <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-moon text-secondary"></i>
+                                </div>
+                                <div class="text-lg font-bold text-gray-800">7.2h</div>
+                                <div class="text-xs text-gray-500">平均睡眠</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 功能菜单 -->
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-gray-800">功能菜单</h3>
+                        
+                        <!-- 健康数据 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-chart-bar text-blue-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">健康数据</div>
+                                        <div class="text-xs text-gray-500">查看详细健康报告</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- 目标设置 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-target text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">目标设置</div>
+                                        <div class="text-xs text-gray-500">设定个人健康目标</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- 设备管理 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-mobile-alt text-purple-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">设备管理</div>
+                                        <div class="text-xs text-gray-500">连接智能设备</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-xs text-accent font-medium mr-2">已连接2台</span>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 隐私设置 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-shield-alt text-orange-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">隐私设置</div>
+                                        <div class="text-xs text-gray-500">数据安全与隐私</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- 帮助中心 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-cyan-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-question-circle text-cyan-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">帮助中心</div>
+                                        <div class="text-xs text-gray-500">使用指南与客服</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 版本信息 -->
+                    <div class="text-center pt-4 border-t border-gray-100">
+                        <div class="text-xs text-gray-400">健康管家 v2.1.0</div>
+                        <div class="text-xs text-gray-400 mt-1">© 2024 HealthApp Inc.</div>
+                    </div>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    个人中心页面
+                </div>
+            </div>
+
+            <!-- 健康数据统计页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">健康数据</h2>
+                        <i class="fas fa-download text-gray-600"></i>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 时间选择器 -->
+                    <div class="flex bg-gray-100 rounded-xl p-1">
+                        <button class="flex-1 bg-white text-primary font-medium py-2 px-3 rounded-lg text-sm shadow-sm">
+                            本周
+                        </button>
+                        <button class="flex-1 text-gray-600 py-2 px-3 rounded-lg text-sm">
+                            本月
+                        </button>
+                        <button class="flex-1 text-gray-600 py-2 px-3 rounded-lg text-sm">
+                            本年
+                        </button>
+                    </div>
+                    
+                    <!-- 综合健康评分 -->
+                    <div class="bg-gradient-to-r from-emerald-400 to-teal-500 rounded-2xl p-4 text-white">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold mb-1">88</div>
+                            <div class="text-sm opacity-90 mb-3">综合健康评分</div>
+                            <div class="text-xs opacity-80">比上周提升 +5 分</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 各项指标统计 -->
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-gray-800">各项指标</h3>
+                        
+                        <!-- 运动数据 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-running text-accent"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">运动数据</div>
+                                        <div class="text-xs text-gray-500">本周表现</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-accent">优秀</div>
+                                    <div class="text-xs text-gray-500">92分</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center text-xs bg-gray-50 rounded-lg p-3">
+                                <div>
+                                    <div class="font-bold text-gray-800">12次</div>
+                                    <div class="text-gray-500">运动次数</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">8.5h</div>
+                                    <div class="text-gray-500">运动时长</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">3,200</div>
+                                    <div class="text-gray-500">消耗卡路里</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 饮食数据 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-utensils text-orange-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">饮食数据</div>
+                                        <div class="text-xs text-gray-500">本周表现</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-orange-500">良好</div>
+                                    <div class="text-xs text-gray-500">85分</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center text-xs bg-gray-50 rounded-lg p-3">
+                                <div>
+                                    <div class="font-bold text-gray-800">1,850</div>
+                                    <div class="text-gray-500">平均卡路里</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">85%</div>
+                                    <div class="text-gray-500">营养均衡度</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">21次</div>
+                                    <div class="text-gray-500">用餐记录</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 睡眠数据 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-moon text-indigo-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">睡眠数据</div>
+                                        <div class="text-xs text-gray-500">本周表现</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-indigo-500">良好</div>
+                                    <div class="text-xs text-gray-500">82分</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center text-xs bg-gray-50 rounded-lg p-3">
+                                <div>
+                                    <div class="font-bold text-gray-800">7.2h</div>
+                                    <div class="text-gray-500">平均睡眠</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">85%</div>
+                                    <div class="text-gray-500">睡眠效率</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">22:45</div>
+                                    <div class="text-gray-500">平均就寝</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 健康指标 -->
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-heartbeat text-red-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">健康指标</div>
+                                        <div class="text-xs text-gray-500">本周表现</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-bold text-accent">正常</div>
+                                    <div class="text-xs text-gray-500">90分</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center text-xs bg-gray-50 rounded-lg p-3">
+                                <div>
+                                    <div class="font-bold text-gray-800">72</div>
+                                    <div class="text-gray-500">平均心率</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">120/80</div>
+                                    <div class="text-gray-500">血压</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">68.5kg</div>
+                                    <div class="text-gray-500">体重</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 趋势分析 -->
+                    <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-chart-line text-primary mr-2"></i>
+                            趋势分析
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">整体健康趋势</span>
+                                <div class="flex items-center">
+                                    <i class="fas fa-arrow-up text-accent text-xs mr-1"></i>
+                                    <span class="text-accent font-medium">持续改善</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">运动表现</span>
+                                <div class="flex items-center">
+                                    <i class="fas fa-arrow-up text-accent text-xs mr-1"></i>
+                                    <span class="text-accent font-medium">显著提升</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">睡眠质量</span>
+                                <div class="flex items-center">
+                                    <i class="fas fa-minus text-warning text-xs mr-1"></i>
+                                    <span class="text-warning font-medium">保持稳定</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 导出报告 -->
+                    <button class="w-full bg-primary text-white p-3 rounded-xl font-medium flex items-center justify-center">
+                        <i class="fas fa-file-pdf mr-2"></i>
+                        导出健康报告
+                    </button>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    健康数据统计页面
+                </div>
+            </div>
+
+            <!-- 设置页面 -->
+            <div class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                <!-- 顶部导航 -->
+                <div class="bg-white border-b border-gray-100 p-4">
+                    <div class="flex items-center justify-between">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                        <h2 class="text-lg font-semibold text-gray-800">设置</h2>
+                        <div></div>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-4">
+                    <!-- 个人信息 -->
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-gray-800">个人信息</h3>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-user text-blue-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">个人资料</div>
+                                        <div class="text-xs text-gray-500">姓名、年龄、身高体重</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-target text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">健康目标</div>
+                                        <div class="text-xs text-gray-500">运动、饮食、睡眠目标</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 应用设置 -->
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-gray-800">应用设置</h3>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-bell text-purple-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">通知设置</div>
+                                        <div class="text-xs text-gray-500">推送通知、提醒设置</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-10 h-6 bg-accent rounded-full relative">
+                                        <div class="w-4 h-4 bg-white rounded-full absolute right-1 top-1 shadow-sm"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-palette text-orange-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">主题设置</div>
+                                        <div class="text-xs text-gray-500">浅色、深色、自动</div>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-gray-500">浅色模式</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-cyan-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-language text-cyan-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">语言设置</div>
+                                        <div class="text-xs text-gray-500">界面语言选择</div>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-gray-500">简体中文</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 数据与隐私 -->
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-gray-800">数据与隐私</h3>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-shield-alt text-red-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">隐私设置</div>
+                                        <div class="text-xs text-gray-500">数据共享、权限管理</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-cloud text-indigo-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">数据同步</div>
+                                        <div class="text-xs text-gray-500">云端备份、设备同步</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-10 h-6 bg-accent rounded-full relative">
+                                        <div class="w-4 h-4 bg-white rounded-full absolute right-1 top-1 shadow-sm"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-download text-yellow-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">数据导出</div>
+                                        <div class="text-xs text-gray-500">导出个人健康数据</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 其他设置 -->
+                    <div class="space-y-3">
+                        <h3 class="font-semibold text-gray-800">其他</h3>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-info-circle text-gray-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">关于我们</div>
+                                        <div class="text-xs text-gray-500">版本信息、用户协议</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-star text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-800">评价应用</div>
+                                        <div class="text-xs text-gray-500">在应用商店评分</div>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 退出登录 -->
+                    <button class="w-full bg-red-50 border border-red-100 text-red-600 p-3 rounded-xl font-medium flex items-center justify-center mt-6">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        退出登录
+                    </button>
+                </div>
+                
+                <div class="text-center py-2 bg-gray-50 text-xs text-gray-500 font-medium">
+                    设置页面
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

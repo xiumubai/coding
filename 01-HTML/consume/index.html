@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>郭建利 - 资深前端工程师简历</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+        body { background: #f5f7fa; color: #333; line-height: 1.6; padding: 30px; max-width: 1000px; margin: 0 auto; }
+        .resume { background: white; box-shadow: 0 5px 25px rgba(0,0,0,0.08); border-radius: 12px; padding: 40px; position: relative; }
+        
+        /* Header */
+        .header { 
+            display: flex; 
+            justify-content: space-between;
+            border-bottom: 2px solid #eaecef;
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
+        .personal-info h1 { font-size: 32px; color: #1a1a1a; margin-bottom: 8px; }
+        .personal-info .tagline { 
+            font-size: 18px; 
+            color: #2c3e50; 
+            font-weight: 500;
+            position: relative;
+            padding-left: 15px;
+        }
+        .tagline:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 12px;
+            width: 4px;
+            background: #3498db;
+            border-radius: 2px;
+        }
+        .contact-info { text-align: right; }
+        .contact-info p { margin: 4px 0; color: #555; }
+        
+        /* Section Styling */
+        .section { margin-bottom: 32px; }
+        .section-title {
+            font-size: 20px;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #e0e6ed;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title:before {
+            content: "▍";
+            margin-right: 8px;
+            color: #3498db;
+        }
+        
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .skill-category h3 { 
+            font-size: 17px; 
+            color: #1a1a1a; 
+            margin-bottom: 12px;
+            padding-left: 8px;
+            border-left: 3px solid #3498db;
+        }
+        .skill-items { 
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #edf2f7;
+        }
+        .skill-items li { 
+            margin-bottom: 8px; 
+            list-style-type: none;
+            position: relative;
+            padding-left: 20px;
+        }
+        .skill-items li:before {
+            content: "•";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* Experience */
+        .experience-item { margin-bottom: 28px; }
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .company-name { 
+            font-size: 18px; 
+            font-weight: 600; 
+            color: #1a1a1a;
+        }
+        .job-period { 
+            color: #7f8c8d; 
+            font-weight: 500;
+        }
+        .job-title { 
+            color: #3498db; 
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0 15px;
+        }
+        .tech-tag {
+            background: #e1f0fa;
+            color: #2c81c4;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .responsibilities li { 
+            margin-bottom: 10px; 
+            position: relative;
+            padding-left: 20px;
+        }
+        .responsibilities li:before {
+            content: "→";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .achievements {
+            background: #f0f9ff;
+            border-left: 3px solid #3498db;
+            padding: 12px 15px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        .achievements strong { color: #2980b9; }
+        
+        /* Highlights */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .highlight-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #edf2f7;
+        }
+        .highlight-card h3 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .highlight-card h3:before {
+            content: "★";
+            color: #f39c12;
+            margin-right: 8px;
+        }
+        
+        /* Footer */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .social-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .social-links a:hover {
+            color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { flex-direction: column; }
+            .contact-info { text-align: left; margin-top: 15px; }
+            .tech-stack { gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="personal-info">
+                <h1>郭建利</h1>
+                <div class="tagline">资深前端工程师 | 8年开发经验</div>
+                <div class="bio" style="margin-top: 15px; color: #555;">
+                    React/Vue双栈专家 | 前端工程化实践者 | 技术团队领导者 | AI工具提效先锋
+                </div>
+            </div>
+            <div class="contact-info">
+                <p>📱 13083999133</p>
+                <p>✉️ janneyguo@dingtalk.com</p>
+                <p>♂️ 31岁 | 山东</p>
+                <p>🎓 鲁东大学 | 软件工程 | 本科</p>
+            </div>
+        </header>
+
+        <!-- Skills Section -->
+        <section class="section">
+            <h2 class="section-title">专业技能</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>核心技术栈</h3>
+                    <div class="skill-items">
+                        <ul>
+                            <li><strong>JavaScript/TypeScript</strong>专家级应用能力</li>
+                            <li><strong>React生态</strong>：Next.js、Ant Design、Redux</li>
+                            <li><strong>Vue生态</strong>：Vue3、Nuxt、Vite、Pinia</li>
+                            <li>跨端开发：小程序、Uniapp、Taro、Electron</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>工程化 & 架构</h3>
+                    <div class="skill-items">
+                        <ul>
+                            <li>前端工程化：Webpack/Rollup/Vite深度优化</li>
+                            <li>微前端架构：Qiankun实战专家</li>
+                            <li>脚手架开发：CLI工具集开发经验</li>
+                            <li>性能优化：首屏加载、资源压缩、缓存策略</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>全栈 & 管理</h3>
+                    <div class="skill-items">
+                        <ul>
+                            <li>Node.js后端开发：Nest.js、Express</li>
+                            <li>数据库：MySQL、Redis实战经验</li>
+                            <li>项目管理：需求拆解、技术方案设计</li>
+                            <li>跨部门协作与10+人团队管理经验</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>效率工具</h3>
+                    <div class="skill-items">
+                        <ul>
+                            <li>AI提效：Cursor/Trae深度使用者</li>
+                            <li>自动化：CI/CD流水线设计</li>
+                            <li>质量保障：单元测试、E2E测试</li>
+                            <li>监控体系：前端监控SDK开发</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section">
+            <h2 class="section-title">工作经历</h2>
+            
+            <!-- Current Job -->
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">北京福佑多多信息技术有限公司</div>
+                    <div class="job-period">2024.07 - 现今</div>
+                </div>
+                <div class="job-title">前端开发工程师 | 技术基建负责人</div>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Rspack</span>
+                    <span class="tech-tag">Nuxt</span>
+                    <span class="tech-tag">Vite</span>
+                </div>
+                <ul class="responsibilities">
+                    <li>主导前端技术基建体系搭建，开发组件库/脚手架/文档平台，<strong>提升团队效率50%</strong></li>
+                    <li>设计可配置式项目升级方案，完成中后台系统Antd 3.x升级及构建工具迁移</li>
+                    <li>创新开发VS Code插件式Mock工具，集成YAPI实现一键生成Mock数据</li>
+                    <li>利用AI工具(Cursor)实现Vue2到React的代码迁移，制定迁移技术规范</li>
+                </ul>
+                <div class="achievements">
+                    <strong>核心成果：</strong>建立标准化前端研发体系，基建工具覆盖公司90%项目，年节省研发工时1200+
+                </div>
+            </div>
+            
+            <!-- Previous Job 1 -->
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">北京天学网教育科技股份有限公司</div>
+                    <div class="job-period">2022.08 - 2024.03</div>
+                </div>
+                <div class="job-title">高级前端工程师 | 微前端架构师</div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Vue3</span>
+                    <span class="tech-tag">Electron</span>
+                    <span class="tech-tag">Qiankun</span>
+                    <span class="tech-tag">Vite</span>
+                    <span class="tech-tag">TypeScript</span>
+                </div>
+                <ul class="responsibilities">
+                    <li>主导教师客户端6.0架构升级，设计微前端解决方案，集成10+业务模块</li>
+                    <li>实现选题布置系统跨应用通信方案，核心数据共享效率提升70%</li>
+                    <li>攻克子应用加载性能瓶颈，通过预加载/缓存策略实现<strong>秒级打开</strong>体验</li>
+                    <li>重构布置系统UI架构，统一交互规范与组件协议</li>
+                </ul>
+                <div class="achievements">
+                    <strong>核心成果：</strong>微前端方案支持5团队并行开发，项目交付周期缩短40%，获重点中学试点用户高度认可
+                </div>
+            </div>
+            
+            <!-- Previous Job 2 -->
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">北京开课吧科技有限公司</div>
+                    <div class="job-period">2019.04 - 2022.06</div>
+                </div>
+                <div class="job-title">高级前端工程师 | 业务线负责人</div>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Qiankun</span>
+                    <span class="tech-tag">WebRTC</span>
+                    <span class="tech-tag">Node.js</span>
+                </div>
+                <ul class="responsibilities">
+                    <li>担任剧本直播业务线前端负责人，<strong>领导10人团队</strong>完成从0到1架构设计</li>
+                    <li>自研直播互动SDK与视频播放引擎，解决弱网环境下多端进度同步技术难题</li>
+                    <li>设计千万级聊天消息渲染优化方案，实现丝滑交互体验</li>
+                    <li>搭建前端监控体系，实现代码报错/性能指标/用户行为全链路追踪</li>
+                    <li>落地微前端架构，支持5个业务团队并行开发，降低维护成本30%</li>
+                </ul>
+                <div class="achievements">
+                    <strong>核心成果：</strong>SDK支持5000+并发直播间，用户转化率提升25%，年节省第三方服务成本200万+
+                </div>
+            </div>
+            
+            <!-- Previous Job 3 -->
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">小船出海教育科技（北京）有限公司</div>
+                    <div class="job-period">2017.07 - 2019.03</div>
+                </div>
+                <div class="job-title">高级前端工程师</div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">小程序</span>
+                    <span class="tech-tag">Webpack</span>
+                </div>
+                <ul class="responsibilities">
+                    <li>独立负责题库系统与问答小程序全链路开发，支撑3.5亿级题库数据处理</li>
+                    <li>实现拍照搜题核心算法前端适配，准确率提升至行业领先水平</li>
+                    <li>设计异步加载与缓存方案，优化海量数据渲染性能</li>
+                </ul>
+                <div class="achievements">
+                    <strong>核心成果：</strong>问答小程序实现月活10万+，生产优质题目量提升300%，转化率提升18%
+                </div>
+            </div>
+        </section>
+
+        <!-- Highlights Section -->
+        <section class="section">
+            <h2 class="section-title">核心优势</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <h3>架构设计能力</h3>
+                    <ul class="responsibilities">
+                        <li>4次主导大型项目从0到1架构设计</li>
+                        <li>微前端方案支持50+子应用</li>
+                        <li>高并发场景SDK设计经验</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>工程化落地</h3>
+                    <ul class="responsibilities">
+                        <li>开发10+标准化开发工具</li>
+                        <li>CI/CD流水线实施经验</li>
+                        <li>团队编码规范制定者</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>技术领导力</h3>
+                    <ul class="responsibilities">
+                        <li>15人前端团队管理经验</li>
+                        <li>跨部门协作推动技术方案</li>
+                        <li>技术分享会组织者</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>技术影响力</h3>
+                    <ul class="responsibilities">
+                        <li>掘金100+技术文章</li>
+                        <li>35万+技术文章阅读量</li>
+                        <li>百万字《前端研究院》文档库</li>
+                        <li>「白哥学前端」公众号主理人</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="social-links">
+                <a href="https://github.com/xiumubai" target="_blank">GitHub</a>
+                <a href="https://www.yuque.com/xiumubai" target="_blank">语雀知识库</a>
+                <a href="https://juejin.cn/user/430664288573789" target="_blank">掘金专栏</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

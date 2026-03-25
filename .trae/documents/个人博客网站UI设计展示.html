@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客网站 UI/UX 设计展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#059669'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .mockup-frame {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            background: #f9fafb;
+            padding: 16px;
+            margin: 16px;
+            min-height: 600px;
+            overflow: hidden;
+        }
+        .page-content {
+            background: white;
+            border-radius: 8px;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-4">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">个人博客网站 UI/UX 设计展示</h1>
+        
+        <!-- 页面展示容器 -->
+        <div class="flex flex-wrap justify-center">
+            
+            <!-- 主页设计 -->
+            <div class="mockup-frame w-80">
+                <h3 class="text-lg font-semibold mb-4 text-center text-gray-700">主页设计</h3>
+                <div class="page-content">
+                    <!-- 导航栏 -->
+                    <nav class="bg-white border-b border-gray-200 px-6 py-4">
+                        <div class="flex justify-between items-center">
+                            <div class="text-xl font-bold text-primary">TechBlog</div>
+                            <div class="flex space-x-6 text-sm">
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">首页</a>
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">文章</a>
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">关于</a>
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">联系</a>
+                            </div>
+                        </div>
+                    </nav>
+                    
+                    <!-- 搜索栏 -->
+                    <div class="px-6 py-4 bg-gray-50">
+                        <div class="relative">
+                            <input type="text" placeholder="搜索文章..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+                            <img src="https://unpkg.com/lucide-static@latest/icons/search.svg" class="absolute right-3 top-2.5 w-4 h-4 text-gray-400" alt="搜索">
+                        </div>
+                    </div>
+                    
+                    <!-- 主要内容区域 -->
+                    <div class="flex px-6 py-4">
+                        <!-- 文章列表 -->
+                        <div class="flex-1 pr-4">
+                            <!-- 文章卡片 -->
+                            <article class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
+                                <h2 class="text-lg font-semibold text-gray-800 mb-2">React Hooks 最佳实践</h2>
+                                <p class="text-gray-600 text-sm mb-3">深入探讨React Hooks的使用技巧和常见陷阱，帮助开发者写出更优雅的代码...</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500">
+                                    <span>2024-01-15</span>
+                                    <div class="flex space-x-2">
+                                        <span class="bg-primary/10 text-primary px-2 py-1 rounded">React</span>
+                                        <span class="bg-secondary/10 text-secondary px-2 py-1 rounded">前端</span>
+                                    </div>
+                                </div>
+                            </article>
+                            
+                            <article class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4 hover:shadow-md transition-shadow">
+                                <h2 class="text-lg font-semibold text-gray-800 mb-2">TypeScript 进阶指南</h2>
+                                <p class="text-gray-600 text-sm mb-3">从基础类型到高级类型，全面掌握TypeScript的核心概念和实用技巧...</p>
+                                <div class="flex justify-between items-center text-xs text-gray-500">
+                                    <span>2024-01-12</span>
+                                    <div class="flex space-x-2">
+                                        <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded">TypeScript</span>
+                                        <span class="bg-secondary/10 text-secondary px-2 py-1 rounded">前端</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        
+                        <!-- 侧边栏 -->
+                        <aside class="w-24">
+                            <!-- 个人信息 -->
+                            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-4">
+                                <div class="text-center">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" class="w-12 h-12 rounded-full mx-auto mb-2" alt="头像">
+                                    <h3 class="text-sm font-semibold text-gray-800">张三</h3>
+                                    <p class="text-xs text-gray-600">全栈工程师</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 热门标签 -->
+                            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-2">热门标签</h4>
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="bg-primary/10 text-primary px-2 py-1 rounded text-xs">React</span>
+                                    <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">TS</span>
+                                    <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs">Node</span>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 文章详情页设计 -->
+            <div class="mockup-frame w-80">
+                <h3 class="text-lg font-semibold mb-4 text-center text-gray-700">文章详情页</h3>
+                <div class="page-content">
+                    <!-- 导航栏 -->
+                    <nav class="bg-white border-b border-gray-200 px-6 py-4">
+                        <div class="flex justify-between items-center">
+                            <div class="text-xl font-bold text-primary">TechBlog</div>
+                            <div class="flex space-x-6 text-sm">
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">首页</a>
+                                <a href="#" class="text-primary font-medium">文章</a>
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">关于</a>
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">联系</a>
+                            </div>
+                        </div>
+                    </nav>
+                    
+                    <!-- 文章内容 -->
+                    <article class="px-6 py-6">
+                        <header class="mb-6">
+                            <h1 class="text-2xl font-bold text-gray-800 mb-3">React Hooks 最佳实践</h1>
+                            <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                <span>2024-01-15</span>
+                                <div class="flex space-x-2">
+                                    <span class="bg-primary/10 text-primary px-2 py-1 rounded">React</span>
+                                    <span class="bg-secondary/10 text-secondary px-2 py-1 rounded">前端</span>
+                                </div>
+                            </div>
+                        </header>
+                        
+                        <div class="prose prose-sm max-w-none">
+                            <p class="text-gray-700 leading-relaxed mb-4">React Hooks 是 React 16.8 引入的新特性，它让我们能够在函数组件中使用状态和其他 React 特性...</p>
+                            
+                            <h2 class="text-lg font-semibold text-gray-800 mb-2">useState 的使用</h2>
+                            <p class="text-gray-700 leading-relaxed mb-4">useState 是最常用的 Hook，用于在函数组件中添加状态...</p>
+                            
+                            <div class="bg-gray-100 rounded-lg p-3 mb-4">
+                                <code class="text-sm text-gray-800">const [count, setCount] = useState(0);</code>
+                            </div>
+                        </div>
+                        
+                        <!-- 分享按钮 -->
+                        <div class="flex space-x-3 mt-6 pt-4 border-t border-gray-200">
+                            <button class="flex items-center space-x-2 px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/share-2.svg" class="w-4 h-4" alt="分享">
+                                <span>分享</span>
+                            </button>
+                            <button class="flex items-center space-x-2 px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors text-sm">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/heart.svg" class="w-4 h-4" alt="点赞">
+                                <span>点赞</span>
+                            </button>
+                        </div>
+                    </article>
+                    
+                    <!-- 评论区 -->
+                    <section class="px-6 py-4 border-t border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">评论 (2)</h3>
+                        
+                        <!-- 评论项 -->
+                        <div class="mb-4">
+                            <div class="flex space-x-3">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face" class="w-8 h-8 rounded-full" alt="用户头像">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="text-sm font-medium text-gray-800">李四</span>
+                                        <span class="text-xs text-gray-500">2小时前</span>
+                                    </div>
+                                    <p class="text-sm text-gray-700">很实用的文章，学到了很多新的技巧！</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 评论输入框 -->
+                        <div class="mt-4">
+                            <textarea placeholder="写下你的评论..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm" rows="3"></textarea>
+                            <button class="mt-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm">发表评论</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            
+            <!-- 个人展示页设计 -->
+            <div class="mockup-frame w-80">
+                <h3 class="text-lg font-semibold mb-4 text-center text-gray-700">个人展示页</h3>
+                <div class="page-content">
+                    <!-- 导航栏 -->
+                    <nav class="bg-white border-b border-gray-200 px-6 py-4">
+                        <div class="flex justify-between items-center">
+                            <div class="text-xl font-bold text-primary">TechBlog</div>
+                            <div class="flex space-x-6 text-sm">
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">首页</a>
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">文章</a>
+                                <a href="#" class="text-primary font-medium">关于</a>
+                                <a href="#" class="text-gray-600 hover:text-primary transition-colors">联系</a>
+                            </div>
+                        </div>
+                    </nav>
+                    
+                    <!-- 个人信息 -->
+                    <section class="px-6 py-6 text-center">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face" class="w-20 h-20 rounded-full mx-auto mb-4" alt="个人头像">
+                        <h1 class="text-2xl font-bold text-gray-800 mb-2">张三</h1>
+                        <p class="text-gray-600 mb-4">全栈工程师 & 技术博主</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">专注于前端技术，热爱分享，致力于用技术创造更好的用户体验。</p>
+                    </section>
+                    
+                    <!-- 技能标签云 -->
+                    <section class="px-6 py-4">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">技能标签</h2>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">React</span>
+                            <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">Vue.js</span>
+                            <span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
+                            <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium">TypeScript</span>
+                            <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm font-medium">Node.js</span>
+                            <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm font-medium">CSS</span>
+                        </div>
+                    </section>
+                    
+                    <!-- 项目展示 -->
+                    <section class="px-6 py-4">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">精选项目</h2>
+                        <div class="space-y-3">
+                            <div class="bg-white border border-gray-200 rounded-lg p-3">
+                                <h3 class="font-medium text-gray-800 mb-1">个人博客系统</h3>
+                                <p class="text-sm text-gray-600 mb-2">基于React和Node.js的现代化博客平台</p>
+                                <div class="flex space-x-2">
+                                    <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">React</span>
+                                    <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs">Node.js</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white border border-gray-200 rounded-lg p-3">
+                                <h3 class="font-medium text-gray-800 mb-1">任务管理工具</h3>
+                                <p class="text-sm text-gray-600 mb-2">高效的团队协作和任务管理应用</p>
+                                <div class="flex space-x-2">
+                                    <span class="bg-purple-100 text-purple-600 px-2 py-1 rounded text-xs">Vue.js</span>
+                                    <span class="bg-yellow-100 text-yellow-600 px-2 py-1 rounded text-xs">Express</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- 联系方式 -->
+                    <section class="px-6 py-4">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">联系我</h2>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/github.svg" class="w-5 h-5 text-gray-600" alt="GitHub">
+                            </a>
+                            <a href="#" class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/mail.svg" class="w-5 h-5 text-gray-600" alt="邮箱">
+                            </a>
+                            <a href="#" class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                <img src="https://unpkg.com/lucide-static@latest/icons/twitter.svg" class="w-5 h-5 text-gray-600" alt="Twitter">
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- 设计说明 -->
+        <div class="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">设计说明</h2>
+            <div class="grid md:grid-cols-2 gap-6 text-sm text-gray-700">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-2">设计理念</h3>
+                    <ul class="space-y-1">
+                        <li>• 现代极简主义，参考Medium、Ghost等平台</li>
+                        <li>• 大量留白，突出内容可读性</li>
+                        <li>• 扁平化设计语言，避免过度装饰</li>
+                        <li>• 响应式设计，适配多种设备</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-2">色彩方案</h3>
+                    <ul class="space-y-1">
+                        <li>• 主色调：温暖白色/浅灰色背景</li>
+                        <li>• 文字：深灰色(#333)确保对比度</li>
+                        <li>• 强调色：深蓝色(#2563eb)品牌色</li>
+                        <li>• 支持深色模式切换</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-2">交互体验</h3>
+                    <ul class="space-y-1">
+                        <li>• 平滑的页面过渡动画</li>
+                        <li>• 鼠标悬停时的微妙反馈效果</li>
+                        <li>• 卡片式布局，清晰的信息层级</li>
+                        <li>• 优雅的加载状态和骨架屏</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-2">技术特性</h3>
+                    <ul class="space-y-1">
+                        <li>• 使用TailwindCSS进行样式管理</li>
+                        <li>• Lucide图标库保持视觉一致性</li>
+                        <li>• 玻璃拟态效果提升质感</li>
+                        <li>• 移动优先的响应式设计</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

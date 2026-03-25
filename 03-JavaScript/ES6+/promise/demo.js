@@ -1,3 +1,7 @@
+// 基础题
+
+
+
 // 1.Promise面试题
 Promise.resolve()
   .then(function() {
@@ -40,6 +44,61 @@ console.log("start");
 // timer2 
 // promise3
 
+/**
+
+问题：为什么是promise0 → promise1 → promise5，而不是promise0 → promise5 → promise1
+          
+执行顺序是 `promise0 → promise1 → promise5` 的原因在于**微任务队列的执行机制**和**Promise链式调用的特性**。
+
+## 代码分析
+
+```javascript
+// 第一个Promise链
+Promise.resolve()
+  .then(function() {
+    console.log("promise0");  // 微任务1
+  })
+  .then(function() {
+    console.log("promise5");  // 微任务3（依赖于promise0完成）
+  });
+
+// 第二个独立Promise
+Promise.resolve().then(function() {
+  console.log("promise1");    // 微任务2
+});
+```
+
+## 关键原理
+
+### 1. 微任务注册时机
+- **promise0** 和 **promise1** 在同步代码执行阶段就被注册到微任务队列
+- **promise5** 只有在 promise0 执行完成后才会被注册到微任务队列
+
+### 2. 微任务队列的执行顺序
+初始微任务队列：`[promise0, promise1]`
+
+**执行步骤：**
+1. 执行 `promise0` → 输出 "promise0"
+   - promise0 执行完成后，`.then(promise5)` 被注册到微任务队列
+   - 微任务队列变为：`[promise1, promise5]`
+
+2. 执行 `promise1` → 输出 "promise1"
+   - 微任务队列变为：`[promise5]`
+
+3. 执行 `promise5` → 输出 "promise5"
+   - 微任务队列清空
+
+### 3. 为什么不是 promise0 → promise5 → promise1？
+
+这种理解是**错误的**，因为：
+- Promise 链中的 `.then()` 不会立即执行，而是等待前一个 Promise 完成
+- `promise5` 在 `promise0` 执行完成之前**不存在于微任务队列中**
+- 微任务队列遵循 **FIFO（先进先出）** 原则
+
+## 总结
+
+Promise 链式调用的关键特性是：**后续的 `.then()` 只有在前一个 Promise 完成后才会被添加到微任务队列**。这确保了链式调用的顺序性，同时与其他独立的微任务按照注册顺序执行。
+ */
 
 // 2. async 面试题
 
